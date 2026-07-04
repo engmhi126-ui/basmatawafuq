@@ -642,7 +642,7 @@ function copyCode(){
 function sendWhatsapp(){
   const data=loadMyData()||encodedData;
   const isMale=currentGender==='male';
-  const msg=encodeURIComponent(`🌿 *بصمة التوافق*\n\n${isMale?'أكملت اختبار الزوج':'أكملت اختبار الزوجة'} وأريد نشوف تقرير التوافق بيننا 💞\n\nأكمل${isMale?'ي':''} اختبارك من هنا:\nhttps://YOUR-USERNAME.github.io/basma-tawafuq\n\nثم أدخل${isMale?'ي':''} هذا الكود:\n${data}\n\n_الاختبار 12 موقف ويأخذ 15 دقيقة_`);
+  const msg=encodeURIComponent(`🌿 *بصمة التوافق*\n\n${isMale?'أكملت اختبار الزوج':'أكملت اختبار الزوجة'} وأريد نشوف تقرير التوافق بيننا 💞\n\nأكمل${isMale?'ي':''} اختبارك من هنا:\nhttps://engmhi126-ui.github.io/basmatawafuq\n\nثم أدخل${isMale?'ي':''} هذا الكود:\n${data}\n\n_الاختبار 12 موقف ويأخذ 15 دقيقة_`);
   window.open(`https://wa.me/?text=${msg}`,'_blank');
 }
 
