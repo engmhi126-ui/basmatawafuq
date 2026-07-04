@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بصمة التوافق</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep:#1a1228; --purple:#2d1f4e; --violet:#4a2d8a;
+  --gold:#c9a84c; --gold-light:#e8c97a; --cream:#f5f0e8;
+  --white:#ffffff; --text-dim:#9b8fc0; --card-bg:#231840;
+  --border:rgba(201,168,76,0.2); --success:#4ade80; --danger:#f87171;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Tajawal',sans-serif;background:var(--deep);color:var(--white);min-height:100vh;overflow-x:hidden;}
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.particle{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.2),transparent);animation:float linear infinite;}
+@keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:1;}90%{opacity:0.3;}100%{transform:translateY(-10vh) scale(1);opacity:0;}}
+.screen{position:relative;z-index:1;min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px 20px;}
+.screen.active{display:flex;}
+
+/* LANDING */
+#screen-landing{text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(74,45,138,0.45) 0%,transparent 70%);}
+.logo-mark{width:76px;height:76px;margin:0 auto 20px;position:relative;}
+.logo-ring{width:76px;height:76px;border-radius:50%;border:2px solid var(--gold);position:absolute;animation:spin 8s linear infinite;}
+.logo-ring::before{content:'';position:absolute;top:-4px;right:50%;width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.logo-inner{position:absolute;inset:12px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--purple));display:flex;align-items:center;justify-content:center;font-size:20px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.brand-name{font-size:40px;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;margin-bottom:5px;}
+.brand-sub{font-size:12px;color:var(--text-dim);letter-spacing:3px;margin-bottom:36px;}
+.hero-headline{font-size:clamp(19px,5vw,28px);font-weight:700;line-height:1.6;margin-bottom:12px;max-width:460px;}
+.hero-headline span{color:var(--gold-light);}
+.hero-sub{font-size:14px;color:var(--text-dim);line-height:1.8;max-width:380px;margin-bottom:32px;}
+.stats-row{display:flex;gap:24px;justify-content:center;margin-bottom:36px;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat-num{font-size:24px;font-weight:800;color:var(--gold);display:block;}
+.stat-label{font-size:11px;color:var(--text-dim);margin-top:2px;}
+
+/* BUTTONS */
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--deep);border:none;padding:15px 36px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 8px 28px rgba(201,168,76,0.28);width:100%;max-width:300px;display:block;margin:0 auto;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(201,168,76,0.38);}
+.btn-secondary{background:transparent;color:var(--text-dim);border:1px solid rgba(155,143,192,0.3);padding:11px 28px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:14px;cursor:pointer;transition:all .3s;margin-top:11px;display:block;margin-left:auto;margin-right:auto;}
+.btn-secondary:hover{color:var(--white);border-color:var(--text-dim);}
+.btn-outline{background:transparent;color:var(--gold);border:1.5px solid var(--gold);padding:13px 28px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;width:100%;max-width:300px;display:block;margin:0 auto;}
+.btn-outline:hover{background:rgba(201,168,76,0.1);}
+.disclaimer{font-size:11px;color:var(--text-dim);margin-top:18px;opacity:.7;max-width:280px;line-height:1.6;text-align:center;}
+
+/* STATUS */
+#screen-status{max-width:460px;margin:0 auto;}
+.status-title{font-size:24px;font-weight:800;text-align:center;margin-bottom:7px;}
+.status-sub{font-size:14px;color:var(--text-dim);text-align:center;margin-bottom:28px;line-height:1.7;}
+.status-options{display:flex;flex-direction:column;gap:12px;width:100%;margin-bottom:24px;}
+.status-card{background:var(--card-bg);border:2px solid rgba(201,168,76,0.13);border-radius:18px;padding:18px 20px;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:14px;}
+.status-card:hover{border-color:var(--gold);background:rgba(74,45,138,0.4);transform:translateX(-3px);}
+.status-card.selected{border-color:var(--gold);background:rgba(201,168,76,0.09);}
+.status-card.disabled{opacity:.38;cursor:not-allowed;pointer-events:none;}
+.status-icon{font-size:30px;flex-shrink:0;}
+.status-name{font-size:16px;font-weight:700;margin-bottom:2px;}
+.status-desc{font-size:12px;color:var(--text-dim);line-height:1.5;}
+.status-badge{margin-right:auto;font-size:10px;font-weight:700;background:var(--gold);color:var(--deep);padding:3px 8px;border-radius:20px;letter-spacing:1px;white-space:nowrap;}
+.coming-badge{margin-right:auto;font-size:10px;background:rgba(155,143,192,0.2);color:var(--text-dim);padding:3px 8px;border-radius:20px;white-space:nowrap;}
+
+/* PARTNER CODE ENTRY */
+#screen-partner-entry{max-width:440px;margin:0 auto;text-align:center;}
+.entry-title{font-size:22px;font-weight:800;margin-bottom:8px;}
+.entry-sub{font-size:14px;color:var(--text-dim);margin-bottom:28px;line-height:1.7;}
+.code-input-wrap{margin:24px 0;}
+.code-input{
+  background:rgba(45,31,78,0.6);border:2px solid var(--border);border-radius:16px;
+  padding:18px 20px;font-family:'Tajawal',sans-serif;font-size:26px;font-weight:800;
+  color:var(--gold);text-align:center;letter-spacing:6px;width:100%;
+  outline:none;transition:border .3s;direction:ltr;
+}
+.code-input:focus{border-color:var(--gold);}
+.code-input::placeholder{color:rgba(201,168,76,0.3);letter-spacing:4px;font-size:20px;}
+.code-error{color:var(--danger);font-size:13px;margin-top:8px;display:none;}
+
+/* INTRO */
+#screen-intro{max-width:480px;margin:0 auto;}
+.intro-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:26px 22px;margin-bottom:14px;text-align:center;}
+.intro-icon{font-size:42px;margin-bottom:12px;}
+.intro-title{font-size:19px;font-weight:700;margin-bottom:9px;}
+.intro-text{font-size:13px;color:var(--text-dim);line-height:1.8;}
+.axes-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0;}
+.axis-chip{background:rgba(74,45,138,0.3);border:1px solid var(--border);border-radius:10px;padding:8px 11px;font-size:12px;color:var(--gold-light);text-align:center;}
+
+/* STORY */
+#screen-story{max-width:580px;margin:0 auto;width:100%;}
+.progress-header{width:100%;display:flex;align-items:center;gap:13px;margin-bottom:22px;}
+.progress-circle{position:relative;width:60px;height:60px;flex-shrink:0;}
+.progress-circle svg{width:60px;height:60px;transform:rotate(-90deg);}
+.progress-circle .track{fill:none;stroke:rgba(201,168,76,0.11);stroke-width:4;}
+.progress-circle .fill{fill:none;stroke:var(--gold);stroke-width:4;stroke-linecap:round;stroke-dasharray:175.9;stroke-dashoffset:175.9;transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1);}
+.progress-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);}
+.progress-info{flex:1;}
+.progress-label{font-size:11px;color:var(--text-dim);margin-bottom:2px;}
+.progress-axis{font-size:14px;font-weight:600;color:var(--gold-light);}
+.story-card{background:linear-gradient(135deg,var(--card-bg),rgba(45,31,78,0.8));border:1px solid var(--border);border-radius:24px;padding:26px 22px;margin-bottom:18px;position:relative;overflow:hidden;transition:opacity .3s,transform .3s;}
+.story-card::before{content:'';position:absolute;top:0;right:0;width:90px;height:90px;background:radial-gradient(circle,rgba(201,168,76,0.07),transparent);}
+.story-context{font-size:12px;color:var(--text-dim);background:rgba(201,168,76,0.05);border-right:3px solid var(--gold);padding:9px 12px;border-radius:0 7px 7px 0;margin-bottom:16px;line-height:1.7;}
+.story-situation{font-size:16px;font-weight:600;line-height:1.75;margin-bottom:5px;}
+.story-question{font-size:14px;color:var(--gold-light);font-weight:500;margin-top:13px;}
+.choices-list{display:flex;flex-direction:column;gap:10px;}
+.choice-btn{background:rgba(45,31,78,0.5);border:1.5px solid rgba(201,168,76,0.12);border-radius:14px;padding:14px 16px;text-align:right;cursor:pointer;transition:all .3s;display:flex;align-items:flex-start;gap:12px;font-family:'Tajawal',sans-serif;width:100%;color:var(--white);}
+.choice-btn:hover{border-color:var(--gold);background:rgba(74,45,138,0.4);transform:translateX(-3px);}
+.choice-btn.selected{border-color:var(--gold);background:rgba(201,168,76,0.09);}
+.choice-letter{width:28px;height:28px;border-radius:50%;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.28);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;margin-top:2px;}
+.choice-btn.selected .choice-letter{background:var(--gold);color:var(--deep);}
+.choice-text{font-size:13px;line-height:1.6;text-align:right;}
+.choice-insight{display:none;margin-top:8px;font-size:11px;color:var(--text-dim);background:rgba(0,0,0,0.2);border-radius:8px;padding:8px 10px;line-height:1.6;border-right:2px solid var(--gold);}
+.choice-btn.selected .choice-insight{display:block;}
+.deep-question{background:linear-gradient(135deg,rgba(74,45,138,0.22),rgba(26,18,40,0.5));border:1px solid rgba(201,168,76,0.16);border-radius:14px;padding:16px;margin-top:16px;display:none;}
+.deep-question.visible{display:block;animation:fadeUp .5s ease;}
+.deep-q-label{font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
+.deep-q-text{font-size:13px;line-height:1.7;color:var(--cream);}
+.next-btn{display:none;width:100%;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--deep);border:none;padding:14px;border-radius:14px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;margin-top:12px;}
+.next-btn.visible{display:block;animation:fadeUp .5s ease;}
+.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(201,168,76,0.28);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* MY RESULT */
+#screen-result{max-width:580px;margin:0 auto;width:100%;padding-bottom:44px;}
+.result-hero{text-align:center;padding:32px 16px 24px;}
+.personality-badge{display:inline-flex;flex-direction:column;align-items:center;background:linear-gradient(135deg,var(--violet),var(--purple));border:2px solid var(--gold);border-radius:20px;padding:20px 28px;margin-bottom:20px;box-shadow:0 0 50px rgba(201,168,76,0.16);}
+.badge-icon{font-size:44px;margin-bottom:6px;}
+.badge-label{font-size:10px;color:var(--text-dim);letter-spacing:2px;}
+.badge-name{font-size:24px;font-weight:800;color:var(--gold-light);margin-top:3px;}
+.result-headline{font-size:19px;font-weight:700;margin-bottom:9px;}
+.result-summary{font-size:13px;color:var(--text-dim);line-height:1.8;max-width:420px;margin:0 auto;}
+.section-title{font-size:15px;font-weight:700;color:var(--gold-light);margin:22px 0 12px;border-right:3px solid var(--gold);padding-right:11px;}
+.axes-result{display:flex;flex-direction:column;gap:11px;}
+.axis-bar{background:var(--card-bg);border:1px solid var(--border);border-radius:13px;padding:13px 16px;}
+.axis-bar-header{display:flex;justify-content:space-between;margin-bottom:8px;align-items:center;}
+.axis-bar-name{font-size:13px;font-weight:600;}
+.axis-bar-score{font-size:12px;color:var(--gold);font-weight:700;}
+.axis-bar-track{height:5px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
+.axis-bar-fill{height:100%;background:linear-gradient(90deg,var(--violet),var(--gold));border-radius:4px;transition:width 1.2s cubic-bezier(.4,0,.2,1);width:0;}
+.axis-bar-desc{font-size:11px;color:var(--text-dim);margin-top:6px;line-height:1.5;}
+.insights-grid{display:flex;flex-direction:column;gap:10px;}
+.insight-card{background:var(--card-bg);border:1px solid var(--border);border-radius:13px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;}
+.insight-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.insight-title{font-size:13px;font-weight:700;margin-bottom:3px;}
+.insight-text{font-size:12px;color:var(--text-dim);line-height:1.6;}
+
+/* SHARE BOX */
+.share-box{background:linear-gradient(135deg,rgba(74,45,138,0.35),var(--card-bg));border:1px solid var(--border);border-radius:20px;padding:24px;text-align:center;margin-top:20px;}
+.share-box-title{font-size:18px;font-weight:700;margin-bottom:6px;color:var(--gold-light);}
+.share-box-sub{font-size:13px;color:var(--text-dim);margin-bottom:16px;line-height:1.6;}
+.code-display{background:rgba(0,0,0,0.32);border:2px dashed var(--gold);border-radius:13px;padding:16px;margin:14px 0;cursor:pointer;transition:all .3s;}
+.code-display:hover{background:rgba(201,168,76,0.05);}
+.code-display-label{font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px;}
+.code-display-value{font-size:28px;font-weight:800;color:var(--gold);letter-spacing:6px;direction:ltr;}
+.code-display-hint{font-size:11px;color:var(--text-dim);margin-top:5px;}
+.copied-toast{display:none;background:var(--success);color:var(--deep);padding:6px 16px;border-radius:50px;font-size:12px;font-weight:700;margin:0 auto 10px;width:fit-content;}
+.copied-toast.visible{display:block;animation:fadeUp .3s ease;}
+.whatsapp-btn{background:#25D366;color:#fff;border:none;padding:13px 28px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;width:100%;max-width:280px;display:block;margin:0 auto;}
+.whatsapp-btn:hover{background:#1fb855;transform:translateY(-2px);}
+
+/* COMPATIBILITY REPORT */
+#screen-compat{max-width:580px;margin:0 auto;width:100%;padding-bottom:44px;}
+.compat-hero{text-align:center;padding:28px 16px 20px;}
+.compat-title{font-size:26px;font-weight:800;margin-bottom:8px;}
+.compat-sub{font-size:14px;color:var(--text-dim);line-height:1.7;}
+.couple-badges{display:flex;gap:12px;justify-content:center;margin:20px 0;flex-wrap:wrap;}
+.couple-badge{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:14px 20px;text-align:center;flex:1;min-width:120px;}
+.couple-badge-icon{font-size:28px;margin-bottom:4px;}
+.couple-badge-role{font-size:10px;color:var(--text-dim);letter-spacing:1px;}
+.couple-badge-name{font-size:15px;font-weight:700;color:var(--gold-light);}
+.vs-divider{display:flex;align-items:center;font-size:18px;color:var(--text-dim);}
+
+/* COMPAT SECTIONS */
+.compat-section{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin-bottom:14px;}
+.compat-section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.compat-section-icon{font-size:22px;}
+.compat-section-title{font-size:15px;font-weight:700;}
+.compat-section-badge{margin-right:auto;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.badge-strong{background:rgba(74,222,128,0.15);color:var(--success);}
+.badge-watch{background:rgba(248,113,113,0.15);color:var(--danger);}
+.badge-neutral{background:rgba(201,168,76,0.15);color:var(--gold);}
+
+.compat-axis-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.compat-axis-name{font-size:12px;color:var(--text-dim);width:90px;flex-shrink:0;text-align:right;}
+.compat-bars{flex:1;display:flex;flex-direction:column;gap:4px;}
+.compat-bar-wrap{display:flex;align-items:center;gap:6px;}
+.compat-bar-label{font-size:10px;color:var(--text-dim);width:20px;text-align:center;}
+.compat-bar-track{flex:1;height:6px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
+.compat-bar-fill-h{height:100%;border-radius:4px;transition:width 1s ease;background:linear-gradient(90deg,var(--violet),#7c5cbf);}
+.compat-bar-fill-w{height:100%;border-radius:4px;transition:width 1s ease;background:linear-gradient(90deg,#c9507a,#e87aa0);}
+
+.exercise-card{background:linear-gradient(135deg,rgba(74,45,138,0.25),rgba(26,18,40,0.4));border:1px solid rgba(201,168,76,0.18);border-radius:13px;padding:14px 16px;margin-top:10px;}
+.exercise-label{font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
+.exercise-text{font-size:13px;line-height:1.7;color:var(--cream);}
+
+.legal-note{font-size:10px;color:var(--text-dim);text-align:center;line-height:1.7;opacity:.6;max-width:360px;margin:20px auto 0;padding:0 14px;}
+
+@media(max-width:480px){
+  .brand-name{font-size:33px;}
+  .hero-headline{font-size:18px;}
+  .couple-badges{flex-direction:column;}
+  .couple-badge{min-width:unset;}
+}
+</style>
+</head>
+<body>
+<div id="particles"></div>
+
+<!-- ======== LANDING ======== -->
+<div id="screen-landing" class="screen active">
+  <div class="logo-mark"><div class="logo-ring"></div><div class="logo-inner">🌿</div></div>
+  <div class="brand-name">بصمة التوافق</div>
+  <div class="brand-sub">HUMAN MINDPRINT</div>
+  <div class="hero-headline">تعرّف على نفسك من خلال<br><span>القرارات</span>، لا الأسئلة</div>
+  <div class="hero-sub">مواقف حقيقية من الحياة الزوجية تكشف أنماطك العميقة — كيف تُحب، كيف تختلف، كيف تقرر</div>
+  <div class="stats-row">
+    <div class="stat"><span class="stat-num">12</span><span class="stat-label">موقف حقيقي</span></div>
+    <div class="stat"><span class="stat-num">8</span><span class="stat-label">محور زوجي</span></div>
+    <div class="stat"><span class="stat-num">15</span><span class="stat-label">دقيقة فقط</span></div>
+  </div>
+  <button class="btn-primary" onclick="showScreen('screen-status')">ابدأ رحلة الاكتشاف ←</button>
+  <button class="btn-outline" style="margin-top:12px;" onclick="showScreen('screen-partner-entry')">عندي كود شريكي — أريد التقرير المشترك</button>
+  <div class="disclaimer">للاستبصار الذاتي فقط. لا تشخيص نفسي ولا حكم على الزواج.</div>
+</div>
+
+<!-- ======== STATUS ======== -->
+<div id="screen-status" class="screen">
+  <div style="width:100%;max-width:440px;">
+    <div class="status-title">ما وضعك الحالي؟</div>
+    <div class="status-sub">القصص ستتكيف معك تماماً</div>
+    <div class="status-options">
+      <div class="status-card" onclick="selectStatus('married',this)">
+        <div class="status-icon">💍</div>
+        <div>
+          <div class="status-name">متزوج / متزوجة</div>
+          <div class="status-desc">مواقف من داخل الحياة الزوجية الفعلية</div>
+        </div>
+        <div class="status-badge">متاح</div>
+      </div>
+      <div class="status-card disabled">
+        <div class="status-icon">💛</div>
+        <div>
+          <div class="status-name">مخطوب / مخطوبة</div>
+          <div class="status-desc">مواقف التوافق قبل الزواج</div>
+        </div>
+        <div class="coming-badge">قريباً</div>
+      </div>
+      <div class="status-card disabled">
+        <div class="status-icon">🌱</div>
+        <div>
+          <div class="status-name">أعزب / عزباء</div>
+          <div class="status-desc">معرفة الذات وجاهزية الزواج</div>
+        </div>
+        <div class="coming-badge">قريباً</div>
+      </div>
+    </div>
+    <button class="btn-primary" id="continueBtn" onclick="goToIntro()" style="opacity:.4;pointer-events:none;">متابعة ←</button>
+    <button class="btn-secondary" onclick="showScreen('screen-landing')">العودة</button>
+  </div>
+</div>
+
+<!-- ======== PARTNER CODE ENTRY ======== -->
+<div id="screen-partner-entry" class="screen">
+  <div style="width:100%;max-width:420px;">
+    <div class="entry-title">أدخل كود شريكك</div>
+    <div class="entry-sub">
+      أكمل اختبارك أولاً — ثم أدخل كود شريكك<br>
+      لنُولّد لكما تقرير التوافق الكامل
+    </div>
+
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:20px;">
+      <div style="font-size:13px;color:var(--text-dim);margin-bottom:14px;text-align:center;">الخطوات:</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div style="width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--deep);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">1</div>
+          <div style="font-size:13px;">أكمل اختبارك الشخصي</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div style="width:26px;height:26px;border-radius:50%;background:rgba(201,168,76,0.3);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">2</div>
+          <div style="font-size:13px;color:var(--text-dim);">احصل على كودك</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div style="width:26px;height:26px;border-radius:50%;background:rgba(201,168,76,0.3);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">3</div>
+          <div style="font-size:13px;color:var(--text-dim);">أرسله لشريكك ليكمل اختباره</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div style="width:26px;height:26px;border-radius:50%;background:rgba(201,168,76,0.3);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;">4</div>
+          <div style="font-size:13px;color:var(--text-dim);">ادخل هنا كوديكما لتقرير التوافق</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;text-align:center;">كودك أنت</div>
+      <input class="code-input" id="myCodeInput" placeholder="× × × × × ×" maxlength="6" oninput="this.value=this.value.toUpperCase()">
+    </div>
+    <div style="margin-bottom:20px;">
+      <div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;text-align:center;">كود شريكك</div>
+      <input class="code-input" id="partnerCodeInput" placeholder="× × × × × ×" maxlength="6" oninput="this.value=this.value.toUpperCase()">
+    </div>
+    <div class="code-error" id="codeError">⚠️ الكود غير صحيح — تأكد من الكود وأعد المحاولة</div>
+
+    <button class="btn-primary" onclick="loadCompatReport()">عرض تقرير التوافق ←</button>
+    <button class="btn-secondary" onclick="showScreen('screen-landing')">العودة</button>
+  </div>
+</div>
+
+<!-- ======== INTRO ======== -->
+<div id="screen-intro" class="screen">
+  <div style="width:100%;max-width:460px;">
+    <div class="intro-card"><div class="intro-icon">💍</div><div class="intro-title">مسار المتزوج</div><div class="intro-text">12 موقفاً من الحياة الزوجية الحقيقية.<br>لا يوجد إجابة صح أو خطأ — فقط اختر ما يعبّر عنك <strong>أنت</strong>.</div></div>
+    <div class="intro-card"><div class="intro-icon">🎯</div><div class="intro-title">ما الذي سنكتشفه؟</div>
+      <div class="axes-grid">
+        <div class="axis-chip">⚡ إدارة الخلاف</div><div class="axis-chip">💰 المال</div>
+        <div class="axis-chip">👨‍👩‍👧 الأهل</div><div class="axis-chip">💛 العاطفة</div>
+        <div class="axis-chip">🤝 المسؤولية</div><div class="axis-chip">👁️ الغيرة</div>
+        <div class="axis-chip">🧠 القرار</div><div class="axis-chip">🌊 الضغط</div>
+      </div>
+    </div>
+    <div class="intro-card"><div class="intro-icon">🔒</div><div class="intro-title">خصوصيتك محمية</div><div class="intro-text">بياناتك ملكك. لا نشاركها مع أحد.</div></div>
+    <button class="btn-primary" onclick="startAssessment()" style="margin-top:8px;">جاهز — ابدأ الآن ←</button>
+    <button class="btn-secondary" onclick="showScreen('screen-status')">العودة</button>
+  </div>
+</div>
+
+<!-- ======== STORY ======== -->
+<div id="screen-story" class="screen">
+  <div class="progress-header">
+    <div class="progress-circle">
+      <svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="28"/><circle class="fill" id="progressFill" cx="32" cy="32" r="28"/></svg>
+      <div class="progress-num" id="progressNum">1/12</div>
+    </div>
+    <div class="progress-info">
+      <div class="progress-label">الموقف الحالي</div>
+      <div class="progress-axis" id="currentAxis">—</div>
+    </div>
+  </div>
+  <div class="story-card" id="storyCard">
+    <div class="story-context" id="storyContext"></div>
+    <div class="story-situation" id="storySituation"></div>
+    <div class="story-question" id="storyQuestion"></div>
+  </div>
+  <div class="choices-list" id="choicesList"></div>
+  <div class="deep-question" id="deepQuestion">
+    <div class="deep-q-label">✦ تأمّل معي</div>
+    <div class="deep-q-text" id="deepQuestionText"></div>
+  </div>
+  <button class="next-btn" id="nextBtn" onclick="nextStory()">الموقف التالي ←</button>
+</div>
+
+<!-- ======== MY RESULT ======== -->
+<div id="screen-result" class="screen">
+  <div class="result-hero">
+    <div class="personality-badge">
+      <div class="badge-icon" id="badgeIcon">🌟</div>
+      <div class="badge-label">نمطك الزوجي</div>
+      <div class="badge-name" id="badgeName">—</div>
+    </div>
+    <div class="result-headline" id="resultHeadline"></div>
+    <div class="result-summary" id="resultSummary"></div>
+  </div>
+  <div class="section-title">بصمتك على المحاور</div>
+  <div class="axes-result" id="axesResult"></div>
+  <div class="section-title">نقاط تستحق الانتباه</div>
+  <div class="insights-grid" id="insightsGrid"></div>
+
+  <!-- SHARE BOX -->
+  <div class="share-box">
+    <div class="share-box-title">🔗 شارك زوجتك البصمة</div>
+    <div class="share-box-sub">أرسل لها هذا الكود تكمل اختبارها<br>ثم ادخلا الكودين معاً لتقرير التوافق</div>
+    <div class="code-display" onclick="copyCode()">
+      <div class="code-display-label">كودك الخاص</div>
+      <div class="code-display-value" id="shareCode">——</div>
+      <div class="code-display-hint">اضغط لنسخ الكود</div>
+    </div>
+    <div class="copied-toast" id="copiedToast">✓ تم النسخ!</div>
+    <button class="whatsapp-btn" onclick="sendWhatsapp()">📲 أرسل لزوجتي على واتساب</button>
+  </div>
+
+  <div style="margin-top:16px;text-align:center;">
+    <button class="btn-outline" onclick="showScreen('screen-partner-entry')" style="max-width:280px;">عندي كوديكما — أريد التقرير المشترك</button>
+  </div>
+  <div class="legal-note">للاستبصار الذاتي فقط. لا تشخيص نفسي ولا فتوى شرعية ولا حكم على الزواج.</div>
+  <button class="btn-secondary" onclick="restartAssessment()" style="margin-top:20px;">أعد الاختبار</button>
+</div>
+
+<!-- ======== COMPATIBILITY REPORT ======== -->
+<div id="screen-compat" class="screen">
+  <div class="compat-hero">
+    <div class="compat-title">تقرير التوافق</div>
+    <div class="compat-sub">بناءً على إجاباتكما — هذا ما كشفته بصمتاكما معاً</div>
+  </div>
+
+  <div class="couple-badges">
+    <div class="couple-badge">
+      <div class="couple-badge-icon" id="compatIcon1">—</div>
+      <div class="couple-badge-role">أنت</div>
+      <div class="couple-badge-name" id="compatName1">—</div>
+    </div>
+    <div class="vs-divider">💞</div>
+    <div class="couple-badge">
+      <div class="couple-badge-icon" id="compatIcon2">—</div>
+      <div class="couple-badge-role">شريكك</div>
+      <div class="couple-badge-name" id="compatName2">—</div>
+    </div>
+  </div>
+
+  <div id="compatSections"></div>
+
+  <div class="legal-note">هذا التقرير أداة للحوار والتأمل. القرارات دائماً لكما.</div>
+  <button class="btn-secondary" onclick="showScreen('screen-landing')" style="margin-top:20px;">العودة للرئيسية</button>
+</div>
+
+<script>
+// =====================================================
+// STORIES DATA
+// =====================================================
+const storiesMap = {
+  married:[
+    {axis:"الأهل والحدود",context:"أنتما متزوجان منذ سنة ونصف. علاقتكما جيدة لكن أسرة أحدكما تتدخل أكثر مما ينبغي.",situation:"الساعة الحادية عشرة ليلاً. أنتما جالسان معاً بعد يوم طويل. رنّ الجوال — أهله يطلبون زيارة الآن قالوا اشتقنا فقط.",question:"ماذا تفعل؟",deep:"ما الحد الذي تعتبره تدخلاً في حياتكما الزوجية؟ وهل تحدثتما عنه صراحةً؟",choices:[{l:"أ",t:"نرحب بهم ونرتب البيت بسرعة",i:"الأهل أولوية فوق كل شيء — الراحة الزوجية قابلة للتأجيل",s:{family:2,emotion:-1,partnership:-1}},{l:"ب",t:"أعتذر بلطف وأقترح موعداً غداً",i:"الحدود الزوجية محترمة — قادر على قول لا بأدب",s:{family:-1,independence:2,communication:1}},{l:"ج",t:"أتشاور مع زوجتي أولاً قبل الرد",i:"الشراكة الزوجية أساس — حتى القرارات الصغيرة تُبنى معاً",s:{partnership:3,communication:2}},{l:"د",t:"أقبلهم لكن في نفسي انزعاج لا أُظهره",i:"يصعب عليه التعبير عن احتياجاته — يُفضّل التكيف على المواجهة",s:{emotion:-2,communication:-2}}]},
+    {axis:"المال والشفافية",context:"أنتما متزوجان منذ 3 سنوات. الحياة المادية مستقرة لكن لم تتحدثا عن التفاصيل المالية بوضوح.",situation:"أخبرتك زوجتك أنها تريد فتح حساب توفير باسمها وحدها وتودع فيه جزءاً من المصروف الشهري.",question:"ما ردة فعلك الداخلية أولاً؟",deep:"ما نموذج إدارة المال الذي تتصوره في زواجك؟ وهل اتفقتما عليه فعلاً؟",choices:[{l:"أ",t:"أشجعها — من حقها مساحتها المالية",i:"يؤمن باستقلالية الشريك المالية — ثقة عالية",s:{trust:3,independence:2,money:1}},{l:"ب",t:"أشعر بعدم ارتياح — لماذا حساب منفصل؟",i:"يرى الشفافية المالية الكاملة أساساً للشراكة",s:{trust:-1,money:2,communication:1}},{l:"ج",t:"لا مشكلة لكنني أريد أعرف لماذا",i:"يحترم القرار لكنه يريد فهماً مشتركاً",s:{trust:1,communication:3,partnership:2}},{l:"د",t:"أتفق لكن أشعر أنها تخفي شيئاً",i:"حساسية عالية تجاه الشفافية — قد يكون خوفاً لا انعدام ثقة",s:{trust:-2,emotion:-1}}]},
+    {axis:"إدارة الخلاف",context:"خلاف حاد بينكما حول جدول مصاريف البيت. الجو متوتر والكلام أصبح جارحاً.",situation:"في لحظة غضب قالت لك: أنت لا تقدّر تعب البيت وكأنك ضيف.",question:"ماذا تفعل في تلك اللحظة؟",deep:"حين تنتهي الخلافات الكبيرة — كيف تعرف أنها انتهت فعلاً؟ هل يبقى شيء؟",choices:[{l:"أ",t:"أرد بنفس الحدة — أنا أشتغل ليل نهار لهذا البيت",i:"غريزة المعاملة بالمثل — الخلاف سيتصاعد",s:{conflict:-2,emotion:-2,communication:-1}},{l:"ب",t:"أصمت وأخرج من الغرفة حتى يهدأ الجو",i:"يتجنب التصعيد لكن قد يترك الجرح دون علاج",s:{conflict:1,communication:-1}},{l:"ج",t:"أتوقف وأقول: كلامك آلمني، نتكلم بعد ما نهدأ؟",i:"وعي عاطفي عالٍ — يُسمّي ألمه ويطلب مهلة",s:{conflict:3,communication:3,emotion:2}},{l:"د",t:"أحاول التهدئة فوراً وأقول: أنا آسف، نتكلم بهدوء",i:"يُقدّم الوحدة على الفوز بالحجة",s:{conflict:2,emotion:-1,partnership:1}}]},
+    {axis:"الاستقلالية والقرار",context:"صديقك المقرب دعاك لرحلة جماعية الأسبوع القادم — 4 أيام. فرصة جميلة ومناسبة مادياً.",situation:"زوجتك لم تعلم بعد وأنت تفكر في الموضوع.",question:"ما أول شيء تفعله؟",deep:"ما القرارات التي تعتبرها شخصية بحتة لا تحتاج استئذاناً؟ وما التي لا تُقدم عليها دون اتفاق؟",choices:[{l:"أ",t:"أحجز وأخبرها — هذا قرار شخصي وهو ملكي",i:"يرى استقلاليته التامة حقاً — قد يُشعر الشريك بالتهميش",s:{independence:3,partnership:-3}},{l:"ب",t:"أتكلم معها أولاً وأسمع رأيها قبل أي قرار",i:"الشراكة الزوجية تشمل القرارات الشخصية",s:{partnership:3,communication:2}},{l:"ج",t:"أخبرها وأحجز في نفس الوقت",i:"يُخبر لا يستأذن — الشريك يشعر بالفارق",s:{independence:2,partnership:0}},{l:"د",t:"أعرض عليها تأتي معنا إن أرادت ثم أحجز",i:"ودي لكن القرار اتُّخذ فعلياً",s:{partnership:1,independence:2}}]},
+    {axis:"الغيرة والثقة",context:"أنتما متزوجان منذ 5 سنوات. العلاقة مستقرة والثقة عالية.",situation:"لاحظت أن زوجتك تتكلم كثيراً عن زميل جديد في عملها — ذكاه ولطفه. ذكرته أكثر من مرة هذا الأسبوع.",question:"ماذا تفعل داخلياً وخارجياً؟",deep:"من أين يأتي إحساسك بالأمان في الزواج — من ثقتك بنفسك أم بها أم من الظروف الخارجية؟",choices:[{l:"أ",t:"لا يهمني — أنا واثق بزوجتي وهذا طبيعي",i:"أمان داخلي عالٍ — لا يحتاج تطمينات خارجية",s:{trust:3,jealousy:-2,emotion:1}},{l:"ب",t:"أسأل بلطف: يبدو أن هذا الزميل لافت — كيف تعرفتم؟",i:"يُعالج شعوره بالتواصل الإيجابي",s:{communication:3,jealousy:1,trust:1}},{l:"ج",t:"أشعر بانزعاج لكن أتجاهله",i:"يكبت مشاعره تجنباً للظهور بمظهر الغيور",s:{emotion:-2,jealousy:2,communication:-2}},{l:"د",t:"أقول لها بصراحة: لاحظت أنك تذكره كثيراً وشعرت بشيء",i:"شجاعة عاطفية — يُعبّر عن ضعفه بثقة دون اتهام",s:{communication:3,emotion:3,trust:2}}]},
+    {axis:"الضغط والدعم",context:"زوجتك مرّت بيوم صعب جداً في عملها. عادت منهكة وحزينة وصامتة.",situation:"تجلس في غرفتها وحدها. يبدو أنها تبكي.",question:"ماذا تفعل؟",deep:"حين تكون زوجتك في ضيق — ما الذي تعتقد أنه يساعدها أكثر؟ هل سألتها يوماً مباشرة؟",choices:[{l:"أ",t:"أدخل وأجلس بجانبها بصمت دون أن أقول شيئاً",i:"يفهم أن الحضور أحياناً أقوى من الكلام",s:{emotion:3,communication:1,stress:2}},{l:"ب",t:"أسألها ما المشكلة وأحاول أجد حلاً",i:"يُحب بالحل — لكن هي قد تحتاج أن تُسمع",s:{stress:2,emotion:-1}},{l:"ج",t:"أتركها وقتها وأقول: أنا موجود إن احتجتِ",i:"يحترم مساحتها — لكن هل هو انتظار ذكي أم ابتعاد؟",s:{independence:1,emotion:0}},{l:"د",t:"أسألها: ماذا تحتاجين مني الآن؟",i:"احترام عالٍ لاحتياجاتها — لا يفترض بل يسأل",s:{communication:3,emotion:3,partnership:3}}]},
+    {axis:"المسؤولية والأدوار",context:"الحياة اليومية مشغولة — عمل وأطفال وأهل. الأعباء كثيرة.",situation:"لاحظت أن توزيع أعباء البيت غير متوازن وإذا تكلمتما سابقاً انتهى الموضوع دون حل حقيقي.",question:"كيف تتعامل مع هذا الموضوع؟",deep:"ما الأدوار التي تعتبرها واضحة بينكما؟ وما التي تشعر أنها غير متفق عليها؟",choices:[{l:"أ",t:"أتحمل أكثر دون شكوى — هذا واجبي",i:"يتحمل المسؤولية لكنه قد يُراكم استياءً خفياً",s:{stress:-1,communication:-2,emotion:-1}},{l:"ب",t:"أطلب نجلس نتكلم ونوزع المهام بوضوح",i:"يُعالج الموضوع بالتخطيط المشترك — ناضج وعملي",s:{communication:3,partnership:3}},{l:"ج",t:"أنتظر تلاحظ وحدها وتتحرك",i:"يأمل أن تُبادر هي — نادراً ما يحل المشكلة",s:{communication:-2,partnership:-1}},{l:"د",t:"أساعد أكثر دون إعلان — الأفعال أقوى من الكلام",i:"يُعبّر بالفعل — لكن هل هي تُدرك ذلك؟",s:{partnership:1,communication:-1}}]},
+    {axis:"القرارات المصيرية",context:"عُرض عليك منصب مهم في مدينة أخرى — فرصة كبيرة لكنها تعني نقل الحياة كلها.",situation:"الراتب سيرتفع بشكل ملحوظ لكن ذلك يعني ترك أهلها وأهلك وبيئتكما التي تعرفانها.",question:"ماذا تفعل؟",deep:"في القرارات التي تمس حياتكما معاً — هل تشعر أن قراراتكما فعلاً مشتركة؟",choices:[{l:"أ",t:"أرفض دون تفكير — الاستقرار الأسري أهم",i:"يُقدّم الأمان الأسري على الطموح",s:{family:3,values:2}},{l:"ب",t:"أقبل — الفرص لا تنتظر وزوجتي ستفهم",i:"يُقدّم الطموح ويفترض موافقة الشريك",s:{independence:3,partnership:-3}},{l:"ج",t:"أجلس مع زوجتي ونضع كل شيء على الطاولة — معاً نقرر",i:"القرارات المصيرية تُبنى معاً",s:{partnership:3,communication:3}},{l:"د",t:"أعرض عليها وأقول القرار لها في النهاية",i:"يُلقي المسؤولية عليها تحت مسمى الاحترام",s:{partnership:-1,communication:-1}}]},
+    {axis:"العاطفة والتعبير",context:"مرّت أسابيع مشغولة. فجأة تلاحظ أن بينكما مسافة هادئة — لا خلاف لكن لا دفء.",situation:"أنتما في البيت مساءً كل واحد في جواله.",question:"ماذا تفعل؟",deep:"هل تجد سهولة في قول أفتقدك لزوجتك؟ وما الذي يجعل هذا سهلاً أو صعباً؟",choices:[{l:"أ",t:"لا أرى مشكلة — الحياة لها مراحل هدوء طبيعية",i:"يقبل التقلبات — لكن هل يُفرّق بين الهدوء والمسافة؟",s:{emotion:0,communication:-1}},{l:"ب",t:"أقترح نخرج مساء — عشاء أو نزهة",i:"يرى نفسه مسؤولاً عن الدفء — يُبادر عاطفياً",s:{emotion:3,partnership:2,communication:1}},{l:"ج",t:"أنتظرها تبادر — لا أريد أبدو محتاجاً",i:"الاحتياج العاطفي يُشعره بالضعف",s:{emotion:-2,communication:-2}},{l:"د",t:"أقول لها: أشعر أن بيننا بعداً — أريد نتكلم",i:"شجاعة عاطفية — يُسمّي المشكلة قبل أن تتجذّر",s:{communication:3,emotion:3,partnership:2}}]},
+    {axis:"الغيرة من النجاح",context:"حصلت زوجتك على ترقية كبيرة في عملها في نفس الوقت الذي تمر فيه أنت بمرحلة ركود مهني.",situation:"لاحظت أن ردة فعلك على نبأ ترقيتها كانت أبطأ مما توقعت.",question:"ماذا تفعل مع هذا الشعور؟",deep:"حين يتفاوت النجاح بينكما — كيف تحافظان على التوازن دون أن يشعر أحدكما بالنقص؟",choices:[{l:"أ",t:"أحتفل معها بصدق — نجاحها نجاحي",i:"أمان داخلي قوي — يرى نجاحها امتداداً له",s:{trust:3,emotion:2,partnership:3}},{l:"ب",t:"أبتسم لكن في داخلي شعور صعب",i:"صادق مع نفسه داخلياً — لكن هل يُعالجه؟",s:{emotion:1,communication:0}},{l:"ج",t:"أسألها عن تفاصيل نجاحها وأستمتع بحكايتها",i:"تعاطف حقيقي وفضول — يُقوّي الرابط الزوجي",s:{communication:3,partnership:3,emotion:2}},{l:"د",t:"أشعر بشيء ثم أشعر بذنب لأنني أشعر بشيء",i:"وعي عاطفي عميق — يُحاسب نفسه على مشاعره",s:{emotion:2,communication:-1}}]},
+    {axis:"الأهل والمسؤولية",context:"والد زوجتك مريض ويحتاج رعاية مستمرة. الموضوع بدأ يأخذ وقتاً وطاقة ومالاً.",situation:"لاحظت أن هذا الوضع يُرهق الحياة الزوجية لكن زوجتك لا تريد أن تضع حدوداً مع أهلها.",question:"كيف تتعامل مع هذا الوضع؟",deep:"ما الدور الذي تتصوره لأهل كل منكما في حياتكما الزوجية؟ وهل اتفقتما على هذا صراحةً؟",choices:[{l:"أ",t:"أدعمها كلياً — أهلها أهلي ولا حدود في هذا",i:"عطاء حقيقي — لكن هل هو مستدام؟",s:{family:3,partnership:2}},{l:"ب",t:"أدعم لكن نتحدث عن حدود واضحة لحماية بيتنا",i:"يوازن بين الواجب والحفاظ على الزواج",s:{family:1,communication:3,partnership:2}},{l:"ج",t:"أشعر بثقل لكن لا أُعبّر حتى لا أُحرجها",i:"يكبت ضغطه — يتراكم ثم ينفجر",s:{emotion:-2,communication:-2,stress:-2}},{l:"د",t:"أقترح نجلس ثلاثتنا لنجد حلاً مناسباً",i:"يشمل الشريك في الحل — شجاعة وتعاون",s:{communication:3,partnership:2,family:1}}]},
+    {axis:"التواصل العاطفي العميق",context:"أنتما في سنتكما الخامسة من الزواج. الحياة مستقرة لكن التواصل العاطفي العميق قل بشكل واضح.",situation:"في ليلة هادئة قالت لك زوجتك: أشعر أننا أصبحنا شركاء في إدارة البيت أكثر من كوننا زوجين.",question:"ماذا تقول لها؟",deep:"ما الذي يجعل زواجاً ناجحاً في رأيك — الاستقرار والمسؤولية أم الدفء والقرب العاطفي أم الاثنان معاً؟",choices:[{l:"أ",t:"أقول: هذا طبيعي بعد سنوات — الحياة تتغير",i:"يُطبّع الوضع بدلاً من مواجهته",s:{emotion:-1,communication:-2}},{l:"ب",t:"أسألها: ماذا تحتاجين لتشعري بالقرب مني مجدداً؟",i:"يضع احتياجها في مركز الحوار",s:{communication:3,emotion:3,partnership:3}},{l:"ج",t:"أعترف أنني أيضاً أشعر بهذا وأنا سعيد أنها قالته",i:"صدق وشجاعة — يُشعرها أنها لم تتكلم وحدها",s:{emotion:3,communication:3,trust:2}},{l:"د",t:"أقول: أنا أحبك لكن لا أعرف كيف نُغيّر هذا",i:"صادق في عجزه — لكن الصدق دون حركة يُوقف التقدم",s:{emotion:2,communication:1,partnership:-1}}]}
+  ]
+};
+
+// =====================================================
+// PERSONALITIES
+// =====================================================
+const personalities = [
+  {key:"communicator",name:"المتواصل الشجاع",icon:"🗣️",desc:"تُسمّي المشاعر والمواقف بجرأة. قوتك في الوضوح، وتحديك أن تُعطي شريكك وقتاً للوصول لمستوى انفتاحك."},
+  {key:"partner",name:"الشريك الحقيقي",icon:"🤝",desc:"تؤمن أن القرارات الكبيرة مشتركة دائماً. قوتك في بناء الثقة، وتحديك قبول مساحة الاستقلالية أحياناً."},
+  {key:"expressor",name:"المعبّر الدافئ",icon:"💛",desc:"تُعبّر عن مشاعرك بحرية وتملأ العلاقة بالدفء. قوتك في العاطفة، وتحديك ألا تأخذ ردود الأفعال بعمق أكثر مما تستحق."},
+  {key:"guardian",name:"الحارس الأمين",icon:"🛡️",desc:"تُعطي الأمان والاستقرار أولوية. قوتك في الثبات، وتحديك أن تفتح قلبك أكثر لشريكك."},
+  {key:"independent",name:"المستقل الواثق",icon:"🦅",desc:"تعرف حدودك وتحترم استقلاليتك. قوتك في الوضوح الذاتي، وتحديك جعل شريكك يشعر بأنه جزء حقيقي من قراراتك."},
+  {key:"caregiver",name:"الراعي المتفاني",icon:"🌸",desc:"تضع الآخرين أولاً. قوتك في الحب غير المشروط، وتحديك التعبير عن احتياجاتك أنت أيضاً."},
+  {key:"grounded",name:"المتجذّر القيمي",icon:"🌳",desc:"قيمك وثوابتك توجّه قراراتك. قوتك في الوضوح الأخلاقي، وتحديك المرونة في الأساليب."},
+  {key:"analyst",name:"المفكر الهادئ",icon:"🧠",desc:"تُفكر قبل كل قرار وتنظر للأمور بموضوعية. قوتك في العدل، وتحديك إظهار مشاعرك دون أن ينتظرها شريكك."}
+];
+
+const axesDisplay = [
+  {key:"communication",name:"التواصل العاطفي",desc:"انفتاحك على التعبير عن مشاعرك والحوار الصعب"},
+  {key:"emotion",name:"الذكاء العاطفي",desc:"إدارة مشاعرك والتعامل مع مشاعر شريكك"},
+  {key:"trust",name:"الثقة والشفافية",desc:"انفتاحك المالي والشخصي مع شريكك"},
+  {key:"conflict",name:"إدارة الخلاف",desc:"أسلوبك في التعامل مع الخلافات وتجاوزها"},
+  {key:"partnership",name:"الشراكة الحقيقية",desc:"درجة إشراك شريكك في القراراتالمهمة"},
+  {key:"independence",name:"الاستقلالية",desc:"احتياجك للمساحة الشخصية داخل الزواج"},
+  {key:"family",name:"القيم الأسرية",desc:"أهمية الأسرة والحدود الأسرية في منظومتك"},
+];
+
+// =====================================================
+// STATE
+// =====================================================
+let currentStatus = null;
+let currentStory = 0;
+let currentStories = [];
+let myScores = {};
+let myPersonality = null;
+let shareCodeValue = '';
+
+function resetScores(){
+  myScores={communication:0,emotion:0,trust:0,conflict:0,money:0,family:0,independence:0,partnership:0,stress:0,values:0,jealousy:0};
+}
+
+// =====================================================
+// CODE ENCODE / DECODE
+// =====================================================
+function encodeScores(scores, personality){
+  const data = {
+    s: {
+      c: scores.communication||0,
+      e: scores.emotion||0,
+      t: scores.trust||0,
+      cf: scores.conflict||0,
+      p: scores.partnership||0,
+      i: scores.independence||0,
+      f: scores.family||0
+    },
+    p: personality.key
+  };
+  try {
+    const json = JSON.stringify(data);
+    const b64 = btoa(unescape(encodeURIComponent(json)));
+    // Take first 8 chars as display code, store full in session
+    return b64;
+  } catch(e){ return null; }
+}
+
+function decodeScores(b64){
+  try {
+    const json = decodeURIComponent(escape(atob(b64)));
+    return JSON.parse(json);
+  } catch(e){ return null; }
+}
+
+function generateShareCode(b64){
+  // Short 6-char display code derived from b64
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let code = '';
+  for(let i=0;i<6;i++){
+    const idx = (b64.charCodeAt(i*3)||0) % chars.length;
+    code += chars[idx];
+  }
+  return code;
+}
+
+// Store full encoded data in sessionStorage
+function saveMyData(encoded){
+  try { sessionStorage.setItem('myData', encoded); } catch(e){}
+}
+function loadMyData(){
+  try { return sessionStorage.getItem('myData'); } catch(e){ return null; }
+}
+
+// =====================================================
+// PARTICLES
+// =====================================================
+function createParticles(){
+  const c=document.getElementById('particles');
+  for(let i=0;i<14;i++){
+    const p=document.createElement('div'); p.className='particle';
+    const s=Math.random()*60+20;
+    p.style.cssText=`width:${s}px;height:${s}px;right:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;
+    c.appendChild(p);
+  }
+}
+
+// =====================================================
+// NAVIGATION
+// =====================================================
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// =====================================================
+// STATUS
+// =====================================================
+function selectStatus(status,el){
+  document.querySelectorAll('.status-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  currentStatus=status;
+  const btn=document.getElementById('continueBtn');
+  btn.style.opacity='1'; btn.style.pointerEvents='auto';
+}
+function goToIntro(){ if(currentStatus) showScreen('screen-intro'); }
+
+// =====================================================
+// ASSESSMENT
+// =====================================================
+function startAssessment(){
+  currentStory=0; resetScores();
+  currentStories=storiesMap[currentStatus]||storiesMap.married;
+  renderStory(); showScreen('screen-story');
+}
+
+function renderStory(){
+  const s=currentStories[currentStory];
+  const total=currentStories.length;
+  const offset=175.9-(currentStory/total)*175.9;
+  document.getElementById('progressFill').style.strokeDashoffset=offset;
+  document.getElementById('progressNum').textContent=`${currentStory+1}/${total}`;
+  document.getElementById('currentAxis').textContent=s.axis;
+  document.getElementById('storyContext').textContent=s.context;
+  document.getElementById('storySituation').textContent=s.situation;
+  document.getElementById('storyQuestion').textContent=s.question;
+  document.getElementById('deepQuestionText').textContent=s.deep;
+  document.getElementById('deepQuestion').classList.remove('visible');
+  document.getElementById('nextBtn').classList.remove('visible');
+  const list=document.getElementById('choicesList'); list.innerHTML='';
+  s.choices.forEach((ch,idx)=>{
+    const btn=document.createElement('button'); btn.className='choice-btn';
+    btn.innerHTML=`<div class="choice-letter">${ch.l}</div><div class="choice-text">${ch.t}<div class="choice-insight">${ch.i}</div></div>`;
+    btn.onclick=()=>selectChoice(idx,btn);
+    list.appendChild(btn);
+  });
+}
+
+function selectChoice(idx,btn){
+  document.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const ch=currentStories[currentStory].choices[idx];
+  Object.entries(ch.s).forEach(([k,v])=>{ myScores[k]=(myScores[k]||0)+v; });
+  setTimeout(()=>{
+    document.getElementById('deepQuestion').classList.add('visible');
+    document.getElementById('nextBtn').classList.add('visible');
+  },350);
+}
+
+function nextStory(){
+  currentStory++;
+  if(currentStory>=currentStories.length){ showResults(); return; }
+  const card=document.getElementById('storyCard');
+  card.style.opacity='0'; card.style.transform='translateX(22px)';
+  setTimeout(()=>{
+    renderStory();
+    card.style.transition='none'; card.style.opacity='0'; card.style.transform='translateX(-22px)';
+    setTimeout(()=>{ card.style.transition='all .4s ease'; card.style.opacity='1'; card.style.transform='translateX(0)'; },40);
+  },270);
+}
+
+// =====================================================
+// MY RESULTS
+// =====================================================
+function showResults(){
+  myPersonality=determinePersonality(myScores);
+  document.getElementById('badgeIcon').textContent=myPersonality.icon;
+  document.getElementById('badgeName').textContent=myPersonality.name;
+  document.getElementById('resultHeadline').textContent=`أنت ${myPersonality.name}`;
+  document.getElementById('resultSummary').textContent=myPersonality.desc;
+
+  // Axes
+  const ac=document.getElementById('axesResult'); ac.innerHTML='';
+  axesDisplay.forEach(ax=>{
+    const raw=myScores[ax.key]||0;
+    const norm=Math.round(Math.max(0,Math.min(100,((raw+6)/15)*100)));
+    const d=document.createElement('div'); d.className='axis-bar';
+    d.innerHTML=`<div class="axis-bar-header"><span class="axis-bar-name">${ax.name}</span><span class="axis-bar-score">${norm}%</span></div><div class="axis-bar-track"><div class="axis-bar-fill" data-w="${norm}"></div></div><div class="axis-bar-desc">${ax.desc}</div>`;
+    ac.appendChild(d);
+  });
+
+  // Insights
+  const ins=generateInsights(myScores);
+  const ig=document.getElementById('insightsGrid'); ig.innerHTML='';
+  ins.forEach(i=>{ const d=document.createElement('div'); d.className='insight-card'; d.innerHTML=`<div class="insight-icon">${i.icon}</div><div class="insight-body"><div class="insight-title">${i.title}</div><div class="insight-text">${i.text}</div></div>`; ig.appendChild(d); });
+
+  // Encode & save
+  const encoded=encodeScores(myScores, myPersonality);
+  saveMyData(encoded);
+  shareCodeValue=generateShareCode(encoded);
+  document.getElementById('shareCode').textContent=shareCodeValue;
+
+  showScreen('screen-result');
+  setTimeout(()=>{ document.querySelectorAll('.axis-bar-fill').forEach(b=>b.style.width=b.dataset.w+'%'); },300);
+}
+
+function determinePersonality(scores){
+  const map=[
+    {key:"communication",type:"communicator"},{key:"partnership",type:"partner"},
+    {key:"emotion",type:"expressor"},{key:"trust",type:"guardian"},
+    {key:"family",type:"caregiver"},{key:"independence",type:"independent"},
+    {key:"values",type:"grounded"},{key:"conflict",type:"analyst"}
+  ];
+  let top="partner",topS=-999;
+  map.forEach(m=>{ const s=scores[m.key]||0; if(s>topS){topS=s;top=m.type;} });
+  return personalities.find(p=>p.key===top)||personalities[1];
+}
+
+function generateInsights(scores){
+  const ins=[];
+  if((scores.communication||0)>=4) ins.push({icon:"💬",title:"تواصل قوي",text:"تُسمّي المشاعر والمواقف بجرأة — هذا يحمي العلاقة من التراكم الصامت."});
+  else if((scores.communication||0)<=-2) ins.push({icon:"🤐",title:"منطقة نمو: التعبير العاطفي",text:"تميل لكبت مشاعرك أو تأجيل الحوارات الصعبة — على المدى البعيد يخلق مسافة."});
+  if((scores.emotion||0)>=4) ins.push({icon:"💛",title:"وعي عاطفي عالٍ",text:"تعرف ما تشعر به وتتعامل مع مشاعر شريكك باحترام."});
+  else if((scores.emotion||0)<=-2) ins.push({icon:"🌊",title:"منطقة نمو: الذكاء العاطفي",text:"أحياناً تجد صعوبة في التعامل مع المشاعر — سواء مشاعرك أو مشاعر شريكك."});
+  if((scores.partnership||0)>=4) ins.push({icon:"🤝",title:"شراكة حقيقية",text:"تؤمن أن الزواج فريق — قراراتك الكبيرة تُبنى مع شريكك لا فوقه."});
+  else if((scores.independence||0)>=4&&(scores.partnership||0)<=0) ins.push({icon:"🦅",title:"استقلالية قوية",text:"تقدّر مساحتك الشخصية كثيراً — تأكد أن شريكك يشعر أنه شريك فعلي."});
+  if((scores.trust||0)>=3) ins.push({icon:"🔓",title:"شفافية مرتفعة",text:"تميل للانفتاح المالي والشخصي — هذا يُسهل بناء الثقة العميقة."});
+  if(ins.length===0) ins.push({icon:"🌱",title:"توازن في الاختيارات",text:"أجبت بتوازن على معظم المحاور — هذا يُظهر مرونة وعقلانية."});
+  return ins.slice(0,3);
+}
+
+// =====================================================
+// SHARE / WHATSAPP
+// =====================================================
+function copyCode(){
+  const fullData=loadMyData()||'';
+  navigator.clipboard.writeText(fullData).catch(()=>{});
+  const t=document.getElementById('copiedToast');
+  t.classList.add('visible');
+  setTimeout(()=>t.classList.remove('visible'),2500);
+}
+
+function sendWhatsapp(){
+  const fullData=loadMyData()||shareCodeValue;
+  const msg=encodeURIComponent(
+    `🌿 *بصمة التوافق*\n\nأكملت اختبار البصمة الزوجية!\nأريد نعرف تقرير التوافق بيننا 💞\n\nأكملي اختبارك من هنا:\nhttps://USERNAME.github.io/basma-tawafuq\n\nثم ادخلي هذا الكود:\n${fullData}\n\n_الاختبار 12 موقف زوجي ويأخذ 15 دقيقة_`
+  );
+  window.open(`https://wa.me/?text=${msg}`,'_blank');
+}
+
+// =====================================================
+// COMPATIBILITY REPORT
+// =====================================================
+function loadCompatReport(){
+  const myInput=document.getElementById('myCodeInput').value.trim();
+  const partnerInput=document.getElementById('partnerCodeInput').value.trim();
+  const errEl=document.getElementById('codeError');
+
+  // Try to decode both
+  const myData=decodeScores(myInput)||decodeScores(loadMyData());
+  const partnerData=decodeScores(partnerInput);
+
+  if(!myData||!partnerData){
+    errEl.style.display='block';
+    setTimeout(()=>errEl.style.display='none',3000);
+    return;
+  }
+
+  errEl.style.display='none';
+  buildCompatReport(myData, partnerData);
+}
+
+function buildCompatReport(myData, partnerData){
+  const myP=personalities.find(p=>p.key===myData.p)||personalities[1];
+  const ptP=personalities.find(p=>p.key===partnerData.p)||personalities[1];
+
+  document.getElementById('compatIcon1').textContent=myP.icon;
+  document.getElementById('compatName1').textContent=myP.name;
+  document.getElementById('compatIcon2').textContent=ptP.icon;
+  document.getElementById('compatName2').textContent=ptP.name;
+
+  const container=document.getElementById('compatSections');
+  container.innerHTML='';
+
+  const axes=[
+    {key:'c',  name:'التواصل العاطفي'},
+    {key:'e',  name:'الذكاء العاطفي'},
+    {key:'t',  name:'الثقة'},
+    {key:'cf', name:'إدارة الخلاف'},
+    {key:'p',  name:'الشراكة'},
+    {key:'i',  name:'الاستقلالية'},
+    {key:'f',  name:'القيم الأسرية'},
+  ];
+
+  // Compute compatibility per axis
+  const strong=[], watch=[], neutral=[];
+  axes.forEach(ax=>{
+    const mv=myData.s[ax.key]||0;
+    const pv=partnerData.s[ax.key]||0;
+    const diff=Math.abs(mv-pv);
+    const avg=(mv+pv)/2;
+    if(diff<=2&&avg>=2) strong.push(ax);
+    else if(diff>=4) watch.push(ax);
+    else neutral.push(ax);
+  });
+
+  // Build bar chart section
+  const barSection=document.createElement('div');
+  barSection.className='compat-section';
+  barSection.innerHTML=`<div class="compat-section-header"><div class="compat-section-icon">📊</div><div class="compat-section-title">مقارنة البصمتين</div></div>`;
+  axes.forEach(ax=>{
+    const mv=normalize(myData.s[ax.key]||0);
+    const pv=normalize(partnerData.s[ax.key]||0);
+    const row=document.createElement('div'); row.className='compat-axis-row';
+    row.innerHTML=`
+      <div class="compat-axis-name">${ax.name}</div>
+      <div class="compat-bars">
+        <div class="compat-bar-wrap"><div class="compat-bar-label" style="color:#7c5cbf">هو</div><div class="compat-bar-track"><div class="compat-bar-fill-h" data-w="${mv}"></div></div><div style="font-size:10px;color:var(--text-dim);width:28px;">${mv}%</div></div>
+        <div class="compat-bar-wrap"><div class="compat-bar-label" style="color:#c9507a">هي</div><div class="compat-bar-track"><div class="compat-bar-fill-w" data-w="${pv}"></div></div><div style="font-size:10px;color:var(--text-dim);width:28px;">${pv}%</div></div>
+      </div>`;
+    barSection.appendChild(row);
+  });
+  container.appendChild(barSection);
+
+  // Strong areas
+  if(strong.length>0){
+    const s=document.createElement('div'); s.className='compat-section';
+    s.innerHTML=`<div class="compat-section-header"><div class="compat-section-icon">✅</div><div class="compat-section-title">مناطق القوة المشتركة</div><div class="compat-section-badge badge-strong">توافق عالٍ</div></div>`;
+    strong.forEach(ax=>{
+      const p=document.createElement('div');
+      p.style.cssText='font-size:13px;margin-bottom:8px;padding-right:8px;border-right:2px solid var(--success);';
+      p.textContent=`${ax.name} — كلاكما يتشابه في هذا المحور بشكل إيجابي`;
+      s.appendChild(p);
+    });
+    s.appendChild(buildExercise(strong[0].key,'strong'));
+    container.appendChild(s);
+  }
+
+  // Watch areas
+  if(watch.length>0){
+    const w=document.createElement('div'); w.className='compat-section';
+    w.innerHTML=`<div class="compat-section-header"><div class="compat-section-icon">⚠️</div><div class="compat-section-title">مناطق تحتاج اتفاقاً مبكراً</div><div class="compat-section-badge badge-watch">اختلاف واضح</div></div>`;
+    watch.forEach(ax=>{
+      const p=document.createElement('div');
+      p.style.cssText='font-size:13px;margin-bottom:8px;padding-right:8px;border-right:2px solid var(--danger);';
+      p.textContent=`${ax.name} — هناك فارق ملحوظ بين أسلوبيكما في هذا المحور`;
+      w.appendChild(p);
+    });
+    w.appendChild(buildExercise(watch[0].key,'watch'));
+    container.appendChild(w);
+  }
+
+  // Neutral
+  if(neutral.length>0){
+    const n=document.createElement('div'); n.className='compat-section';
+    n.innerHTML=`<div class="compat-section-header"><div class="compat-section-icon">💡</div><div class="compat-section-title">مناطق الإثراء المتبادل</div><div class="compat-section-badge badge-neutral">مكمّلان</div></div>`;
+    neutral.forEach(ax=>{
+      const p=document.createElement('div');
+      p.style.cssText='font-size:13px;margin-bottom:8px;padding-right:8px;border-right:2px solid var(--gold);';
+      p.textContent=`${ax.name} — اختلافكما هنا يمكن أن يكون مصدر إثراء لا توتر`;
+      n.appendChild(p);
+    });
+    n.appendChild(buildExercise(neutral[0].key,'neutral'));
+    container.appendChild(n);
+  }
+
+  showScreen('screen-compat');
+  setTimeout(()=>{
+    document.querySelectorAll('.compat-bar-fill-h,.compat-bar-fill-w').forEach(b=>b.style.width=b.dataset.w+'%');
+  },300);
+}
+
+function normalize(v){ return Math.round(Math.max(0,Math.min(100,((v+6)/15)*100))); }
+
+function buildExercise(axisKey, type){
+  const exercises={
+    c:{strong:"كل أسبوع: اجلسا 15 دقيقة بدون جوالات وتحدثا عن شيء واحد يشغل بالكما.",watch:"جربا تمرين الكرسيين: كل طرف يتكلم 3 دقائق دون مقاطعة — الآخر يستمع فقط.",neutral:"سؤال الأسبوع: ما الشيء الذي أتمنيت أن تخبرني به مؤخراً؟"},
+    e:{strong:"شاركا يومياً: ما أفضل شيء وأصعب شيء في يومك؟",watch:"تمرين التسمية: حين تشعر بشيء صعب قل اسم الشعور بدلاً من التصرف بناءً عليه.",neutral:"تمرين المرآة: حين يتكلم شريكك أعد ما سمعته بكلماتك الخاصة."},
+    t:{strong:"مراجعة مالية شهرية معاً — 30 دقيقة تتحدثان فيها عن الأرقام بشفافية.",watch:"ابدأ بجلسة واحدة: ضع كل أرقامك المالية على الطاولة وادعها تفعل الأمر ذاته.",neutral:"اتفقا على ميزانية مشتركة شهرية مع احتفاظ كل طرف بمبلغ شخصي."},
+    cf:{strong:"ضعا قاعدة مشتركة للخلاف — مثلاً: لا نوم على خلاف.",watch:"تمرين التوقف: حين يرتفع الصوت كلاكما يأخذ 10 دقائق ثم يعودان.",neutral:"بعد كل خلاف: كل طرف يقول شيئاً واحداً فعله الآخر صح في الخلاف."},
+    p:{strong:"قرارا مشتركا هذا الشهر: اختارا شيئاً يخص حياتكما معاً وقرراه معاً من البداية للنهاية.",watch:"قائمة القرارات: كل طرف يكتب ما يعتبره قراراً شخصياً وما يعتبره قراراً مشتركاً — قارنا القائمتين.",neutral:"قرارا كل أسبوع قراراً صغيراً بالتبادل — مرة هو مرة هي."},
+    i:{strong:"كل طرف له وقت شخصي أسبوعي لا يُقاطع فيه.",watch:"اتفقا على تعريف واضح للمساحة الشخصية — ما هي وما حدودها.",neutral:"جربا نشاطاً مستقلاً لكل طرف ثم شاركا التجربة مع بعض."},
+    f:{strong:"زيارة عائلية مشتركة شهرياً تخططان لها معاً.",watch:"حددا حدوداً واضحة للأسرة الممتدة — ما يدخل حياتكما وما لا يدخل.",neutral:"اتفقا على كيفية التعامل مع طلبات الأهل قبل أن تصل."},
+  };
+  const ex=exercises[axisKey];
+  const text=ex?ex[type]:ex?ex.neutral:'تحدثا عن هذا المحور بصراحة في وقت هادئ.';
+  const d=document.createElement('div'); d.className='exercise-card';
+  d.innerHTML=`<div class="exercise-label">✦ تمرين عملي</div><div class="exercise-text">${text}</div>`;
+  return d;
+}
+
+// =====================================================
+// RESTART
+// =====================================================
+function restartAssessment(){
+  showScreen('screen-status');
+  document.querySelectorAll('.status-card').forEach(c=>c.classList.remove('selected'));
+  currentStatus=null;
+  const btn=document.getElementById('continueBtn');
+  btn.style.opacity='.4'; btn.style.pointerEvents='none';
+}
+
+// INIT
+createParticles();
+
+// Check URL for partner code
+const urlParams=new URLSearchParams(window.location.search);
+if(urlParams.get('code')){
+  document.getElementById('partnerCodeInput').value=urlParams.get('code');
+  showScreen('screen-partner-entry');
+}
+</script>
+</body>
+</html>
