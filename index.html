@@ -9,765 +9,975 @@
 :root{
   --deep:#1a1228;--purple:#2d1f4e;--violet:#4a2d8a;
   --gold:#c9a84c;--gold-light:#e8c97a;--cream:#f5f0e8;
-  --white:#ffffff;--text-dim:#9b8fc0;--card-bg:#231840;
-  --border:rgba(201,168,76,0.2);--success:#4ade80;--danger:#f87171;
+  --white:#fff;--text-dim:#9b8fc0;--card-bg:#231840;
+  --border:rgba(201,168,76,0.2);--success:#4ade80;
+  --danger:#f87171;--warn:#fbbf24;
   --male:#5b8dee;--female:#e87aa0;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Tajawal',sans-serif;background:var(--deep);color:var(--white);min-height:100vh;overflow-x:hidden;}
 #particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
-.particle{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.18),transparent);animation:float linear infinite;}
+.particle{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.15),transparent);animation:float linear infinite;}
 @keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:1;}90%{opacity:.3;}100%{transform:translateY(-10vh) scale(1);opacity:0;}}
 .screen{position:relative;z-index:1;min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px 18px;}
 .screen.active{display:flex;}
-
-/* LANDING */
-#screen-landing{text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(74,45,138,0.42) 0%,transparent 68%);}
-.logo-mark{width:74px;height:74px;margin:0 auto 18px;position:relative;}
-.logo-ring{width:74px;height:74px;border-radius:50%;border:2px solid var(--gold);position:absolute;animation:spin 8s linear infinite;}
+#screen-landing{text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(74,45,138,0.4) 0%,transparent 65%);}
+.logo-mark{width:72px;height:72px;margin:0 auto 16px;position:relative;}
+.logo-ring{width:72px;height:72px;border-radius:50%;border:2px solid var(--gold);position:absolute;animation:spin 8s linear infinite;}
 .logo-ring::before{content:'';position:absolute;top:-4px;right:50%;width:8px;height:8px;border-radius:50%;background:var(--gold);}
-.logo-inner{position:absolute;inset:12px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--purple));display:flex;align-items:center;justify-content:center;font-size:20px;}
+.logo-inner{position:absolute;inset:11px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--purple));display:flex;align-items:center;justify-content:center;font-size:19px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .brand-name{font-size:38px;font-weight:900;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;margin-bottom:4px;}
-.brand-sub{font-size:12px;color:var(--text-dim);letter-spacing:3px;margin-bottom:32px;}
-.hero-headline{font-size:clamp(18px,5vw,27px);font-weight:700;line-height:1.65;margin-bottom:11px;max-width:440px;}
-.hero-headline span{color:var(--gold-light);}
-.hero-sub{font-size:14px;color:var(--text-dim);line-height:1.8;max-width:370px;margin-bottom:30px;}
-.stats-row{display:flex;gap:22px;justify-content:center;margin-bottom:32px;flex-wrap:wrap;}
+.brand-sub{font-size:11px;color:var(--text-dim);letter-spacing:3px;margin-bottom:28px;}
+.hero-hl{font-size:clamp(17px,5vw,26px);font-weight:700;line-height:1.65;margin-bottom:10px;max-width:420px;}
+.hero-hl span{color:var(--gold-light);}
+.hero-sub{font-size:13px;color:var(--text-dim);line-height:1.8;max-width:360px;margin-bottom:28px;}
+.stats-row{display:flex;gap:20px;justify-content:center;margin-bottom:28px;flex-wrap:wrap;}
 .stat{text-align:center;}
-.stat-num{font-size:23px;font-weight:800;color:var(--gold);display:block;}
-.stat-label{font-size:11px;color:var(--text-dim);margin-top:2px;}
+.stat-num{font-size:22px;font-weight:800;color:var(--gold);display:block;}
+.stat-label{font-size:10px;color:var(--text-dim);margin-top:1px;}
+.btn-p{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--deep);border:none;padding:13px 32px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 8px 24px rgba(201,168,76,0.24);width:100%;max-width:280px;display:block;margin:0 auto;}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,168,76,0.34);}
+.btn-o{background:transparent;color:var(--gold);border:1.5px solid var(--gold);padding:11px 24px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;width:100%;max-width:280px;display:block;margin:8px auto 0;}
+.btn-o:hover{background:rgba(201,168,76,0.09);}
+.btn-s{background:transparent;color:var(--text-dim);border:1px solid rgba(155,143,192,0.26);padding:9px 24px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:13px;cursor:pointer;transition:all .3s;margin:8px auto 0;display:block;}
+.btn-s:hover{color:var(--white);border-color:var(--text-dim);}
+.disclaimer{font-size:10px;color:var(--text-dim);margin-top:14px;opacity:.6;max-width:260px;line-height:1.6;text-align:center;}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:18px;padding:22px 18px;margin-bottom:12px;}
 
-/* BUTTONS */
-.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--deep);border:none;padding:14px 34px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 8px 26px rgba(201,168,76,0.26);width:100%;max-width:290px;display:block;margin:0 auto;}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(201,168,76,0.36);}
-.btn-secondary{background:transparent;color:var(--text-dim);border:1px solid rgba(155,143,192,0.28);padding:10px 26px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:13px;cursor:pointer;transition:all .3s;margin-top:10px;display:block;margin-left:auto;margin-right:auto;}
-.btn-secondary:hover{color:var(--white);border-color:var(--text-dim);}
-.btn-outline{background:transparent;color:var(--gold);border:1.5px solid var(--gold);padding:12px 26px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;width:100%;max-width:290px;display:block;margin:0 auto;}
-.btn-outline:hover{background:rgba(201,168,76,0.09);}
-.disclaimer{font-size:10px;color:var(--text-dim);margin-top:16px;opacity:.65;max-width:270px;line-height:1.6;text-align:center;}
+/* GENDER */
+#screen-gender{max-width:400px;margin:0 auto;text-align:center;}
+.g-title{font-size:22px;font-weight:800;margin-bottom:6px;}
+.g-sub{font-size:13px;color:var(--text-dim);margin-bottom:24px;line-height:1.7;}
+.g-opts{display:flex;gap:12px;justify-content:center;margin-bottom:22px;}
+.g-card{background:var(--card-bg);border:2px solid rgba(201,168,76,0.12);border-radius:18px;padding:20px 16px;cursor:pointer;transition:all .3s;flex:1;text-align:center;min-width:120px;}
+.g-card:hover{transform:translateY(-2px);}
+.g-card.male:hover,.g-card.male.sel{border-color:var(--male);background:rgba(91,141,238,0.09);}
+.g-card.female:hover,.g-card.female.sel{border-color:var(--female);background:rgba(232,122,160,0.09);}
+.g-icon{font-size:40px;margin-bottom:8px;}
+.g-name{font-size:16px;font-weight:700;}
+.g-desc{font-size:11px;color:var(--text-dim);margin-top:3px;line-height:1.4;}
 
-/* GENDER SELECT */
-#screen-gender{max-width:420px;margin:0 auto;text-align:center;}
-.gender-title{font-size:24px;font-weight:800;margin-bottom:8px;}
-.gender-sub{font-size:14px;color:var(--text-dim);margin-bottom:30px;line-height:1.7;}
-.gender-options{display:flex;gap:14px;justify-content:center;margin-bottom:28px;flex-wrap:wrap;}
-.gender-card{background:var(--card-bg);border:2px solid rgba(201,168,76,0.13);border-radius:20px;padding:24px 20px;cursor:pointer;transition:all .3s;flex:1;min-width:130px;text-align:center;}
-.gender-card:hover{transform:translateY(-3px);}
-.gender-card.male:hover,.gender-card.male.selected{border-color:var(--male);background:rgba(91,141,238,0.1);}
-.gender-card.female:hover,.gender-card.female.selected{border-color:var(--female);background:rgba(232,122,160,0.1);}
-.gender-card-icon{font-size:44px;margin-bottom:10px;}
-.gender-card-name{font-size:17px;font-weight:700;}
-.gender-card-desc{font-size:12px;color:var(--text-dim);margin-top:4px;line-height:1.5;}
+/* AGE */
+#screen-age{max-width:400px;margin:0 auto;text-align:center;}
+.age-opts{display:flex;flex-direction:column;gap:10px;margin-bottom:22px;}
+.age-card{background:var(--card-bg);border:2px solid rgba(201,168,76,0.12);border-radius:14px;padding:16px 18px;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:14px;text-align:right;}
+.age-card:hover,.age-card.sel{border-color:var(--gold);background:rgba(201,168,76,0.08);}
+.age-icon{font-size:26px;flex-shrink:0;}
+.age-name{font-size:15px;font-weight:700;}
+.age-desc{font-size:11px;color:var(--text-dim);margin-top:2px;}
 
 /* INTRO */
-#screen-intro{max-width:460px;margin:0 auto;}
-.intro-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:24px 20px;margin-bottom:13px;text-align:center;}
-.intro-icon{font-size:40px;margin-bottom:11px;}
-.intro-title{font-size:18px;font-weight:700;margin-bottom:8px;}
-.intro-text{font-size:13px;color:var(--text-dim);line-height:1.8;}
-.axes-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:13px 0;}
-.axis-chip{background:rgba(74,45,138,0.28);border:1px solid var(--border);border-radius:10px;padding:7px 10px;font-size:11px;color:var(--gold-light);text-align:center;}
+#screen-intro{max-width:440px;margin:0 auto;}
+.axes-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0;}
+.axis-chip{background:rgba(74,45,138,0.26);border:1px solid var(--border);border-radius:9px;padding:7px 10px;font-size:11px;color:var(--gold-light);text-align:center;}
 
 /* STORY */
-#screen-story{max-width:560px;margin:0 auto;width:100%;}
-.progress-header{width:100%;display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-.progress-circle{position:relative;width:58px;height:58px;flex-shrink:0;}
-.progress-circle svg{width:58px;height:58px;transform:rotate(-90deg);}
-.progress-circle .track{fill:none;stroke:rgba(201,168,76,0.1);stroke-width:4;}
-.progress-circle .fill{fill:none;stroke:var(--gold);stroke-width:4;stroke-linecap:round;stroke-dasharray:175.9;stroke-dashoffset:175.9;transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1);}
-.progress-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);}
-.progress-info{flex:1;}
-.progress-label{font-size:11px;color:var(--text-dim);margin-bottom:2px;}
-.progress-axis{font-size:14px;font-weight:600;color:var(--gold-light);}
-.gender-indicator{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;}
-.gender-indicator.male{background:rgba(91,141,238,0.15);color:var(--male);}
-.gender-indicator.female{background:rgba(232,122,160,0.15);color:var(--female);}
+#screen-story{max-width:540px;margin:0 auto;width:100%;}
+.prog-hdr{width:100%;display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.prog-circ{position:relative;width:56px;height:56px;flex-shrink:0;}
+.prog-circ svg{width:56px;height:56px;transform:rotate(-90deg);}
+.prog-circ .trk{fill:none;stroke:rgba(201,168,76,0.1);stroke-width:4;}
+.prog-circ .fil{fill:none;stroke:var(--gold);stroke-width:4;stroke-linecap:round;stroke-dasharray:175.9;stroke-dashoffset:175.9;transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1);}
+.prog-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);}
+.prog-info{flex:1;}
+.prog-lbl{font-size:10px;color:var(--text-dim);margin-bottom:2px;}
+.prog-axis{font-size:13px;font-weight:600;color:var(--gold-light);}
+.g-badge{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:600;}
+.g-badge.m{background:rgba(91,141,238,0.14);color:var(--male);}
+.g-badge.f{background:rgba(232,122,160,0.14);color:var(--female);}
+.story-card{background:linear-gradient(135deg,var(--card-bg),rgba(45,31,78,0.8));border:1px solid var(--border);border-radius:20px;padding:22px 18px;margin-bottom:14px;position:relative;overflow:hidden;transition:opacity .3s,transform .3s;}
+.story-card::before{content:'';position:absolute;top:0;right:0;width:70px;height:70px;background:radial-gradient(circle,rgba(201,168,76,0.06),transparent);}
+.s-ctx{font-size:11px;color:var(--text-dim);background:rgba(201,168,76,0.04);border-right:3px solid var(--gold);padding:8px 11px;border-radius:0 6px 6px 0;margin-bottom:13px;line-height:1.7;}
+.s-sit{font-size:15px;font-weight:600;line-height:1.75;}
+.s-q{font-size:13px;color:var(--gold-light);font-weight:500;margin-top:11px;}
+.choices{display:flex;flex-direction:column;gap:8px;}
+.choice{background:rgba(45,31,78,0.5);border:1.5px solid rgba(201,168,76,0.1);border-radius:12px;padding:12px 14px;text-align:right;cursor:pointer;transition:all .3s;display:flex;align-items:flex-start;gap:10px;font-family:'Tajawal',sans-serif;width:100%;color:var(--white);}
+.choice:hover{border-color:var(--gold);background:rgba(74,45,138,0.36);transform:translateX(-2px);}
+.choice.sel{border-color:var(--gold);background:rgba(201,168,76,0.08);}
+.c-let{width:26px;height:26px;border-radius:50%;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.24);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;margin-top:2px;}
+.choice.sel .c-let{background:var(--gold);color:var(--deep);}
+.c-txt{font-size:13px;line-height:1.6;text-align:right;}
+.c-ins{display:none;margin-top:7px;font-size:11px;color:var(--text-dim);background:rgba(0,0,0,0.2);border-radius:7px;padding:7px 9px;line-height:1.6;border-right:2px solid var(--gold);}
+.choice.sel .c-ins{display:block;}
 
-.story-card{background:linear-gradient(135deg,var(--card-bg),rgba(45,31,78,0.8));border:1px solid var(--border);border-radius:22px;padding:24px 20px;margin-bottom:16px;position:relative;overflow:hidden;transition:opacity .3s,transform .3s;}
-.story-card::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(201,168,76,0.06),transparent);}
-.story-context{font-size:12px;color:var(--text-dim);background:rgba(201,168,76,0.05);border-right:3px solid var(--gold);padding:8px 11px;border-radius:0 7px 7px 0;margin-bottom:14px;line-height:1.7;}
-.story-situation{font-size:15px;font-weight:600;line-height:1.75;margin-bottom:5px;}
-.story-question{font-size:14px;color:var(--gold-light);font-weight:500;margin-top:12px;}
-.choices-list{display:flex;flex-direction:column;gap:9px;}
-.choice-btn{background:rgba(45,31,78,0.5);border:1.5px solid rgba(201,168,76,0.11);border-radius:13px;padding:13px 15px;text-align:right;cursor:pointer;transition:all .3s;display:flex;align-items:flex-start;gap:11px;font-family:'Tajawal',sans-serif;width:100%;color:var(--white);}
-.choice-btn:hover{border-color:var(--gold);background:rgba(74,45,138,0.38);transform:translateX(-3px);}
-.choice-btn.selected{border-color:var(--gold);background:rgba(201,168,76,0.08);}
-.choice-letter{width:27px;height:27px;border-radius:50%;background:rgba(201,168,76,0.11);border:1px solid rgba(201,168,76,0.26);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;margin-top:2px;}
-.choice-btn.selected .choice-letter{background:var(--gold);color:var(--deep);}
-.choice-text{font-size:13px;line-height:1.6;text-align:right;}
-.choice-insight{display:none;margin-top:7px;font-size:11px;color:var(--text-dim);background:rgba(0,0,0,0.2);border-radius:8px;padding:7px 9px;line-height:1.6;border-right:2px solid var(--gold);}
-.choice-btn.selected .choice-insight{display:block;}
-.deep-question{background:linear-gradient(135deg,rgba(74,45,138,0.2),rgba(26,18,40,0.45));border:1px solid rgba(201,168,76,0.15);border-radius:13px;padding:14px;margin-top:14px;display:none;}
-.deep-question.visible{display:block;animation:fadeUp .5s ease;}
-.deep-q-label{font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:5px;}
-.deep-q-text{font-size:13px;line-height:1.7;color:var(--cream);}
-.next-btn{display:none;width:100%;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--deep);border:none;padding:13px;border-radius:13px;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;margin-top:11px;}
-.next-btn.visible{display:block;animation:fadeUp .5s ease;}
-.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(201,168,76,0.26);}
+/* DEEP QUESTION */
+.deep-q-box{background:linear-gradient(135deg,rgba(74,45,138,0.22),rgba(26,18,40,0.5));border:1px solid rgba(201,168,76,0.18);border-radius:14px;padding:14px 15px;margin-top:11px;display:none;}
+.dq-label{font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
+.dq-text{font-size:13px;line-height:1.7;color:var(--cream);margin-bottom:10px;}
+.dq-input{width:100%;background:rgba(0,0,0,0.25);border:1px solid rgba(201,168,76,0.2);border-radius:9px;padding:9px 11px;font-family:'Tajawal',sans-serif;font-size:12px;color:var(--white);resize:none;outline:none;transition:border .3s;direction:rtl;line-height:1.6;}
+.dq-input:focus{border-color:var(--gold);}
+.dq-input::placeholder{color:var(--text-dim);}
+.dq-loading{display:flex;gap:5px;justify-content:center;padding:12px 0;}
+.dq-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:dotP 1.2s infinite;}
+.dq-dot:nth-child(2){animation-delay:.2s;}
+.dq-dot:nth-child(3){animation-delay:.4s;}
+@keyframes dotP{0%,80%,100%{opacity:.3;transform:scale(.8);}40%{opacity:1;transform:scale(1);}}
+
+.next-btn{display:none;width:100%;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--deep);border:none;padding:13px;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s;margin-top:11px;}
+.next-btn.vis{display:block;animation:fadeUp .5s ease;}
+.next-btn:hover{transform:translateY(-2px);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
-/* MY RESULT */
-#screen-result{max-width:560px;margin:0 auto;width:100%;padding-bottom:40px;}
-.result-hero{text-align:center;padding:28px 14px 20px;}
-.personality-badge{display:inline-flex;flex-direction:column;align-items:center;background:linear-gradient(135deg,var(--violet),var(--purple));border:2px solid var(--gold);border-radius:20px;padding:18px 26px;margin-bottom:18px;box-shadow:0 0 44px rgba(201,168,76,0.14);}
-.badge-icon{font-size:42px;margin-bottom:5px;}
-.badge-label{font-size:10px;color:var(--text-dim);letter-spacing:2px;}
-.badge-name{font-size:22px;font-weight:800;color:var(--gold-light);margin-top:2px;}
-.result-headline{font-size:18px;font-weight:700;margin-bottom:8px;}
-.result-summary{font-size:13px;color:var(--text-dim);line-height:1.8;max-width:400px;margin:0 auto;}
-.section-title{font-size:14px;font-weight:700;color:var(--gold-light);margin:20px 0 11px;border-right:3px solid var(--gold);padding-right:10px;}
-.axes-result{display:flex;flex-direction:column;gap:10px;}
-.axis-bar{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:12px 15px;}
-.axis-bar-header{display:flex;justify-content:space-between;margin-bottom:7px;align-items:center;}
-.axis-bar-name{font-size:12px;font-weight:600;}
-.axis-bar-score{font-size:11px;color:var(--gold);font-weight:700;}
-.axis-bar-track{height:5px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
-.axis-bar-fill{height:100%;background:linear-gradient(90deg,var(--violet),var(--gold));border-radius:4px;transition:width 1.2s cubic-bezier(.4,0,.2,1);width:0;}
-.axis-bar-desc{font-size:11px;color:var(--text-dim);margin-top:5px;line-height:1.5;}
-.insights-grid{display:flex;flex-direction:column;gap:9px;}
-.insight-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:13px 15px;display:flex;gap:11px;align-items:flex-start;}
-.insight-icon{font-size:19px;flex-shrink:0;margin-top:1px;}
-.insight-title{font-size:12px;font-weight:700;margin-bottom:3px;}
-.insight-text{font-size:11px;color:var(--text-dim);line-height:1.6;}
+/* RESULT */
+#screen-result{max-width:540px;margin:0 auto;width:100%;padding-bottom:40px;}
+.res-hero{text-align:center;padding:26px 12px 18px;}
+.p-badge{display:inline-flex;flex-direction:column;align-items:center;background:linear-gradient(135deg,var(--violet),var(--purple));border:2px solid var(--gold);border-radius:18px;padding:16px 24px;margin-bottom:16px;box-shadow:0 0 40px rgba(201,168,76,0.13);}
+.p-icon{font-size:40px;margin-bottom:5px;}
+.p-lbl{font-size:10px;color:var(--text-dim);letter-spacing:2px;}
+.p-name{font-size:21px;font-weight:800;color:var(--gold-light);margin-top:2px;}
+.res-hl{font-size:17px;font-weight:700;margin-bottom:7px;}
+.res-sum{font-size:12px;color:var(--text-dim);line-height:1.8;max-width:380px;margin:0 auto;}
+.sec-title{font-size:13px;font-weight:700;color:var(--gold-light);margin:18px 0 10px;border-right:3px solid var(--gold);padding-right:9px;}
+.axes-res{display:flex;flex-direction:column;gap:9px;}
+.ax-bar{background:var(--card-bg);border:1px solid var(--border);border-radius:11px;padding:11px 14px;}
+.ax-hdr{display:flex;justify-content:space-between;margin-bottom:7px;align-items:center;}
+.ax-nm{font-size:12px;font-weight:600;}
+.ax-sc{font-size:11px;color:var(--gold);font-weight:700;}
+.ax-trk{height:5px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;}
+.ax-fil{height:100%;background:linear-gradient(90deg,var(--violet),var(--gold));border-radius:4px;transition:width 1.2s cubic-bezier(.4,0,.2,1);width:0;}
+.ax-desc{font-size:10px;color:var(--text-dim);margin-top:5px;line-height:1.5;}
+
+/* AI REPORT */
+.ai-btn{width:100%;background:linear-gradient(135deg,var(--violet),var(--purple));color:var(--white);border:1px solid var(--gold);padding:13px;border-radius:12px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.ai-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(74,45,138,0.4);}
+.ai-btn.loading{opacity:.7;pointer-events:none;}
+.ai-box{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:18px;margin-top:14px;display:none;}
+.ai-box.vis{display:block;animation:fadeUp .5s ease;}
+.ai-lbl{font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:10px;}
+.ai-txt{font-size:13px;line-height:1.9;color:var(--cream);white-space:pre-wrap;}
+.ai-disc{font-size:10px;color:var(--danger);margin-top:12px;padding:8px 10px;background:rgba(248,113,113,0.08);border-radius:8px;border-right:2px solid var(--danger);line-height:1.6;}
+.rev-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(201,168,76,0.1);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:11px;color:var(--gold);margin-top:10px;}
 
 /* SHARE */
-.share-box{background:linear-gradient(135deg,rgba(74,45,138,0.3),var(--card-bg));border:1px solid var(--border);border-radius:18px;padding:22px;text-align:center;margin-top:18px;}
-.share-box-title{font-size:17px;font-weight:700;margin-bottom:5px;color:var(--gold-light);}
-.share-box-sub{font-size:12px;color:var(--text-dim);margin-bottom:14px;line-height:1.6;}
-.code-display{background:rgba(0,0,0,0.3);border:2px dashed var(--gold);border-radius:12px;padding:14px;margin:12px 0;cursor:pointer;transition:all .3s;}
-.code-display:hover{background:rgba(201,168,76,0.05);}
-.code-display-label{font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-bottom:5px;}
-.code-display-value{font-size:13px;font-weight:700;color:var(--gold);letter-spacing:2px;word-break:break-all;direction:ltr;font-family:monospace;}
-.code-display-hint{font-size:10px;color:var(--text-dim);margin-top:4px;}
-.copied-toast{display:none;background:var(--success);color:var(--deep);padding:5px 14px;border-radius:50px;font-size:11px;font-weight:700;margin:0 auto 8px;width:fit-content;}
-.copied-toast.visible{display:block;animation:fadeUp .3s ease;}
-.whatsapp-btn{background:#25D366;color:#fff;border:none;padding:12px 24px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s;width:100%;max-width:260px;display:block;margin:0 auto;}
-.whatsapp-btn:hover{background:#1fb855;transform:translateY(-2px);}
+.share-box{background:linear-gradient(135deg,rgba(74,45,138,0.28),var(--card-bg));border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center;margin-top:16px;}
+.sh-tit{font-size:16px;font-weight:700;margin-bottom:5px;color:var(--gold-light);}
+.sh-sub{font-size:11px;color:var(--text-dim);margin-bottom:12px;line-height:1.6;}
+.code-disp{background:rgba(0,0,0,0.28);border:2px dashed var(--gold);border-radius:11px;padding:13px;margin:11px 0;cursor:pointer;transition:all .3s;}
+.code-disp:hover{background:rgba(201,168,76,0.04);}
+.cd-lbl{font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-bottom:4px;}
+.cd-val{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;word-break:break-all;direction:ltr;font-family:monospace;}
+.cd-hint{font-size:10px;color:var(--text-dim);margin-top:3px;}
+.copied{display:none;background:var(--success);color:var(--deep);padding:5px 14px;border-radius:50px;font-size:11px;font-weight:700;margin:0 auto 8px;width:fit-content;}
+.copied.vis{display:block;animation:fadeUp .3s ease;}
+.wa-btn{background:#25D366;color:#fff;border:none;padding:11px 22px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .3s;width:100%;max-width:240px;display:block;margin:0 auto;}
+.wa-btn:hover{background:#1fb855;transform:translateY(-2px);}
 
-/* PARTNER ENTRY */
-#screen-partner-entry{max-width:420px;margin:0 auto;text-align:center;}
-.entry-title{font-size:22px;font-weight:800;margin-bottom:7px;}
-.entry-sub{font-size:13px;color:var(--text-dim);margin-bottom:24px;line-height:1.7;}
-.code-input{background:rgba(45,31,78,0.6);border:2px solid var(--border);border-radius:14px;padding:14px 16px;font-family:monospace;font-size:13px;color:var(--gold);width:100%;outline:none;transition:border .3s;direction:ltr;margin-bottom:10px;}
-.code-input:focus{border-color:var(--gold);}
-.code-input::placeholder{color:rgba(201,168,76,0.3);font-size:12px;}
-.code-error{color:var(--danger);font-size:12px;margin-top:6px;display:none;}
+/* ENTRY */
+#screen-entry{max-width:400px;margin:0 auto;text-align:center;}
+.code-inp{background:rgba(45,31,78,0.6);border:2px solid var(--border);border-radius:12px;padding:12px 14px;font-family:monospace;font-size:12px;color:var(--gold);width:100%;outline:none;transition:border .3s;direction:ltr;margin-bottom:9px;}
+.code-inp:focus{border-color:var(--gold);}
+.code-inp::placeholder{color:rgba(201,168,76,0.28);font-size:11px;}
+.code-err{color:var(--danger);font-size:11px;margin-top:5px;display:none;}
 
-/* COMPATIBILITY */
+/* COMPAT */
 #screen-compat{max-width:560px;margin:0 auto;width:100%;padding-bottom:44px;}
-.compat-hero{text-align:center;padding:24px 14px 18px;}
-.compat-title{font-size:24px;font-weight:800;margin-bottom:6px;}
-.compat-sub{font-size:13px;color:var(--text-dim);line-height:1.7;}
-.couple-row{display:flex;gap:10px;justify-content:center;align-items:center;margin:18px 0;flex-wrap:wrap;}
-.couple-badge{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:12px 18px;text-align:center;flex:1;min-width:120px;}
-.couple-badge.his{border-color:rgba(91,141,238,0.4);}
-.couple-badge.hers{border-color:rgba(232,122,160,0.4);}
-.couple-badge-icon{font-size:26px;margin-bottom:3px;}
-.couple-badge-role{font-size:10px;color:var(--text-dim);letter-spacing:1px;}
-.couple-badge-name{font-size:14px;font-weight:700;}
-.couple-badge.his .couple-badge-name{color:var(--male);}
-.couple-badge.hers .couple-badge-name{color:var(--female);}
-.heart-div{font-size:20px;}
+.cp-hero{text-align:center;padding:22px 12px 16px;}
+.cp-tit{font-size:22px;font-weight:800;margin-bottom:5px;}
+.cp-sub{font-size:12px;color:var(--text-dim);line-height:1.7;}
+.couple-row{display:flex;gap:9px;justify-content:center;align-items:center;margin:16px 0;flex-wrap:wrap;}
+.cp-badge{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:10px 16px;text-align:center;flex:1;min-width:110px;}
+.cp-badge.his{border-color:rgba(91,141,238,0.35);}
+.cp-badge.hers{border-color:rgba(232,122,160,0.35);}
+.cp-b-icon{font-size:24px;margin-bottom:2px;}
+.cp-b-role{font-size:9px;color:var(--text-dim);letter-spacing:1px;}
+.cp-b-name{font-size:13px;font-weight:700;}
+.cp-badge.his .cp-b-name{color:var(--male);}
+.cp-badge.hers .cp-b-name{color:var(--female);}
+.cp-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:11px;}
+.cp-card-hdr{display:flex;align-items:center;gap:8px;margin-bottom:11px;}
+.cp-card-ico{font-size:18px;}
+.cp-card-tit{font-size:13px;font-weight:700;flex:1;}
+.cp-bdg{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;}
+.cb-s{background:rgba(74,222,128,0.13);color:var(--success);}
+.cb-w{background:rgba(248,113,113,0.13);color:var(--danger);}
+.cb-n{background:rgba(201,168,76,0.13);color:var(--gold);}
+.cmp-axis{margin-bottom:13px;}
+.cmp-nm{font-size:11px;color:var(--text-dim);margin-bottom:5px;}
+.cmp-bars{display:flex;flex-direction:column;gap:5px;}
+.cmp-row{display:flex;align-items:center;gap:7px;}
+.cmp-who{font-size:10px;font-weight:700;width:20px;text-align:center;flex-shrink:0;}
+.cmp-who.m{color:var(--male);}
+.cmp-who.f{color:var(--female);}
+.cmp-trk{flex:1;height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden;}
+.cmp-fil-m{height:100%;border-radius:4px;background:linear-gradient(90deg,#3a6adb,var(--male));transition:width 1.1s ease;width:0;}
+.cmp-fil-f{height:100%;border-radius:4px;background:linear-gradient(90deg,#c9507a,var(--female));transition:width 1.1s ease;width:0;}
+.cmp-pct{font-size:10px;color:var(--text-dim);width:26px;flex-shrink:0;}
+.lvl-tag{font-size:9px;padding:2px 7px;border-radius:20px;margin-right:4px;display:inline-block;}
+.lvl-hi{background:rgba(74,222,128,0.12);color:var(--success);}
+.lvl-md{background:rgba(251,191,36,0.12);color:var(--warn);}
+.lvl-lo{background:rgba(248,113,113,0.12);color:var(--danger);}
+.diff-tag{font-size:10px;margin-top:5px;padding:3px 8px;border-radius:20px;display:inline-block;}
+.diff-close{background:rgba(74,222,128,0.09);color:var(--success);}
+.diff-mid{background:rgba(251,191,36,0.09);color:var(--warn);}
+.diff-far{background:rgba(248,113,113,0.09);color:var(--danger);}
+.analysis{font-size:11px;color:var(--text-dim);line-height:1.7;margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,0.05);}
+.exercise{background:linear-gradient(135deg,rgba(74,45,138,0.18),rgba(26,18,40,0.35));border:1px solid rgba(201,168,76,0.13);border-radius:10px;padding:11px 13px;margin-top:8px;}
+.ex-lbl{font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:4px;}
+.ex-txt{font-size:11px;line-height:1.7;color:var(--cream);}
+.dialogue-box{background:linear-gradient(135deg,rgba(74,45,138,0.2),var(--card-bg));border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:14px;}
+.dl-tit{font-size:13px;font-weight:700;color:var(--gold-light);margin-bottom:10px;}
+.dl-item{background:rgba(0,0,0,0.2);border-radius:9px;padding:10px 12px;margin-bottom:7px;border-right:2px solid var(--gold);}
+.dl-axis{font-size:10px;color:var(--gold);letter-spacing:1px;margin-bottom:3px;}
+.dl-q{font-size:12px;line-height:1.6;color:var(--cream);}
+.legal{font-size:10px;color:var(--text-dim);text-align:center;line-height:1.7;opacity:.55;max-width:320px;margin:16px auto 0;padding:0 12px;}
 
-.compat-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:12px;}
-.compat-card-header{display:flex;align-items:center;gap:9px;margin-bottom:13px;}
-.compat-card-icon{font-size:20px;}
-.compat-card-title{font-size:14px;font-weight:700;flex:1;}
-.compat-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;}
-.cb-strong{background:rgba(74,222,128,0.14);color:var(--success);}
-.cb-watch{background:rgba(248,113,113,0.14);color:var(--danger);}
-.cb-neutral{background:rgba(201,168,76,0.14);color:var(--gold);}
+/* LOADING SCREEN */
+#screen-loading{text-align:center;}
+.load-spinner{width:50px;height:50px;border:3px solid rgba(201,168,76,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px;}
+.load-text{font-size:14px;color:var(--text-dim);}
 
-/* COMPARISON BARS */
-.compare-axis{margin-bottom:14px;}
-.compare-axis-name{font-size:12px;color:var(--text-dim);margin-bottom:6px;}
-.compare-bars{display:flex;flex-direction:column;gap:5px;}
-.compare-bar-row{display:flex;align-items:center;gap:8px;}
-.compare-bar-who{font-size:11px;font-weight:600;width:22px;text-align:center;flex-shrink:0;}
-.compare-bar-who.his{color:var(--male);}
-.compare-bar-who.hers{color:var(--female);}
-.compare-bar-track{flex:1;height:7px;background:rgba(255,255,255,0.07);border-radius:4px;overflow:hidden;}
-.compare-bar-fill-m{height:100%;border-radius:4px;background:linear-gradient(90deg,#3a6adb,var(--male));transition:width 1.1s ease;width:0;}
-.compare-bar-fill-f{height:100%;border-radius:4px;background:linear-gradient(90deg,#c9507a,var(--female));transition:width 1.1s ease;width:0;}
-.compare-bar-pct{font-size:10px;color:var(--text-dim);width:26px;text-align:left;flex-shrink:0;}
-
-.diff-indicator{font-size:10px;margin-top:4px;padding:3px 8px;border-radius:20px;display:inline-block;}
-.diff-close{background:rgba(74,222,128,0.1);color:var(--success);}
-.diff-far{background:rgba(248,113,113,0.1);color:var(--danger);}
-.diff-mid{background:rgba(201,168,76,0.1);color:var(--gold);}
-
-.analysis-text{font-size:12px;color:var(--text-dim);line-height:1.7;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);}
-.exercise-box{background:linear-gradient(135deg,rgba(74,45,138,0.2),rgba(26,18,40,0.4));border:1px solid rgba(201,168,76,0.14);border-radius:11px;padding:12px 14px;margin-top:9px;}
-.exercise-label{font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:5px;}
-.exercise-text{font-size:12px;line-height:1.7;color:var(--cream);}
-
-.legal-note{font-size:10px;color:var(--text-dim);text-align:center;line-height:1.7;opacity:.55;max-width:340px;margin:18px auto 0;padding:0 12px;}
-
-@media(max-width:480px){
-  .brand-name{font-size:32px;}
-  .hero-headline{font-size:17px;}
-  .gender-options{flex-direction:column;align-items:center;}
-  .gender-card{width:100%;max-width:260px;}
-}
+@media(max-width:480px){.brand-name{font-size:32px;}.hero-hl{font-size:16px;}.g-opts{flex-direction:column;align-items:center;}}
 </style>
 </head>
 <body>
 <div id="particles"></div>
 
-<!-- ========== LANDING ========== -->
+<!-- LANDING -->
 <div id="screen-landing" class="screen active">
   <div class="logo-mark"><div class="logo-ring"></div><div class="logo-inner">🌿</div></div>
   <div class="brand-name">بصمة التوافق</div>
   <div class="brand-sub">HUMAN MINDPRINT</div>
-  <div class="hero-headline">تعرّف على نفسك من خلال<br><span>القرارات</span>، لا الأسئلة</div>
-  <div class="hero-sub">12 موقفاً من زاويتك أنت — ثم تقرير مقارنة حقيقي بينك وبين شريكك</div>
+  <div class="hero-hl">تعرّف على نفسك من خلال<br><span>القرارات</span>، لا الأسئلة</div>
+  <div class="hero-sub">13 موقفاً زوجياً حقيقياً — بما فيها محور الدين — تكشف بصمتك الحقيقية</div>
   <div class="stats-row">
-    <div class="stat"><span class="stat-num">12</span><span class="stat-label">موقف حقيقي</span></div>
-    <div class="stat"><span class="stat-num">8</span><span class="stat-label">محور مقارنة</span></div>
+    <div class="stat"><span class="stat-num">13</span><span class="stat-label">موقف حقيقي</span></div>
+    <div class="stat"><span class="stat-num">9</span><span class="stat-label">محور مقارنة</span></div>
     <div class="stat"><span class="stat-num">15</span><span class="stat-label">دقيقة فقط</span></div>
   </div>
-  <button class="btn-primary" onclick="showScreen('screen-gender')">ابدأ الاختبار ←</button>
-  <button class="btn-outline" style="margin-top:11px;" onclick="showScreen('screen-partner-entry')">عندي كود شريكي — أريد التقرير المشترك</button>
+  <button class="btn-p" onclick="show('screen-gender')">ابدأ الاختبار ←</button>
+  <button class="btn-o" onclick="show('screen-entry')">عندي كود شريكي — التقرير المشترك</button>
   <div class="disclaimer">للاستبصار الذاتي فقط. لا تشخيص نفسي ولا حكم على الزواج.</div>
 </div>
 
-<!-- ========== GENDER ========== -->
+<!-- LOADING -->
+<div id="screen-loading" class="screen">
+  <div class="load-spinner"></div>
+  <div class="load-text" id="loadText">جاري التحميل...</div>
+</div>
+
+<!-- GENDER -->
 <div id="screen-gender" class="screen">
-  <div style="width:100%;max-width:400px;text-align:center;">
-    <div class="gender-title">من أنت؟</div>
-    <div class="gender-sub">الأسئلة ستتشكّل من زاويتك أنت<br>لتكون أكثر واقعية ودقة</div>
-    <div class="gender-options">
-      <div class="gender-card male" onclick="selectGender('male',this)">
-        <div class="gender-card-icon">👨</div>
-        <div class="gender-card-name">زوج</div>
-        <div class="gender-card-desc">أسئلة من زاوية الرجل في الزواج</div>
-      </div>
-      <div class="gender-card female" onclick="selectGender('female',this)">
-        <div class="gender-card-icon">👩</div>
-        <div class="gender-card-name">زوجة</div>
-        <div class="gender-card-desc">أسئلة من زاوية المرأة في الزواج</div>
-      </div>
+  <div style="width:100%;max-width:380px;text-align:center;">
+    <div class="g-title">من أنت؟</div>
+    <div class="g-sub">الأسئلة ستتشكّل من زاويتك أنت<br>لتكون أكثر واقعية ودقة</div>
+    <div class="g-opts">
+      <div class="g-card male" onclick="selGender('male',this)"><div class="g-icon">👨</div><div class="g-name">رجل</div><div class="g-desc">أسئلة من زاوية الرجل</div></div>
+      <div class="g-card female" onclick="selGender('female',this)"><div class="g-icon">👩</div><div class="g-name">امرأة</div><div class="g-desc">أسئلة من زاوية المرأة</div></div>
     </div>
-    <button class="btn-primary" id="genderContinueBtn" onclick="goToIntro()" style="opacity:.4;pointer-events:none;">متابعة ←</button>
-    <button class="btn-secondary" onclick="showScreen('screen-landing')">العودة</button>
+    <button class="btn-p" id="gBtn" onclick="show('screen-status')" style="opacity:.4;pointer-events:none;">متابعة ←</button>
+    <button class="btn-s" onclick="show('screen-landing')">العودة</button>
   </div>
 </div>
 
-<!-- ========== INTRO ========== -->
-<div id="screen-intro" class="screen">
-  <div style="width:100%;max-width:440px;">
-    <div class="intro-card">
-      <div class="intro-icon" id="introIcon">💍</div>
-      <div class="intro-title" id="introTitle">اختبار الزوج</div>
-      <div class="intro-text">12 موقفاً من الحياة الزوجية من زاويتك أنت.<br>لا يوجد إجابة صح أو خطأ — فقط اختر ما يعبّر عنك.</div>
+<!-- STATUS -->
+<div id="screen-status" class="screen">
+  <div style="width:100%;max-width:380px;text-align:center;">
+    <div class="g-title">ما حالتك الاجتماعية؟</div>
+    <div class="g-sub">تُحدد نوع المواقف التي ستواجهها</div>
+    <div class="age-opts">
+      <div class="age-card" onclick="selStatus('single',this)"><div class="age-icon">🌱</div><div><div class="age-name">أعزب / عزباء</div><div class="age-desc">اكتشاف الذات والجاهزية للزواج</div></div></div>
+      <div class="age-card" onclick="selStatus('engaged',this)"><div class="age-icon">💍</div><div><div class="age-name">خاطب / خطيبة</div><div class="age-desc">بناء الأساس قبل الزواج</div></div></div>
+      <div class="age-card" onclick="selStatus('married',this)"><div class="age-icon">🏠</div><div><div class="age-name">متزوج / متزوجة</div><div class="age-desc">تعميق التوافق وفهم الشريك</div></div></div>
     </div>
-    <div class="intro-card">
-      <div class="intro-icon">🎯</div>
-      <div class="intro-title">المحاور الثمانية</div>
+    <button class="btn-p" id="statusBtn" onclick="show('screen-status')" style="opacity:.4;pointer-events:none;">متابعة ←</button>
+    <button class="btn-s" onclick="show('screen-gender')">العودة</button>
+  </div>
+</div>
+
+<!-- AGE -->
+<div id="screen-age" class="screen">
+  <div style="width:100%;max-width:380px;text-align:center;">
+    <div class="g-title">ما مرحلتك العمرية؟</div>
+    <div class="g-sub">تؤثر على طبيعة المواقف التي ستواجهها</div>
+    <div class="age-opts">
+      <div class="age-card" onclick="selAge('18-25',this)"><div class="age-icon">🌱</div><div><div class="age-name">18 — 25 سنة</div><div class="age-desc">مرحلة الاكتشاف والبداية</div></div></div>
+      <div class="age-card" onclick="selAge('26-35',this)"><div class="age-icon">🌳</div><div><div class="age-name">26 — 35 سنة</div><div class="age-desc">مرحلة البناء والنضج</div></div></div>
+      <div class="age-card" onclick="selAge('36-50',this)"><div class="age-icon">🏔️</div><div><div class="age-name">36 — 50 سنة</div><div class="age-desc">مرحلة التعمق وإعادة التقييم</div></div></div>
+      <div class="age-card" onclick="selAge('50+',this)"><div class="age-icon">⭐</div><div><div class="age-name">50 سنة فأكثر</div><div class="age-desc">مرحلة الحكمة والمعنى</div></div></div>
+    </div>
+    <button class="btn-p" id="ageBtn" onclick="goToIntro()" style="opacity:.4;pointer-events:none;">متابعة ←</button>
+    <button class="btn-s" onclick="show('screen-status')">العودة</button>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div id="screen-intro" class="screen">
+  <div style="width:100%;max-width:420px;">
+    <div class="card" style="text-align:center;">
+      <div style="font-size:38px;margin-bottom:10px;" id="introIcon">💍</div>
+      <div style="font-size:17px;font-weight:700;margin-bottom:7px;" id="introTitle">اختبار رجل</div>
+      <div style="font-size:12px;color:var(--text-dim);line-height:1.8;">13 موقفاً من الحياة الرجلية من زاويتك أنت.<br>لا يوجد إجابة صح أو خطأ — فقط اختر ما يعبّر عنك.</div>
+    </div>
+    <div class="card">
+      <div style="font-size:16px;font-weight:700;margin-bottom:10px;">🎯 المحاور التسعة</div>
       <div class="axes-grid">
         <div class="axis-chip">⚡ إدارة الخلاف</div><div class="axis-chip">💰 المال</div>
         <div class="axis-chip">👨‍👩‍👧 الأهل</div><div class="axis-chip">💛 العاطفة</div>
         <div class="axis-chip">🤝 المسؤولية</div><div class="axis-chip">👁️ الغيرة</div>
         <div class="axis-chip">🧠 القرار</div><div class="axis-chip">🌊 الضغط</div>
+        <div class="axis-chip" style="grid-column:span 2;">🕌 الدين والمرجعية</div>
       </div>
     </div>
-    <button class="btn-primary" onclick="startAssessment()" style="margin-top:8px;">جاهز — ابدأ الآن ←</button>
-    <button class="btn-secondary" onclick="showScreen('screen-gender')">العودة</button>
+    <button class="btn-p" onclick="startAssessment()" style="margin-top:6px;">جاهز — ابدأ الآن ←</button>
+    <button class="btn-s" onclick="show('screen-age')">العودة</button>
   </div>
 </div>
 
-<!-- ========== STORY ========== -->
+<!-- STORY -->
 <div id="screen-story" class="screen">
-  <div class="progress-header">
-    <div class="progress-circle">
-      <svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="28"/><circle class="fill" id="progressFill" cx="32" cy="32" r="28"/></svg>
-      <div class="progress-num" id="progressNum">1/12</div>
+  <div class="prog-hdr">
+    <div class="prog-circ">
+      <svg viewBox="0 0 64 64"><circle class="trk" cx="32" cy="32" r="28"/><circle class="fil" id="pFil" cx="32" cy="32" r="28"/></svg>
+      <div class="prog-num" id="pNum">1/13</div>
     </div>
-    <div class="progress-info">
-      <div class="progress-label">الموقف الحالي</div>
-      <div class="progress-axis" id="currentAxis">—</div>
+    <div class="prog-info">
+      <div class="prog-lbl">الموقف الحالي</div>
+      <div class="prog-axis" id="pAxis">—</div>
     </div>
-    <div class="gender-indicator" id="genderIndicator">—</div>
+    <div class="g-badge" id="gBadge">—</div>
   </div>
   <div class="story-card" id="storyCard">
-    <div class="story-context" id="storyContext"></div>
-    <div class="story-situation" id="storySituation"></div>
-    <div class="story-question" id="storyQuestion"></div>
+    <div class="s-ctx" id="sCtx"></div>
+    <div class="s-sit" id="sSit"></div>
+    <div class="s-q" id="sQ"></div>
   </div>
-  <div class="choices-list" id="choicesList"></div>
-  <div class="deep-question" id="deepQuestion">
-    <div class="deep-q-label">✦ تأمّل معي</div>
-    <div class="deep-q-text" id="deepQuestionText"></div>
-  </div>
+  <div class="choices" id="choices"></div>
+  <div class="deep-q-box" id="deepQBox"></div>
   <button class="next-btn" id="nextBtn" onclick="nextStory()">الموقف التالي ←</button>
 </div>
 
-<!-- ========== MY RESULT ========== -->
+<!-- RESULT -->
 <div id="screen-result" class="screen">
-  <div class="result-hero">
-    <div class="personality-badge">
-      <div class="badge-icon" id="badgeIcon">🌟</div>
-      <div class="badge-label">نمطك الزوجي</div>
-      <div class="badge-name" id="badgeName">—</div>
-    </div>
-    <div class="result-headline" id="resultHeadline"></div>
-    <div class="result-summary" id="resultSummary"></div>
+  <div class="res-hero">
+    <div class="p-badge"><div class="p-icon" id="bIcon">🌟</div><div class="p-lbl">نمطك الرجلي</div><div class="p-name" id="bName">—</div></div>
+    <div class="res-hl" id="rHl"></div>
+    <div class="res-sum" id="rSum"></div>
   </div>
-  <div class="section-title">بصمتك على المحاور</div>
-  <div class="axes-result" id="axesResult"></div>
-  <div class="section-title">نقاط تستحق الانتباه</div>
-  <div class="insights-grid" id="insightsGrid"></div>
+  <div class="sec-title">بصمتك على المحاور</div>
+  <div class="axes-res" id="axesRes"></div>
+  <button class="ai-btn" id="aiBtn" onclick="genAIReport('personal')">
+    ✨ احصل على تقريرك الشخصي بالذكاء الاصطناعي
+  </button>
+  <div class="ai-box" id="aiBox">
+    <div class="ai-lbl">✦ تقريرك الشخصي</div>
+    <div class="ai-txt" id="aiTxt"></div>
+    <div class="rev-badge" id="revBadge"></div>
+  </div>
   <div class="share-box">
-    <div class="share-box-title">🔗 شارك شريكك</div>
-    <div class="share-box-sub" id="shareBoxSub">أرسل لشريكك هذا الكود ليكمل اختباره<br>ثم ادخلا الكودين لتقرير التوافق</div>
-    <div class="code-display" onclick="copyCode()">
-      <div class="code-display-label">كودك المشفّر</div>
-      <div class="code-display-value" id="shareCode">—</div>
-      <div class="code-display-hint">اضغط لنسخ الكود</div>
+    <div class="sh-tit">🔗 شارك شريكك</div>
+    <div class="sh-sub" id="shSub">أرسل لشريكك هذا الكود ليكمل اختباره</div>
+    <div class="code-disp" onclick="copyCode()">
+      <div class="cd-lbl">كودك المشفّر</div>
+      <div class="cd-val" id="shareCode">—</div>
+      <div class="cd-hint">اضغط لنسخ الكود</div>
     </div>
-    <div class="copied-toast" id="copiedToast">✓ تم النسخ!</div>
-    <button class="whatsapp-btn" onclick="sendWhatsapp()">📲 أرسل عبر واتساب</button>
+    <div class="copied" id="copiedToast">✓ تم النسخ!</div>
+    <button class="wa-btn" onclick="sendWA()">📲 أرسل عبر واتساب</button>
   </div>
-  <div style="margin-top:14px;text-align:center;">
-    <button class="btn-outline" onclick="showScreen('screen-partner-entry')" style="max-width:260px;">عندي كود شريكي — التقرير المشترك</button>
+  <div style="margin-top:12px;text-align:center;">
+    <button class="btn-o" onclick="show('screen-entry')" style="max-width:240px;">عندي كود شريكي — التقرير المشترك</button>
   </div>
-  <div class="legal-note">للاستبصار الذاتي فقط. لا تشخيص نفسي ولا فتوى شرعية ولا حكم على الزواج.</div>
-  <button class="btn-secondary" onclick="showScreen('screen-gender')" style="margin-top:18px;">أعد الاختبار</button>
+  <div class="legal">للاستبصار الذاتي فقط. لا تشخيص نفسي ولا فتوى شرعية ولا حكم على الزواج.</div>
+  <button class="btn-s" onclick="show('screen-gender')" style="margin-top:16px;">أعد الاختبار</button>
 </div>
 
-<!-- ========== PARTNER ENTRY ========== -->
-<div id="screen-partner-entry" class="screen">
-  <div style="width:100%;max-width:400px;">
-    <div class="entry-title" style="text-align:center;">تقرير التوافق المشترك</div>
-    <div class="entry-sub">أدخل كودك وكود شريكك لنُولّد تقرير المقارنة الكامل</div>
-    <div style="margin-bottom:10px;">
-      <div style="font-size:12px;color:var(--text-dim);margin-bottom:5px;">كودك أنت</div>
-      <input class="code-input" id="myCodeInput" placeholder="الصق كودك هنا...">
-    </div>
-    <div style="margin-bottom:18px;">
-      <div style="font-size:12px;color:var(--text-dim);margin-bottom:5px;">كود شريكك</div>
-      <input class="code-input" id="partnerCodeInput" placeholder="الصق كود شريكك هنا...">
-    </div>
-    <div class="code-error" id="codeError">⚠️ تأكد من الكودين وأعد المحاولة</div>
-    <button class="btn-primary" onclick="loadCompatReport()">عرض تقرير التوافق ←</button>
-    <button class="btn-secondary" onclick="showScreen('screen-landing')">العودة</button>
+<!-- ENTRY -->
+<div id="screen-entry" class="screen">
+  <div style="width:100%;max-width:380px;">
+    <div style="font-size:20px;font-weight:800;text-align:center;margin-bottom:6px;">تقرير التوافق المشترك</div>
+    <div style="font-size:12px;color:var(--text-dim);text-align:center;margin-bottom:22px;line-height:1.7;">أدخل كودك وكود شريكك لنُولّد تقرير المقارنة</div>
+    <div style="font-size:11px;color:var(--text-dim);margin-bottom:5px;">كودك أنت</div>
+    <input class="code-inp" id="myInp" placeholder="الصق كودك هنا...">
+    <div style="font-size:11px;color:var(--text-dim);margin-bottom:5px;margin-top:4px;">كود شريكك</div>
+    <input class="code-inp" id="ptInp" placeholder="الصق كود شريكك هنا...">
+    <div class="code-err" id="cErr">⚠️ تأكد من الكودين وأعد المحاولة</div>
+    <button class="btn-p" onclick="loadCompat()" style="margin-top:14px;">عرض تقرير التوافق ←</button>
+    <button class="btn-s" onclick="show('screen-landing')">العودة</button>
   </div>
 </div>
 
-<!-- ========== COMPAT REPORT ========== -->
+<!-- COMPAT -->
 <div id="screen-compat" class="screen">
-  <div class="compat-hero">
-    <div class="compat-title">تقرير التوافق</div>
-    <div class="compat-sub">بصمتان — مقارنة واحدة — حوار حقيقي</div>
+  <div class="cp-hero">
+    <div class="cp-tit">تقرير التوافق</div>
+    <div class="cp-sub">بصمتان — مقارنة واحدة — حوار حقيقي</div>
   </div>
   <div class="couple-row">
-    <div class="couple-badge his">
-      <div class="couple-badge-icon">👨</div>
-      <div class="couple-badge-role">الزوج</div>
-      <div class="couple-badge-name" id="compatNameM">—</div>
-    </div>
-    <div class="heart-div">💞</div>
-    <div class="couple-badge hers">
-      <div class="couple-badge-icon">👩</div>
-      <div class="couple-badge-role">الزوجة</div>
-      <div class="couple-badge-name" id="compatNameF">—</div>
-    </div>
+    <div class="cp-badge his"><div class="cp-b-icon">👨</div><div class="cp-b-role">الرجل</div><div class="cp-b-name" id="cpNM">—</div></div>
+    <div style="font-size:18px;">💞</div>
+    <div class="cp-badge hers"><div class="cp-b-icon">👩</div><div class="cp-b-role">الرجلة</div><div class="cp-b-name" id="cpNF">—</div></div>
   </div>
-  <div id="compatContent"></div>
-  <div class="legal-note">هذا التقرير أداة للحوار والتأمل. القرارات دائماً لكما.</div>
-  <button class="btn-secondary" onclick="showScreen('screen-landing')" style="margin-top:18px;">العودة للرئيسية</button>
+  <div id="cpContent"></div>
+  <button class="ai-btn" id="cpAIBtn" style="display:none;" onclick="genAIReport('compat')">
+    ✨ تقرير التوافق بالذكاء الاصطناعي
+  </button>
+  <div class="ai-box" id="cpAIBox">
+    <div class="ai-lbl">✦ تحليل التوافق</div>
+    <div class="ai-txt" id="cpAITxt"></div>
+    <div class="rev-badge" id="cpRevBadge"></div>
+  </div>
+  <div class="legal">هذا التقرير أداة للحوار والتأمل. القرارات دائماً لكما.</div>
+  <button class="btn-s" onclick="show('screen-landing')" style="margin-top:16px;">العودة للرئيسية</button>
 </div>
 
 <script>
 // ============================================================
-// STORIES — MALE (من زاوية الزوج)
+// CONFIG — غيّر هذه القيم فقط
 // ============================================================
-const storiesMale = [
-  {axis:"الأهل والحدود",context:"أنتما متزوجان منذ سنة ونصف. الحياة جيدة لكن أسرتك تتدخل أكثر مما ينبغي أحياناً.",situation:"الساعة الحادية عشرة ليلاً. أنتما جالسان معاً بعد يوم طويل. رنّ جوالك — أهلك يطلبون زيارة الآن قالوا اشتقنا فقط.",question:"ماذا تفعل؟",deep:"ما الحد الذي تعتبره تدخلاً في حياتكما الزوجية؟ وهل تحدثتما عنه صراحةً؟",
-  choices:[{l:"أ",t:"نرحب بهم ونرتب البيت بسرعة",i:"الأهل أولوية دائماً — الراحة الزوجية قابلة للتأجيل",s:{family:2,emotion:-1,partnership:-1}},{l:"ب",t:"أعتذر بلطف وأقترح موعداً غداً",i:"الحدود الزوجية محترمة — قادر على قول لا بثقة",s:{family:-1,independence:2,communication:1}},{l:"ج",t:"أتشاور مع زوجتي أولاً قبل الرد",i:"الشراكة أساس — حتى القرارات الصغيرة تُبنى معاً",s:{partnership:3,communication:2}},{l:"د",t:"أقبلهم لكن في نفسي انزعاج لا أُظهره",i:"يصعب عليه التعبير عن احتياجاته",s:{emotion:-2,communication:-2}}]},
-  {axis:"المال والشفافية",context:"أنتما متزوجان 3 سنوات. الحياة مستقرة لكن لم تتحدثا عن التفاصيل المالية بوضوح.",situation:"أخبرتك زوجتك أنها تريد فتح حساب توفير باسمها وحدها وتودع فيه جزءاً من مصروفها الشهري.",question:"ما ردة فعلك الداخلية أولاً؟",deep:"ما نموذج إدارة المال الذي تتصوره في زواجك؟ وهل اتفقتما عليه فعلاً؟",
-  choices:[{l:"أ",t:"أشجعها — من حقها مساحتها المالية",i:"يؤمن باستقلالية الشريك المالية — ثقة عالية",s:{trust:3,independence:2}},{l:"ب",t:"أشعر بعدم ارتياح — لماذا حساب منفصل؟",i:"يرى الشفافية المالية الكاملة أساساً للشراكة",s:{trust:-1,money:2,communication:1}},{l:"ج",t:"لا مشكلة لكنني أريد أعرف لماذا",i:"يحترم القرار لكنه يريد فهماً مشتركاً",s:{trust:1,communication:3,partnership:2}},{l:"د",t:"أتفق لكن أشعر أنها تخفي شيئاً",i:"حساسية عالية تجاه الشفافية",s:{trust:-2,emotion:-1}}]},
-  {axis:"إدارة الخلاف",context:"خلاف حاد بينكما حول مصاريف البيت. الجو متوتر والكلام أصبح جارحاً.",situation:"قالت لك في لحظة غضب: أنت لا تقدّر تعب البيت وكأنك ضيف.",question:"ماذا تفعل في تلك اللحظة؟",deep:"حين تنتهي الخلافات الكبيرة — كيف تعرف أنها انتهت فعلاً؟ هل يبقى شيء؟",
-  choices:[{l:"أ",t:"أرد بنفس الحدة — أنا أشتغل ليل نهار لهذا البيت",i:"غريزة المعاملة بالمثل — الخلاف سيتصاعد",s:{conflict:-2,emotion:-2}},{l:"ب",t:"أصمت وأخرج من الغرفة حتى يهدأ الجو",i:"يتجنب التصعيد لكن قد يترك الجرح دون علاج",s:{conflict:1,communication:-1}},{l:"ج",t:"أتوقف وأقول: كلامك آلمني، نتكلم بعد ما نهدأ؟",i:"وعي عاطفي عالٍ — يُسمّي ألمه ويطلب مهلة",s:{conflict:3,communication:3,emotion:2}},{l:"د",t:"أحاول التهدئة فوراً وأقول: أنا آسف، نتكلم بهدوء",i:"يُقدّم الوحدة على الفوز بالحجة",s:{conflict:2,emotion:-1,partnership:1}}]},
-  {axis:"الاستقلالية والقرار",context:"صديقك المقرب دعاك لرحلة جماعية الأسبوع القادم — 4 أيام.",situation:"زوجتك لم تعلم بعد وأنت تفكر في الموضوع.",question:"ما أول شيء تفعله؟",deep:"ما القرارات التي تعتبرها شخصية بحتة؟ وما التي لا تُقدم عليها دون اتفاق الاثنين؟",
-  choices:[{l:"أ",t:"أحجز وأخبرها — هذا قرار شخصي",i:"يرى استقلاليته التامة حقاً",s:{independence:3,partnership:-3}},{l:"ب",t:"أتكلم معها أولاً وأسمع رأيها قبل أي قرار",i:"الشراكة الزوجية تشمل القرارات الشخصية",s:{partnership:3,communication:2}},{l:"ج",t:"أخبرها وأحجز في نفس الوقت",i:"يُخبر لا يستأذن — الشريك يشعر بالفارق",s:{independence:2,partnership:0}},{l:"د",t:"أعرض عليها تأتي معنا إن أرادت ثم أحجز",i:"ودي لكن القرار اتُّخذ فعلياً",s:{partnership:1,independence:2}}]},
-  {axis:"الغيرة والثقة",context:"أنتما متزوجان 5 سنوات. العلاقة مستقرة.",situation:"لاحظت أن زوجتك تتكلم كثيراً عن زميل جديد في عملها — تذكره بأسلوب إيجابي جداً أكثر من مرة.",question:"ماذا تفعل داخلياً وخارجياً؟",deep:"من أين يأتي إحساسك بالأمان في الزواج — من ثقتك بنفسك أم بها أم من الظروف الخارجية؟",
-  choices:[{l:"أ",t:"لا يهمني — أنا واثق بزوجتي",i:"أمان داخلي عالٍ — لا يحتاج تطمينات خارجية",s:{trust:3,jealousy:-2}},{l:"ب",t:"أسأل بلطف: يبدو أن هذا الزميل لافت — كيف تعرفتم؟",i:"يُعالج شعوره بالتواصل الإيجابي",s:{communication:3,jealousy:1,trust:1}},{l:"ج",t:"أشعر بانزعاج لكن أتجاهله",i:"يكبت مشاعره تجنباً للظهور بمظهر الغيور",s:{emotion:-2,jealousy:2,communication:-2}},{l:"د",t:"أقول لها بصراحة: لاحظت أنك تذكره كثيراً وشعرت بشيء",i:"شجاعة عاطفية — يُعبّر دون اتهام",s:{communication:3,emotion:3,trust:2}}]},
-  {axis:"الضغط والدعم",context:"زوجتك مرّت بيوم صعب جداً. عادت منهكة وصامتة.",situation:"تجلس في غرفتها وحدها. يبدو أنها تبكي.",question:"ماذا تفعل؟",deep:"هل تعرف ماذا تحتاج زوجتك حين تكون في ضيق؟ وهل سألتها مباشرة؟",
-  choices:[{l:"أ",t:"أدخل وأجلس بجانبها بصمت",i:"يفهم أن الحضور أحياناً أقوى من الكلام",s:{emotion:3,communication:1}},{l:"ب",t:"أسألها ما المشكلة وأحاول أجد حلاً",i:"يُحب بالحل — لكن هي قد تحتاج أن تُسمع",s:{stress:2,emotion:-1}},{l:"ج",t:"أتركها وقتها وأقول: أنا موجود إن احتجتِ",i:"يحترم مساحتها — لكن هل هو انتظار ذكي؟",s:{independence:1,emotion:0}},{l:"د",t:"أسألها: ماذا تحتاجين مني الآن؟",i:"لا يفترض — يسأل ويحترم إجابتها",s:{communication:3,emotion:3,partnership:3}}]},
-  {axis:"المسؤولية والأدوار",context:"الحياة مشغولة — عمل وأطفال وأهل. الأعباء كثيرة.",situation:"لاحظت أن توزيع أعباء البيت غير متوازن وتكرر الموضوع دون حل حقيقي.",question:"كيف تتعامل مع هذا؟",deep:"ما الأدوار التي تعتبرها واضحة بينكما؟ وما التي تشعر أنها غير متفق عليها؟",
-  choices:[{l:"أ",t:"أتحمل أكثر دون شكوى — هذا واجبي",i:"يتحمل المسؤولية لكنه قد يُراكم استياءً خفياً",s:{stress:-1,communication:-2}},{l:"ب",t:"أطلب نجلس نتكلم ونوزع المهام بوضوح",i:"يُعالج الموضوع بالتخطيط المشترك",s:{communication:3,partnership:3}},{l:"ج",t:"أنتظر تلاحظ وحدها وتتحرك",i:"يأمل أن تُبادر هي",s:{communication:-2,partnership:-1}},{l:"د",t:"أساعد أكثر دون إعلان — الأفعال أقوى",i:"يُعبّر بالفعل — لكن هل هي تُدرك ذلك؟",s:{partnership:1,communication:-1}}]},
-  {axis:"القرارات المصيرية",context:"عُرض عليك منصب مهم في مدينة أخرى — فرصة كبيرة تعني نقل الحياة كلها.",situation:"الراتب سيرتفع بشكل ملحوظ لكن ذلك يعني ترك أهلها وأهلك وبيئتكما.",question:"ماذا تفعل؟",deep:"في القرارات التي تمس حياتكما معاً — هل قراراتكما فعلاً مشتركة؟",
-  choices:[{l:"أ",t:"أرفض دون تفكير — الاستقرار الأسري أهم",i:"يُقدّم الأمان الأسري على الطموح",s:{family:3,values:2}},{l:"ب",t:"أقبل — الفرص لا تنتظر وزوجتي ستفهم",i:"يُقدّم الطموح ويفترض موافقة الشريك",s:{independence:3,partnership:-3}},{l:"ج",t:"أجلس مع زوجتي ونضع كل شيء على الطاولة — معاً نقرر",i:"القرارات المصيرية تُبنى معاً",s:{partnership:3,communication:3}},{l:"د",t:"أعرض عليها وأقول القرار لها في النهاية",i:"يُلقي المسؤولية عليها تحت مسمى الاحترام",s:{partnership:-1,communication:-1}}]},
-  {axis:"العاطفة والمبادرة",context:"مرّت أسابيع مشغولة. بينكما مسافة هادئة — لا خلاف لكن لا دفء.",situation:"أنتما في البيت مساءً كل واحد في جواله.",question:"ماذا تفعل؟",deep:"هل تجد سهولة في قول أفتقدك لزوجتك؟ وما الذي يجعل هذا سهلاً أو صعباً؟",
-  choices:[{l:"أ",t:"لا أرى مشكلة — الحياة لها مراحل هدوء",i:"يقبل التقلبات — لكن هل يُفرّق بين الهدوء والمسافة؟",s:{emotion:0,communication:-1}},{l:"ب",t:"أقترح نخرج مساء — عشاء أو نزهة",i:"يرى نفسه مسؤولاً عن الدفء — يُبادر بالفعل",s:{emotion:3,partnership:2,communication:1}},{l:"ج",t:"أنتظرها تبادر — لا أريد أبدو محتاجاً",i:"الاحتياج العاطفي يُشعره بالضعف",s:{emotion:-2,communication:-2}},{l:"د",t:"أقول لها: أشعر أن بيننا بعداً — أريد نتكلم",i:"شجاعة عاطفية — يُسمّي المشكلة قبل أن تتجذّر",s:{communication:3,emotion:3,partnership:2}}]},
-  {axis:"الغيرة من النجاح",context:"حصلت زوجتك على ترقية كبيرة في نفس الوقت الذي تمر فيه بمرحلة ركود مهني.",situation:"لاحظت أن ردة فعلك على نبأ ترقيتها كانت أبطأ مما توقعت.",question:"ماذا تفعل مع هذا الشعور؟",deep:"حين يتفاوت النجاح بينكما — كيف تحافظان على التوازن دون أن يشعر أحدكما بالنقص؟",
-  choices:[{l:"أ",t:"أحتفل معها بصدق — نجاحها نجاحي",i:"أمان داخلي قوي — يرى نجاحها امتداداً له",s:{trust:3,emotion:2,partnership:3}},{l:"ب",t:"أبتسم لكن في داخلي شعور صعب",i:"صادق مع نفسه — لكن هل يُعالجه؟",s:{emotion:1,communication:0}},{l:"ج",t:"أسألها عن تفاصيل نجاحها وأستمتع بحكايتها",i:"تعاطف حقيقي — يُقوّي الرابط الزوجي",s:{communication:3,partnership:3,emotion:2}},{l:"د",t:"أشعر بشيء ثم أشعر بذنب لأنني أشعر بشيء",i:"وعي عاطفي عميق — يُحاسب نفسه على مشاعره",s:{emotion:2,communication:-1}}]},
-  {axis:"الأهل والمسؤولية",context:"والد زوجتك مريض ويحتاج رعاية مستمرة. الموضوع يأخذ وقتاً وطاقة ومالاً.",situation:"تشعر بالإرهاق لكن زوجتك لا تريد أن تضع حدوداً مع أهلها.",question:"كيف تتعامل مع هذا الوضع؟",deep:"ما الدور الذي تتصوره لأهل كل منكما في حياتكما الزوجية؟ وهل اتفقتما على هذا صراحةً؟",
-  choices:[{l:"أ",t:"أدعمها كلياً — أهلها أهلي ولا حدود",i:"عطاء حقيقي — لكن هل هو مستدام؟",s:{family:3,partnership:2}},{l:"ب",t:"أدعم لكن نتحدث عن حدود لحماية بيتنا",i:"يوازن بين الواجب والحفاظ على الزواج",s:{family:1,communication:3,partnership:2}},{l:"ج",t:"أشعر بثقل لكن لا أُعبّر حتى لا أُحرجها",i:"يكبت ضغطه — يتراكم ثم ينفجر",s:{emotion:-2,communication:-2,stress:-2}},{l:"د",t:"أقترح نجلس ثلاثتنا لنجد حلاً مناسباً",i:"يشمل الشريك في الحل — شجاعة وتعاون",s:{communication:3,partnership:2,family:1}}]},
-  {axis:"التواصل العاطفي العميق",context:"أنتما في سنتكما الخامسة. الحياة مستقرة لكن التواصل العاطفي العميق قل.",situation:"في ليلة هادئة قالت لك زوجتك: أشعر أننا أصبحنا شركاء في إدارة البيت أكثر من كوننا زوجين.",question:"ماذا تقول لها؟",deep:"ما الذي يجعل زواجاً ناجحاً في رأيك — الاستقرار والمسؤولية أم الدفء والقرب العاطفي؟",
-  choices:[{l:"أ",t:"أقول: هذا طبيعي بعد سنوات — الحياة تتغير",i:"يُطبّع الوضع بدلاً من مواجهته",s:{emotion:-1,communication:-2}},{l:"ب",t:"أسألها: ماذا تحتاجين لتشعري بالقرب مني مجدداً؟",i:"يضع احتياجها في مركز الحوار",s:{communication:3,emotion:3,partnership:3}},{l:"ج",t:"أعترف أنني أيضاً أشعر بهذا وأنا سعيد أنها قالته",i:"صدق وشجاعة — يُشعرها أنها لم تتكلم وحدها",s:{emotion:3,communication:3,trust:2}},{l:"د",t:"أقول: أنا أحبك لكن لا أعرف كيف نُغيّر هذا",i:"صادق في عجزه — لكن الصدق دون حركة يُوقف التقدم",s:{emotion:2,communication:1,partnership:-1}}]}
-];
-
-// ============================================================
-// STORIES — FEMALE (من زاوية الزوجة)
-// ============================================================
-const storiesFemale = [
-  {axis:"الأهل والحدود",context:"أنتِ وزوجك جالسان معاً بعد يوم طويل. الساعة الحادية عشرة ليلاً.",situation:"رنّ جواله — أهله يطلبون زيارة الآن. نظر إليكِ وقال: هم أهلي، ما رأيك؟",question:"ماذا تفعلين؟",deep:"حين تحتاجين شيئاً في الزواج — هل تقولينه مباشرة أم تنتظرين أن يلاحظ؟",
-  choices:[{l:"أ",t:"أبتسم وأقول: أهلاً وسهلاً، نرحب بهم",i:"تُقدّم راحة الأهل على راحتها — تتجنب الظهور بمظهر المانعة",s:{family:2,emotion:-1,partnership:-1}},{l:"ب",t:"أقول بلطف: أنا متعبة اليوم، ممكن نرتب موعد غداً؟",i:"حدود واضحة — تعبّر عن احتياجها بثقة",s:{family:-1,independence:2,communication:2}},{l:"ج",t:"أقول له: القرار لك، أنا معك في أي قرار تتخذه",i:"تُحيل القرار له — مرونة أم تجنب للمسؤولية؟",s:{partnership:1,communication:-1}},{l:"د",t:"أقول نعم لكن في داخلي انزعاج لا أُظهره",i:"تكبت احتياجها — تُفضّل السلامة على الصراحة",s:{emotion:-2,communication:-2}}]},
-  {axis:"المال والاستقلالية",context:"لديكِ راتب خاص بكِ. قررتِ أن تفتحي حساب توفير باسمك وحدك.",situation:"حين أخبرتِ زوجك نظر إليكِ وقال: لماذا حساب منفصل؟ ألسنا شريكين؟",question:"ماذا تفعلين؟",deep:"هل تشعرين بأمان مالي في زواجك؟ وما الذي يُشعرك أو لا يُشعرك بهذا الأمان؟",
-  choices:[{l:"أ",t:"أشرح له: هذا لأمني الشخصي، لا علاقة له بالثقة",i:"واضحة في احتياجها — تُفرّق بين الاستقلالية والثقة",s:{trust:2,independence:3,communication:2}},{l:"ب",t:"أتراجع — لا أريد أخلق توتراً",i:"تُقدّم راحته على احتياجها — قد تُراكم استياءً",s:{independence:-2,emotion:-1,trust:-1}},{l:"ج",t:"أقول: حسناً نجلس نتفق على نموذج مالي يريحنا معاً",i:"تحوّل الموضوع لحوار مشترك — ناضجة وعملية",s:{communication:3,partnership:2,money:2}},{l:"د",t:"أشعر بأنه لا يثق بي وأتأثر عاطفياً",i:"حساسة للتفسير — قد تقرأ القلق كاتهام",s:{emotion:-1,trust:-1,communication:-1}}]},
-  {axis:"إدارة الخلاف",context:"خلاف حاد بينكما. الكلام ارتفع وأصبح جارحاً.",situation:"قال لكِ في لحظة غضب: أنتِ دائماً تبالغين في كل شيء.",question:"ماذا تفعلين؟",deep:"حين تتألمين في خلاف — ما الذي تحتاجينه من زوجك: اعتذار، فهم، صمت، أم حضور؟",
-  choices:[{l:"أ",t:"أرد بحدة: وأنت دائماً تُقلّل من مشاعري",i:"المعاملة بالمثل — الخلاف سيتصاعد",s:{conflict:-2,emotion:-2}},{l:"ب",t:"أصمت وأبكي أو أنسحب",i:"الألم أكبر من قدرتها على الرد — تحتاج مساحة",s:{conflict:0,emotion:1,communication:-1}},{l:"ج",t:"أقول: كلامك هذا آلمني، أريد نتوقف ونتكلم بعد ما نهدأ",i:"وعي عاطفي عالٍ — تُسمّي ألمها وتطلب مهلة",s:{conflict:3,communication:3,emotion:2}},{l:"د",t:"أحاول أشرح نفسي وأثبت أنني لا أبالغ",i:"تبحث عن الفهم لا الفوز — لكن في اللحظة الخطأ",s:{conflict:1,communication:0,emotion:-1}}]},
-  {axis:"الاستقلالية والقرار",context:"صديقتك المقربة دعتك لرحلة نسائية الأسبوع القادم — 4 أيام.",situation:"أخبرتِ زوجك فقال: 4 أيام؟ وأنا والأطفال؟",question:"ماذا تفعلين؟",deep:"هل تشعرين أن لكِ الحق في وقت خاص بكِ بدون شعور بالذنب؟",
-  choices:[{l:"أ",t:"أتراجع — راحتي ليست أهم من البيت",i:"تُقدّم المسؤولية الأسرية على احتياجها",s:{independence:-2,emotion:-1,stress:-1}},{l:"ب",t:"أقول: أنا أحتاج هذا الوقت، سنرتب الأمور معاً",i:"تعرف احتياجها وتطلبه بثقة — توازن صحي",s:{independence:3,communication:2,partnership:1}},{l:"ج",t:"أذهب لكن أشعر بذنب طوال الرحلة",i:"تأخذ حقها لكن لا تستمتع به — ضغط داخلي مزمن",s:{independence:1,emotion:-2}},{l:"د",t:"أقنعه بأهمية الرحلة وأشرح له بالتفصيل",i:"تحتاج موافقته لتشعر بأحقيتها — تبحث عن إذن",s:{independence:-1,communication:1,partnership:-1}}]},
-  {axis:"الغيرة والثقة",context:"أنتِ وزوجك في حفل عائلي.",situation:"لاحظتِ أن زوجك يتحدث كثيراً مع امرأة من معارفه — يضحك معها ويبدو مرتاحاً بشكل غير معتاد.",question:"ماذا تفعلين؟",deep:"ما الذي يجعلك تشعرين بالأمان في الزواج — سلوكه، كلامه، أم شعورك الداخلي؟",
-  choices:[{l:"أ",t:"لا يهمني — أنا واثقة بزوجي وهذا طبيعي",i:"أمان داخلي عالٍ — لا تحتاج تطمينات خارجية",s:{trust:3,jealousy:-2,emotion:1}},{l:"ب",t:"أقترب منه بشكل طبيعي وأنضم للحديث",i:"ذكية — تحل الشعور بالفعل لا بالمواجهة",s:{communication:2,jealousy:-1,trust:1,partnership:1}},{l:"ج",t:"أشعر بانزعاج لكن أتجاهله وأنتظر ينتهي",i:"تكبت مشاعرها — ستظهر لاحقاً بطريقة أخرى",s:{emotion:-2,jealousy:2,communication:-2}},{l:"د",t:"أخبره بعد الحفل بصراحة: شعرت بشيء حين رأيتك معها",i:"شجاعة عاطفية — تُعبّر دون اتهام",s:{communication:3,emotion:3,trust:1}}]},
-  {axis:"الضغط والدعم",context:"مررتِ بيوم صعب جداً — عمل وأطفال وضغوط متراكمة. عدتِ منهكة.",situation:"زوجك موجود في البيت. لاحظ أنكِ صامتة.",question:"ما الذي تحتاجينه منه في تلك اللحظة؟",deep:"هل سبق وأخبرتِ زوجك بالضبط ماذا تحتاجين منه حين تكونين في ضيق؟",
-  choices:[{l:"أ",t:"أحتاج يجلس بجانبي ويسمعني دون أن يحل شيئاً",i:"تعرف احتياجها بوضوح — الاستماع قبل الحل",s:{communication:2,emotion:3,stress:1}},{l:"ب",t:"أحتاج يتحمل المسؤوليات المنزلية عني الليلة",i:"احتياج عملي واضح — الدعم بالفعل",s:{partnership:2,stress:2,communication:1}},{l:"ج",t:"أحتاج يسألني ماذا أحتاج — لا أريد أطلب",i:"تريد أن يلاحظ — الطلب الصريح يُشعرها بالعبء",s:{communication:-1,emotion:1,partnership:0}},{l:"د",t:"أريد أكون وحدي — وجوده كافٍ دون كلام",i:"تستعيد طاقتها بالمساحة لا بالتواصل",s:{independence:2,emotion:1,stress:1}}]},
-  {axis:"المسؤولية والأدوار",context:"الحياة مشغولة. أنتِ تحملين الجزء الأكبر من أعباء البيت.",situation:"قال لك زوجك بعد يوم طويل: أنا تعبان اليوم.",question:"ماذا يدور في داخلك؟",deep:"هل تشعرين أن إرهاقك مرئي لزوجك؟ وهل طلبتِ مساعدة صريحة دون لف أو دوران؟",
-  choices:[{l:"أ",t:"أتعاطف معه — التعب مشترك وهو يبذل جهداً",i:"تعاطف حقيقي — لكن هل تعبها مرئي أيضاً؟",s:{partnership:1,emotion:1}},{l:"ب",t:"في داخلي: وأنا؟ لكن لا أقولها",i:"تكبت استياءها — تراكم صامت خطير",s:{emotion:-2,communication:-2,stress:-2}},{l:"ج",t:"أقول بصراحة: أنا أيضاً تعبانة ونحتاج نعيد توزيع المهام",i:"شجاعة وصدق — تعالج الموضوع مباشرة",s:{communication:3,partnership:2,stress:1}},{l:"د",t:"أكمل في مهامي دون تعليق — العمل لا ينتظر",i:"تتحمل بصمت — لكن حتى متى؟",s:{stress:-2,communication:-1,emotion:-1}}]},
-  {axis:"القرارات المصيرية",context:"عُرض عليكِ عمل أحلامك — لكنه يتطلب ساعات أطول وسفراً أحياناً.",situation:"زوجك قال: قرري أنتِ — أنا أدعمك في أي شيء.",question:"ماذا تفعلين؟",deep:"هل تشعرين أن طموحك المهني يُدعم فعلاً في زواجك؟ أم أنك تُقيّدين نفسك بتوقعات غير معلنة؟",
-  choices:[{l:"أ",t:"أقبل الفرصة بسعادة — دعمه كافٍ لي",i:"ثقة بنفسها وبدعمه — قادرة على التوازن",s:{independence:3,trust:2,values:2}},{l:"ب",t:"أرفض — البيت والأطفال أولاً",i:"تُقدّم المسؤولية الأسرية — اختيار واعٍ أو خوف من الحكم؟",s:{family:2,independence:-1,stress:-1}},{l:"ج",t:"أجلس معه نتكلم عن التفاصيل قبل القرار",i:"تريد شراكة حقيقية لا مجرد موافقة",s:{partnership:3,communication:3,independence:1}},{l:"د",t:"أقبل لكن أشعر بذنب تجاه البيت",i:"تأخذ حقها لكن لا تستمتع به بسبب التوقعات الداخلية",s:{independence:1,emotion:-2,stress:-1}}]},
-  {axis:"العاطفة والمبادرة",context:"مرّت أسابيع مشغولة. بينكما مسافة هادئة — لا خلاف لكن لا دفء.",situation:"أنتِ تلاحظين البعد وتشعرين باحتياج للقرب.",question:"ماذا تفعلين؟",deep:"هل تجدين سهولة في قول أفتقدك لزوجك؟ وما الذي يجعل هذا سهلاً أو صعباً؟",
-  choices:[{l:"أ",t:"أنتظره يبادر — هو من يجب أن يلاحظ",i:"تضع مسؤولية العاطفة عليه — توقع غير معلن",s:{emotion:-1,communication:-2,partnership:-1}},{l:"ب",t:"أبادر: أقترح نخرج معاً أو نجلس ونتكلم",i:"تتحمل مسؤولية العلاقة بنفسها — قوة عاطفية",s:{emotion:3,communication:2,partnership:2}},{l:"ج",t:"أقول له مباشرة: أشعر أن بيننا بعداً وأفتقدك",i:"شجاعة عاطفية نادرة — الصدق أسرع طريق للقرب",s:{communication:3,emotion:3,trust:2}},{l:"د",t:"أكتفي بإشارات غير مباشرة وأنتظر يفهم",i:"تتوقع أن يقرأ ما بين السطور — مصدر إحباط متكرر",s:{emotion:-1,communication:-2,partnership:-1}}]},
-  {axis:"الغيرة من النجاح",context:"زوجك حصل على ترقية كبيرة في عمله. أنتِ سعيدة له.",situation:"لكن نجاحه الجديد جعله أكثر انشغالاً وأقل حضوراً في البيت.",question:"ماذا تفعلين؟",deep:"هل تشعرين أن احتياجاتك العاطفية تُؤخذ بعين الاعتبار حين يكون زوجك في مرحلة انشغال؟",
-  choices:[{l:"أ",t:"أدعمه كلياً — نجاحه نجاحنا ووقته سيعود",i:"صبر حقيقي — تفهم أن المراحل تتغير",s:{partnership:2,trust:2,emotion:1}},{l:"ب",t:"أشعر بوحدة لكن لا أريد أكون عائقاً لنجاحه",i:"تكبت احتياجها خشية الظهور بمظهر المعيقة",s:{emotion:-2,communication:-2,independence:-1}},{l:"ج",t:"أقول له بصراحة: أنا سعيدة بنجاحك وأحتاجك أيضاً",i:"تجمع بين الدعم والصدق — توازن جميل",s:{communication:3,emotion:2,partnership:2}},{l:"د",t:"أشغل نفسي بأشياء أخرى حتى تمر المرحلة",i:"تتكيف بالانسحاب — لكن هل يعرف ما تشعر به؟",s:{independence:1,emotion:-1,communication:-1}}]},
-  {axis:"الأهل والمسؤولية",context:"أهل زوجك يطلبون أشياء كثيرة — زيارات متكررة ومساعدة مستمرة.",situation:"تشعرين بالإرهاق لكن زوجك لا يرى المشكلة ويقول: هذا طبيعي، هم أهلي.",question:"ماذا تفعلين؟",deep:"هل تشعرين أن زوجك يرى ويفهم ما تتحملينه في علاقتك مع أهله؟",
-  choices:[{l:"أ",t:"أتحمل وأكمل — لا أريد أكون سبب توتر",i:"تتحمل بصمت — لكن التحمل له سقف",s:{family:1,emotion:-1,stress:-2,communication:-1}},{l:"ب",t:"أقول له بهدوء: أنا أحب أهلك لكنني أحتاج نتفق على توقعات واضحة",i:"تعبّر عن احتياجها باحترام — شجاعة ناضجة",s:{communication:3,partnership:2,family:0}},{l:"ج",t:"أتكلم مع أهله مباشرة",i:"تتجاوز زوجها — قد يخلق توتراً أكبر",s:{family:-1,partnership:-2,communication:0}},{l:"د",t:"أنسحب عاطفياً وتصبح الزيارات عبئاً لا أُخفيه",i:"التراكم وصل لمرحلة الانسحاب — إشارة خطر",s:{emotion:-3,communication:-2,stress:-3}}]},
-  {axis:"التواصل العاطفي العميق",context:"أنتِ في سنتكما الخامسة. الحياة مستقرة لكن شيئاً ما ينقص.",situation:"تجدين الشجاعة وتقولين لزوجك: أشعر أننا أصبحنا شركاء في إدارة البيت أكثر من كوننا زوجين.",question:"ما الذي تتمنين أن يقوله؟",deep:"ما الشيء الذي تتمنين أن يفهمه زوجك عنكِ دون أن تضطري لشرحه؟",
-  choices:[{l:"أ",t:"أتمنى يقول: أنتِ مبالغة — الحياة هكذا",i:"هذا الرد يُشعرها بالوحدة — تحتاج من يُصادق على شعورها",s:{emotion:-2,communication:-2}},{l:"ب",t:"أتمنى يقول: أنا أيضاً أشعر بهذا — شكراً لأنك قلتِ",i:"تبحث عن شريك يشاركها الصدق",s:{emotion:3,communication:3,trust:3}},{l:"ج",t:"أتمنى يسألني: ماذا تحتاجين لتشعري بالقرب مني؟",i:"هذا هو ما تحتاجه فعلاً — أن يسأل لا أن يفترض",s:{communication:3,partnership:3,emotion:3}},{l:"د",t:"أتمنى يقول: سنرتب شيئاً هذا الأسبوع",i:"وعد عملي — لكن هل يصل للعمق الذي تحتاجه؟",s:{partnership:1,communication:0,emotion:-1}}]}
-];
-
-// ============================================================
-// PERSONALITIES
-// ============================================================
-const personalitiesMale = [
-  {key:"communicator",name:"المتواصل الشجاع",icon:"🗣️",desc:"تُسمّي المشاعر والمواقف بجرأة وتحل المشكلات بالحوار. قوتك في الوضوح، وتحديك أن تُعطي شريكتك وقتاً للوصول لمستوى انفتاحك."},
-  {key:"partner",name:"الشريك الحقيقي",icon:"🤝",desc:"تؤمن أن القرارات الكبيرة مشتركة دائماً. قوتك في بناء الثقة، وتحديك قبول مساحة الاستقلالية أحياناً."},
-  {key:"expressor",name:"المعبّر الدافئ",icon:"💛",desc:"تُعبّر عن مشاعرك بحرية وتملأ العلاقة بالدفء. قوتك في العاطفة، وتحديك ألا تأخذ ردود الأفعال بعمق أكثر مما تستحق."},
-  {key:"guardian",name:"الحارس الأمين",icon:"🛡️",desc:"تُعطي الأمان والاستقرار أولوية. قوتك في الثبات، وتحديك أن تفتح قلبك أكثر لشريكتك."},
-  {key:"independent",name:"المستقل الواثق",icon:"🦅",desc:"تعرف حدودك وتحترم استقلاليتك. قوتك في الوضوح الذاتي، وتحديك جعل شريكتك تشعر بأنها جزء حقيقي من قراراتك."},
-  {key:"caregiver",name:"الراعي المتفاني",icon:"🌸",desc:"تضع الآخرين أولاً. قوتك في الحب غير المشروط، وتحديك التعبير عن احتياجاتك أنت أيضاً."},
-  {key:"grounded",name:"المتجذّر القيمي",icon:"🌳",desc:"قيمك وثوابتك توجّه قراراتك. قوتك في الوضوح الأخلاقي، وتحديك المرونة في الأساليب."},
-  {key:"analyst",name:"المفكر الهادئ",icon:"🧠",desc:"تُفكر قبل كل قرار وتنظر للأمور بموضوعية. قوتك في العدل، وتحديك إظهار مشاعرك دون أن ينتظرها شريكك."}
-];
-const personalitiesFemale = [
-  {key:"communicator",name:"المتواصلة الشجاعة",icon:"🗣️",desc:"تُسمّين المشاعر والمواقف بجرأة. قوتك في الوضوح، وتحديك أن تُعطي شريكك وقتاً للوصول لمستوى انفتاحك."},
-  {key:"partner",name:"الشريكة الحقيقية",icon:"🤝",desc:"تؤمنين أن القرارات الكبيرة مشتركة دائماً. قوتك في بناء الثقة، وتحديك قبول مساحة الاستقلالية أحياناً."},
-  {key:"expressor",name:"المعبّرة الدافئة",icon:"💛",desc:"تُعبّرين عن مشاعرك بحرية وتملئين العلاقة بالدفء. قوتك في العاطفة، وتحديك ألا تأخذي ردود الأفعال بعمق أكثر مما تستحق."},
-  {key:"guardian",name:"الحارسة الأمينة",icon:"🛡️",desc:"تُعطين الأمان والاستقرار أولوية. قوتك في الثبات، وتحديك أن تفتحي قلبك أكثر لشريكك."},
-  {key:"independent",name:"المستقلة الواثقة",icon:"🦅",desc:"تعرفين حدودك وتحترمين استقلاليتك. قوتك في الوضوح الذاتي، وتحديك جعل شريكك يشعر بأنه جزء حقيقي من قراراتك."},
-  {key:"caregiver",name:"الراعية المتفانية",icon:"🌸",desc:"تضعين الآخرين أولاً. قوتك في الحب غير المشروط، وتحديك التعبير عن احتياجاتك أنتِ أيضاً."},
-  {key:"grounded",name:"المتجذّرة القيمية",icon:"🌳",desc:"قيمك وثوابتك توجّه قراراتك. قوتك في الوضوح الأخلاقي، وتحديك المرونة في الأساليب."},
-  {key:"analyst",name:"المفكّرة الهادئة",icon:"🧠",desc:"تُفكّرين قبل كل قرار وتنظرين للأمور بموضوعية. قوتك في العدل، وتحديك إظهار مشاعرك دون أن ينتظرها شريكك."}
-];
-
-const axesDisplay = [
-  {key:"communication",name:"التواصل العاطفي",desc:"الانفتاح على التعبير عن المشاعر والحوار الصعب"},
-  {key:"emotion",name:"الذكاء العاطفي",desc:"إدارة المشاعر الداخلية والتعامل مع مشاعر الشريك"},
-  {key:"trust",name:"الثقة والشفافية",desc:"الانفتاح المالي والشخصي مع الشريك"},
-  {key:"conflict",name:"إدارة الخلاف",desc:"أسلوب التعامل مع الخلافات وتجاوزها"},
-  {key:"partnership",name:"الشراكة الحقيقية",desc:"درجة إشراك الشريك في القرارات المهمة"},
-  {key:"independence",name:"الاستقلالية",desc:"الاحتياج للمساحة الشخصية داخل الزواج"},
-  {key:"family",name:"القيم الأسرية",desc:"أهمية الأسرة والحدود الأسرية في المنظومة الشخصية"},
-  {key:"stress",name:"إدارة الضغط",desc:"الأسلوب في مواجهة الضغوط الحياتية"},
-];
+const SUPABASE_URL  = 'https://db.bmeng.tech';
+const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzgwMDU0NzkwLCJleHAiOjIwOTU0MTQ3OTB9.QCmNnXnckfrCBpjFegJeS56rGV36RO-6VRsFb-qje2U';
+const N8N_BASE      = 'https://n8n.bmeng.tech/webhook';
+const DEEP_Q_URL    = `${N8N_BASE}/basma-deep-question`;
+const REPORT_URL    = `${N8N_BASE}/basma-generate-report`;
+const SITE_URL      = 'https://engmhi126-ui.github.io/basmatawafuq';
 
 // ============================================================
 // STATE
 // ============================================================
-let currentGender=null, currentStory=0, currentStories=[], myScores={}, myPersonality=null, encodedData='';
+let G=null, AGE=null, MaritalStatus=null, Stories=[], SI=0, Scores={}, MyP=null;
+let Enc='', DeepAnswers=[], CurrentDeepQ='';
+let CompatMale=null, CompatFemale=null;
 
-function resetScores(){
-  myScores={communication:0,emotion:0,trust:0,conflict:0,money:0,family:0,independence:0,partnership:0,stress:0,values:0,jealousy:0};
-}
+const AXES_META = [
+  {key:'communication', name:'التواصل العاطفي',  desc:'الانفتاح على التعبير والحوار الصعب'},
+  {key:'emotion',       name:'الذكاء العاطفي',   desc:'إدارة المشاعر الداخلية والتعاطف'},
+  {key:'trust',         name:'الثقة والشفافية',  desc:'الانفتاح المالي والشخصي مع الشريك'},
+  {key:'conflict',      name:'إدارة الخلاف',     desc:'السلوك عند نقطة الغضب والاختلاف'},
+  {key:'partnership',   name:'الشراكة والقرار',  desc:'درجة إشراك الشريك في القرارات'},
+  {key:'independence',  name:'الاستقلالية',       desc:'الحاجة للمساحة الشخصية داخل الزواج'},
+  {key:'family',        name:'القيم الأسرية',    desc:'أهمية الأسرة والحدود الأسرية'},
+  {key:'stress',        name:'إدارة الضغط',      desc:'الأسلوب في مواجهة الأزمات'},
+  {key:'religion',      name:'الدين والمرجعية',  desc:'حضور الدين في القرارات اليومية'},
+];
 
-// ============================================================
-// ENCODE / DECODE
-// ============================================================
-function encodeData(gender, scores, pKey){
-  const d={g:gender,s:{c:scores.communication||0,e:scores.emotion||0,t:scores.trust||0,cf:scores.conflict||0,p:scores.partnership||0,i:scores.independence||0,f:scores.family||0,st:scores.stress||0},pk:pKey};
-  try{ return btoa(unescape(encodeURIComponent(JSON.stringify(d)))); }catch(e){ return null; }
-}
-function decodeData(b64){
-  try{ return JSON.parse(decodeURIComponent(escape(atob(b64)))); }catch(e){ return null; }
-}
-function saveMyData(enc){ try{ sessionStorage.setItem('bmData',enc); }catch(e){} }
-function loadMyData(){ try{ return sessionStorage.getItem('bmData'); }catch(e){ return null; } }
+const PERSONALITIES_M = [
+  {key:'communicator',name:'المتواصل الشجاع',  icon:'🗣️',desc:'تُسمّي المشاعر بجرأة وتحل المشكلات بالحوار. قوتك في الوضوح، وتحديك أن تُعطي شريكتك وقتاً للوصول لمستوى انفتاحك.'},
+  {key:'partner',     name:'الشريك الحقيقي',   icon:'🤝',desc:'تؤمن أن القرارات الكبيرة مشتركة. قوتك في بناء الثقة، وتحديك قبول مساحة الاستقلالية أحياناً.'},
+  {key:'expressor',   name:'المعبّر الدافئ',   icon:'💛',desc:'تُعبّر عن مشاعرك بحرية وتملأ العلاقة بالدفء. قوتك في العاطفة، وتحديك ألا تأخذ ردود الأفعال بعمق أكثر مما تستحق.'},
+  {key:'guardian',    name:'الحارس الأمين',    icon:'🛡️',desc:'تُعطي الأمان والاستقرار أولوية. قوتك في الثبات، وتحديك أن تفتح قلبك أكثر لشريكتك.'},
+  {key:'independent', name:'المستقل الواثق',   icon:'🦅',desc:'تعرف حدودك وتحترم استقلاليتك. قوتك في الوضوح الذاتي، وتحديك جعل شريكتك تشعر بأنها جزء حقيقي من قراراتك.'},
+  {key:'caregiver',   name:'الراعي المتفاني',  icon:'🌸',desc:'تضع الآخرين أولاً. قوتك في الحب غير المشروط، وتحديك التعبير عن احتياجاتك أنت أيضاً.'},
+  {key:'grounded',    name:'المتجذّر القيمي',  icon:'🌳',desc:'قيمك وثوابتك توجّه قراراتك. قوتك في الوضوح الأخلاقي، وتحديك المرونة في الأساليب.'},
+  {key:'analyst',     name:'المفكر الهادئ',    icon:'🧠',desc:'تُفكر قبل كل قرار وتنظر للأمور بموضوعية. قوتك في العدل، وتحديك إظهار مشاعرك دون أن ينتظرها شريكك.'},
+];
+const PERSONALITIES_F = [
+  {key:'communicator',name:'المتواصلة الشجاعة', icon:'🗣️',desc:'تُسمّين المشاعر بجرأة. قوتك في الوضوح، وتحديك أن تُعطي شريكك وقتاً للوصول لمستوى انفتاحك.'},
+  {key:'partner',     name:'الشريكة الحقيقية',  icon:'🤝',desc:'تؤمنين أن القرارات الكبيرة مشتركة. قوتك في بناء الثقة، وتحديك قبول مساحة الاستقلالية أحياناً.'},
+  {key:'expressor',   name:'المعبّرة الدافئة',  icon:'💛',desc:'تُعبّرين عن مشاعرك بحرية. قوتك في العاطفة، وتحديك ألا تأخذي ردود الأفعال بعمق أكثر مما تستحق.'},
+  {key:'guardian',    name:'الحارسة الأمينة',   icon:'🛡️',desc:'تُعطين الأمان والاستقرار أولوية. قوتك في الثبات، وتحديك أن تفتحي قلبك أكثر لشريكك.'},
+  {key:'independent', name:'المستقلة الواثقة',  icon:'🦅',desc:'تعرفين حدودك وتحترمين استقلاليتك. قوتك في الوضوح الذاتي، وتحديك جعل شريكك يشعر بأنه جزء حقيقي من قراراتك.'},
+  {key:'caregiver',   name:'الراعية المتفانية', icon:'🌸',desc:'تضعين الآخرين أولاً. قوتك في الحب غير المشروط، وتحديك التعبير عن احتياجاتك أنتِ أيضاً.'},
+  {key:'grounded',    name:'المتجذّرة القيمية', icon:'🌳',desc:'قيمك وثوابتك توجّه قراراتك. قوتك في الوضوح الأخلاقي، وتحديك المرونة في الأساليب.'},
+  {key:'analyst',     name:'المفكّرة الهادئة',  icon:'🧠',desc:'تُفكّرين قبل كل قرار وتنظرين للأمور بموضوعية. قوتك في العدل، وتحديك إظهار مشاعرك دون أن ينتظرها شريكك.'},
+];
 
 // ============================================================
 // PARTICLES
 // ============================================================
-function createParticles(){
-  const c=document.getElementById('particles');
-  for(let i=0;i<13;i++){
-    const p=document.createElement('div'); p.className='particle';
-    const s=Math.random()*55+18;
-    p.style.cssText=`width:${s}px;height:${s}px;right:${Math.random()*100}%;animation-duration:${Math.random()*14+9}s;animation-delay:${Math.random()*9}s;`;
-    c.appendChild(p);
+(()=>{ const c=document.getElementById('particles'); for(let i=0;i<12;i++){ const p=document.createElement('div'); p.className='particle'; const s=Math.random()*55+18; p.style.cssText=`width:${s}px;height:${s}px;right:${Math.random()*100}%;animation-duration:${Math.random()*14+9}s;animation-delay:${Math.random()*9}s;`; c.appendChild(p); }})();
+
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
+
+// ============================================================
+// SUPABASE — سحب الأسئلة
+// ============================================================
+async function fetchStories(gender, status, ageGroup){
+  try {
+    const url=`${SUPABASE_URL}/rest/v1/stories_full?order=order_num.asc`;
+    const res=await fetch(url,{
+      headers:{
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Accept-Profile': 'basma'
+      }
+    });
+    if(!res.ok){ const err=await res.text(); console.error('Supabase:',err); throw new Error(); }
+    const all = await res.json();
+    return all.filter(s => {
+      const gOk  = s.gender === gender || s.gender === 'both';
+      const stOk = !s.status || s.status.includes(status) || s.status.includes('all');
+      const aOk  = !s.age_groups || s.age_groups.includes(ageGroup) || s.age_groups.includes('all');
+      return gOk && stOk && aOk;
+    }).slice(0, 13);
+  } catch(e){
+    console.error('Supabase error:',e);
+    return null;
   }
 }
 
 // ============================================================
-// NAV
+// SETUP
 // ============================================================
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
+function selStatus(s,el){
+  document.querySelectorAll('.age-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel'); MaritalStatus=s;
+  const b=document.getElementById('statusBtn'); b.style.opacity='1'; b.style.pointerEvents='auto';
 }
 
-// ============================================================
-// GENDER
-// ============================================================
-function selectGender(g, el){
-  document.querySelectorAll('.gender-card').forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected');
-  currentGender=g;
-  const btn=document.getElementById('genderContinueBtn');
-  btn.style.opacity='1'; btn.style.pointerEvents='auto';
+function selGender(g,el){
+  document.querySelectorAll('.g-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel'); G=g;
+  const b=document.getElementById('gBtn'); b.style.opacity='1'; b.style.pointerEvents='auto';
 }
+
+function selAge(a,el){
+  document.querySelectorAll('.age-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel'); AGE=a;
+  const b=document.getElementById('ageBtn'); b.style.opacity='1'; b.style.pointerEvents='auto';
+}
+
 function goToIntro(){
-  if(!currentGender) return;
-  document.getElementById('introIcon').textContent=currentGender==='male'?'👨':'👩';
-  document.getElementById('introTitle').textContent=currentGender==='male'?'اختبار الزوج':'اختبار الزوجة';
-  showScreen('screen-intro');
+  const statusLabels={single:'أعزب',engaged:'خاطب',married:'متزوج'};
+  const statusLabelsF={single:'عزباء',engaged:'خطيبة',married:'متزوجة'};
+  const icon=G==='male'?'👨':'👩';
+  const title=G==='male'?`اختبار — ${statusLabels[MaritalStatus]||''}`:
+                          `اختبار — ${statusLabelsF[MaritalStatus]||''}`;
+  document.getElementById('introIcon').textContent=icon;
+  document.getElementById('introTitle').textContent=title;
+  show('screen-intro');
 }
 
 // ============================================================
 // ASSESSMENT
 // ============================================================
-function startAssessment(){
-  currentStory=0; resetScores();
-  currentStories=currentGender==='male'?storiesMale:storiesFemale;
-  renderStory(); showScreen('screen-story');
+async function startAssessment(){
+  show('screen-loading');
+  document.getElementById('loadText').textContent='جاري تحميل الأسئلة...';
+  SI=0; DeepAnswers=[]; CurrentDeepQ='';
+  Scores={communication:0,emotion:0,trust:0,conflict:0,partnership:0,independence:0,family:0,stress:0,religion:0,values:0,money:0,jealousy:0};
+
+  const data = await fetchStories(G, MaritalStatus||'married', AGE||'26-35');
+  if(data && data.length>0){
+    Stories=data;
+  } else {
+    // fallback — إظهار رسالة خطأ
+    document.getElementById('loadText').textContent='تعذّر تحميل الأسئلة. تحقق من اتصالك.';
+    return;
+  }
+  renderStory();
+  show('screen-story');
 }
+
 function renderStory(){
-  const s=currentStories[currentStory];
-  const total=currentStories.length;
-  document.getElementById('progressFill').style.strokeDashoffset=175.9-(currentStory/total)*175.9;
-  document.getElementById('progressNum').textContent=`${currentStory+1}/${total}`;
-  document.getElementById('currentAxis').textContent=s.axis;
-  const gi=document.getElementById('genderIndicator');
-  if(currentGender==='male'){ gi.textContent='👨 زوج'; gi.className='gender-indicator male'; }
-  else{ gi.textContent='👩 زوجة'; gi.className='gender-indicator female'; }
-  document.getElementById('storyContext').textContent=s.context;
-  document.getElementById('storySituation').textContent=s.situation;
-  document.getElementById('storyQuestion').textContent=s.question;
-  document.getElementById('deepQuestionText').textContent=s.deep;
-  document.getElementById('deepQuestion').classList.remove('visible');
-  document.getElementById('nextBtn').classList.remove('visible');
-  const list=document.getElementById('choicesList'); list.innerHTML='';
-  s.choices.forEach((ch,idx)=>{
-    const btn=document.createElement('button'); btn.className='choice-btn';
-    btn.innerHTML=`<div class="choice-letter">${ch.l}</div><div class="choice-text">${ch.t}<div class="choice-insight">${ch.i}</div></div>`;
-    btn.onclick=()=>selectChoice(idx,btn); list.appendChild(btn);
+  const s=Stories[SI], total=Stories.length;
+  document.getElementById('pFil').style.strokeDashoffset=175.9-(SI/total)*175.9;
+  document.getElementById('pNum').textContent=`${SI+1}/${total}`;
+  document.getElementById('pAxis').textContent=s.axis;
+  const gb=document.getElementById('gBadge');
+  if(G==='male'){gb.textContent='👨 رجل';gb.className='g-badge m';}
+  else{gb.textContent='👩 امرأة';gb.className='g-badge f';}
+  document.getElementById('sCtx').textContent=s.context_ar;
+  document.getElementById('sSit').textContent=s.situation_ar;
+  document.getElementById('sQ').textContent=s.question_ar;
+  document.getElementById('deepQBox').style.display='none';
+  document.getElementById('deepQBox').innerHTML='';
+  document.getElementById('nextBtn').classList.remove('vis');
+  const cl=document.getElementById('choices'); cl.innerHTML='';
+  const choices=Array.isArray(s.choices)?s.choices:JSON.parse(s.choices||'[]');
+  choices.forEach((ch,idx)=>{
+    const b=document.createElement('button'); b.className='choice';
+    b.innerHTML=`<div class="c-let">${ch.letter||ch.l}</div><div class="c-txt">${ch.text||ch.t}<div class="c-ins">${ch.insight||ch.i}</div></div>`;
+    b.onclick=()=>selChoice(ch,b); cl.appendChild(b);
   });
 }
-function selectChoice(idx,btn){
-  document.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  const ch=currentStories[currentStory].choices[idx];
-  Object.entries(ch.s).forEach(([k,v])=>{ myScores[k]=(myScores[k]||0)+v; });
-  setTimeout(()=>{ document.getElementById('deepQuestion').classList.add('visible'); document.getElementById('nextBtn').classList.add('visible'); },350);
+
+async function selChoice(ch,btn){
+  document.querySelectorAll('.choice').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  // تطبيق الأوزان
+  const scores=typeof ch.scores==='string'?JSON.parse(ch.scores):ch.scores;
+  Object.entries(scores||{}).forEach(([k,v])=>{ Scores[k]=(Scores[k]||0)+v; });
+  // جلب سؤال العمق من Groq
+  await fetchDeepQuestion(ch);
+  document.getElementById('nextBtn').classList.add('vis');
 }
+
+async function fetchDeepQuestion(ch){
+  const dqBox=document.getElementById('deepQBox');
+  dqBox.innerHTML=`<div class="dq-label">✦ تأمّل معي</div><div class="dq-loading"><span class="dq-dot"></span><span class="dq-dot"></span><span class="dq-dot"></span></div>`;
+  dqBox.style.display='block';
+  const s=Stories[SI];
+  try {
+    const res=await fetch(DEEP_Q_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({gender:G,age_group:AGE,axis:s.axis,choice_text:ch.text||ch.t,choice_insight:ch.insight||ch.i,story_context:s.context_ar,story_situation:s.situation_ar,scores:Scores}),
+      signal:AbortSignal.timeout(8000)
+    });
+    const data=res.ok?await res.json():null;
+    CurrentDeepQ=data?.deep_question||s.deep_ar;
+  } catch(e){ CurrentDeepQ=s.deep_ar; }
+  dqBox.innerHTML=`
+    <div class="dq-label">✦ تأمّل معي</div>
+    <div class="dq-text">${CurrentDeepQ}</div>
+    <textarea class="dq-input" id="deepInp" placeholder="اكتب إجابتك هنا... (اختياري)" rows="3"></textarea>`;
+}
+
+function saveDeepAnswer(){
+  const inp=document.getElementById('deepInp');
+  if(inp&&inp.value.trim()&&CurrentDeepQ){
+    DeepAnswers.push({axis:Stories[SI]?.axis||'',question:CurrentDeepQ,answer:inp.value.trim()});
+  }
+}
+
 function nextStory(){
-  currentStory++;
-  if(currentStory>=currentStories.length){ showResults(); return; }
+  saveDeepAnswer();
+  document.getElementById('deepQBox').style.display='none';
+  CurrentDeepQ='';
+  SI++;
+  if(SI>=Stories.length){ showResults(); return; }
   const card=document.getElementById('storyCard');
   card.style.opacity='0'; card.style.transform='translateX(20px)';
-  setTimeout(()=>{ renderStory(); card.style.transition='none'; card.style.opacity='0'; card.style.transform='translateX(-20px)'; setTimeout(()=>{ card.style.transition='all .4s ease'; card.style.opacity='1'; card.style.transform='translateX(0)'; },40); },260);
+  setTimeout(()=>{ renderStory(); card.style.transition='none'; card.style.opacity='0'; card.style.transform='translateX(-20px)'; setTimeout(()=>{ card.style.transition='all .4s ease'; card.style.opacity='1'; card.style.transform='translateX(0)'; },40); },250);
 }
 
 // ============================================================
 // RESULTS
 // ============================================================
+function norm(v){ return Math.round(Math.max(0,Math.min(100,((v+8)/18)*100))); }
+function lvl(n){ return n>=70?'high':n>=40?'mid':'low'; }
+
 function showResults(){
-  const pList=currentGender==='male'?personalitiesMale:personalitiesFemale;
-  myPersonality=determinePersonality(myScores,pList);
-  document.getElementById('badgeIcon').textContent=myPersonality.icon;
-  document.getElementById('badgeName').textContent=myPersonality.name;
-  document.getElementById('resultHeadline').textContent=`أنت ${myPersonality.name}`;
-  document.getElementById('resultSummary').textContent=myPersonality.desc;
-  document.getElementById('shareBoxSub').textContent=currentGender==='male'?'أرسل لزوجتك هذا الكود لتكمل اختبارها\nثم ادخلا الكودين لتقرير التوافق':'أرسل لزوجك هذا الكود ليكمل اختباره\nثم ادخلا الكودين لتقرير التوافق';
-  const ac=document.getElementById('axesResult'); ac.innerHTML='';
-  axesDisplay.forEach(ax=>{
-    const raw=myScores[ax.key]||0;
-    const norm=Math.round(Math.max(0,Math.min(100,((raw+8)/18)*100)));
-    const d=document.createElement('div'); d.className='axis-bar';
-    d.innerHTML=`<div class="axis-bar-header"><span class="axis-bar-name">${ax.name}</span><span class="axis-bar-score">${norm}%</span></div><div class="axis-bar-track"><div class="axis-bar-fill" data-w="${norm}"></div></div><div class="axis-bar-desc">${ax.desc}</div>`;
+  const pList=G==='male'?PERSONALITIES_M:PERSONALITIES_F;
+  MyP=detPersonality();
+  document.getElementById('bIcon').textContent=MyP.icon;
+  document.getElementById('bName').textContent=MyP.name;
+  document.getElementById('rHl').textContent=`أنت ${MyP.name}`;
+  document.getElementById('rSum').textContent=MyP.desc;
+  document.getElementById('shSub').textContent=G==='male'?'أرسل لشريكتك هذا الكود لتكمل اختبارها':'أرسل لشريكك هذا الكود ليكمل اختباره';
+  const ac=document.getElementById('axesRes'); ac.innerHTML='';
+  AXES_META.forEach(ax=>{
+    const n=norm(Scores[ax.key]||0);
+    const d=document.createElement('div'); d.className='ax-bar';
+    d.innerHTML=`<div class="ax-hdr"><span class="ax-nm">${ax.name}</span><span class="ax-sc">${n}%</span></div><div class="ax-trk"><div class="ax-fil" data-w="${n}"></div></div><div class="ax-desc">${ax.desc}</div>`;
     ac.appendChild(d);
   });
-  const ins=generateInsights(myScores,currentGender);
-  const ig=document.getElementById('insightsGrid'); ig.innerHTML='';
-  ins.forEach(i=>{ const d=document.createElement('div'); d.className='insight-card'; d.innerHTML=`<div class="insight-icon">${i.icon}</div><div class="insight-body"><div class="insight-title">${i.title}</div><div class="insight-text">${i.text}</div></div>`; ig.appendChild(d); });
-  encodedData=encodeData(currentGender,myScores,myPersonality.key)||'';
-  saveMyData(encodedData);
-  document.getElementById('shareCode').textContent=encodedData.substring(0,40)+'...';
-  showScreen('screen-result');
-  setTimeout(()=>{ document.querySelectorAll('.axis-bar-fill').forEach(b=>b.style.width=b.dataset.w+'%'); },300);
+  Enc=encData();
+  saveData(Enc);
+  document.getElementById('shareCode').textContent=Enc.substring(0,50)+'...';
+  show('screen-result');
+  setTimeout(()=>{ document.querySelectorAll('.ax-fil').forEach(b=>b.style.width=b.dataset.w+'%'); },280);
 }
 
-function determinePersonality(scores,pList){
-  const map=[{key:"communication",type:"communicator"},{key:"partnership",type:"partner"},{key:"emotion",type:"expressor"},{key:"trust",type:"guardian"},{key:"family",type:"caregiver"},{key:"independence",type:"independent"},{key:"values",type:"grounded"},{key:"conflict",type:"analyst"}];
-  let top="partner",topS=-999;
-  map.forEach(m=>{ const s=scores[m.key]||0; if(s>topS){topS=s;top=m.type;} });
+function detPersonality(){
+  const pList=G==='male'?PERSONALITIES_M:PERSONALITIES_F;
+  const map=[{k:'communication',t:'communicator'},{k:'partnership',t:'partner'},{k:'emotion',t:'expressor'},{k:'trust',t:'guardian'},{k:'family',t:'caregiver'},{k:'independence',t:'independent'},{k:'religion',t:'grounded'},{k:'conflict',t:'analyst'}];
+  let top='partner',topS=-999;
+  map.forEach(m=>{ const s=Scores[m.k]||0; if(s>topS){topS=s;top=m.t;} });
   return pList.find(p=>p.key===top)||pList[1];
 }
 
-function generateInsights(scores,gender){
-  const ins=[];
-  const isFemale=gender==='female';
-  if((scores.communication||0)>=4) ins.push({icon:"💬",title:"تواصل قوي",text:isFemale?"تُسمّين المشاعر والمواقف بجرأة — هذا يحمي العلاقة من التراكم الصامت.":"تُسمّي المشاعر والمواقف بجرأة — هذا يحمي العلاقة من التراكم الصامت."});
-  else if((scores.communication||0)<=-2) ins.push({icon:"🤐",title:"منطقة نمو: التعبير العاطفي",text:isFemale?"تميلين لكبت مشاعرك أو تأجيل الحوارات الصعبة — على المدى البعيد يخلق مسافة.":"تميل لكبت مشاعرك أو تأجيل الحوارات الصعبة — على المدى البعيد يخلق مسافة."});
-  if((scores.partnership||0)>=4) ins.push({icon:"🤝",title:"شراكة حقيقية",text:isFemale?"تؤمنين أن الزواج فريق — قراراتك الكبيرة تُبنى مع شريكك.":"تؤمن أن الزواج فريق — قراراتك الكبيرة تُبنى مع شريكتك."});
-  if((scores.independence||0)>=4&&(scores.partnership||0)<=0) ins.push({icon:"🦅",title:"استقلالية قوية",text:isFemale?"تقدّرين مساحتك الشخصية كثيراً — تأكدي أن شريكك يشعر بأنه شريك فعلي.":"تقدّر مساحتك الشخصية كثيراً — تأكد أن شريكتك تشعر بأنها شريكة فعلية."});
-  if((scores.emotion||0)>= 4) ins.push({icon:"💛",title:"وعي عاطفي عالٍ",text:isFemale?"تعرفين ما تشعرين به وتتعاملين مع مشاعر شريكك باحترام.":"تعرف ما تشعر به وتتعامل مع مشاعر شريكتك باحترام."});
-  if((scores.stress||0)<=-3) ins.push({icon:"🌊",title:"منطقة نمو: إدارة الضغط",text:isFemale?"تتحملين كثيراً بصمت — الضغط المكتوم يُستنزف العلاقة ببطء.":"تتحمل كثيراً بصمت — الضغط المكتوم يُستنزف العلاقة ببطء."});
-  if(ins.length===0) ins.push({icon:"🌱",title:"توازن في الاختيارات",text:"أجبت بتوازن على معظم المحاور — هذا يُظهر مرونة وعقلانية."});
-  return ins.slice(0,3);
+// ============================================================
+// ENCODE / DECODE — كود مضغوط قصير
+// ============================================================
+function encData(){
+  const d={g:G,a:AGE,pk:MyP.key,s:{
+    c:Scores.communication||0,e:Scores.emotion||0,t:Scores.trust||0,
+    cf:Scores.conflict||0,p:Scores.partnership||0,i:Scores.independence||0,
+    f:Scores.family||0,st:Scores.stress||0,r:Scores.religion||0
+  }};
+  try{ return btoa(unescape(encodeURIComponent(JSON.stringify(d)))); }catch(e){ return ''; }
+}
+function decData(b64){ try{ return JSON.parse(decodeURIComponent(escape(atob(b64)))); }catch(e){ return null; } }
+function saveData(enc){ try{ sessionStorage.setItem('bm',enc); }catch(e){} }
+function loadData(){ try{ return sessionStorage.getItem('bm'); }catch(e){ return null; } }
+
+// ============================================================
+// GROQ — توليد التقرير
+// ============================================================
+async function genAIReport(type){
+  const isCompat=type==='compat';
+  const btn=document.getElementById(isCompat?'cpAIBtn':'aiBtn');
+  const box=document.getElementById(isCompat?'cpAIBox':'aiBox');
+  const txt=document.getElementById(isCompat?'cpAITxt':'aiTxt');
+  const rev=document.getElementById(isCompat?'cpRevBadge':'revBadge');
+
+  btn.classList.add('loading');
+  btn.innerHTML='<span class="dq-dot"></span><span class="dq-dot"></span><span class="dq-dot"></span>&nbsp; جاري التحليل...';
+
+  try {
+    const mP=CompatMale?PERSONALITIES_M.find(p=>p.key===CompatMale.pk)||PERSONALITIES_M[1]:MyP;
+    const fP=CompatFemale?PERSONALITIES_F.find(p=>p.key===CompatFemale.pk)||PERSONALITIES_F[1]:null;
+
+    const body={
+      gender:G||'male', age_group:AGE||'31-45',
+      personality:mP?.name||'',
+      scores:{
+        communication:Scores.communication||0,emotion:Scores.emotion||0,
+        trust:Scores.trust||0,conflict:Scores.conflict||0,
+        partnership:Scores.partnership||0,independence:Scores.independence||0,
+        family:Scores.family||0,stress:Scores.stress||0,religion:Scores.religion||0
+      },
+      deep_answers:DeepAnswers,
+      report_type:type
+    };
+
+    if(isCompat&&CompatMale&&CompatFemale){
+      body.gender='male'; body.personality=mP?.name||'';
+      body.scores={communication:CompatMale.s.c||0,emotion:CompatMale.s.e||0,trust:CompatMale.s.t||0,conflict:CompatMale.s.cf||0,partnership:CompatMale.s.p||0,independence:CompatMale.s.i||0,family:CompatMale.s.f||0,stress:CompatMale.s.st||0,religion:CompatMale.s.r||0};
+      body.partner_data={personality:fP?.name||'',scores:{communication:CompatFemale.s.c||0,emotion:CompatFemale.s.e||0,trust:CompatFemale.s.t||0,conflict:CompatFemale.s.cf||0,partnership:CompatFemale.s.p||0,independence:CompatFemale.s.i||0,family:CompatFemale.s.f||0,stress:CompatFemale.s.st||0,religion:CompatFemale.s.r||0}};
+    }
+
+    const res=await fetch(REPORT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(25000)});
+    if(!res.ok) throw new Error();
+    const data=await res.json();
+    const parts=(data.report||'').split('---');
+    txt.textContent=parts[0].trim();
+    if(parts[1]){
+      const dis=document.createElement('div'); dis.className='ai-disc';
+      dis.textContent='⚠️ '+parts[1].replace('⚠️ تنبيه مهم:','').trim();
+      box.appendChild(dis);
+    }
+    if(data.review_date){
+      const d=new Date(data.review_date);
+      rev.innerHTML=`📅 موعد المراجعة: ${d.toLocaleDateString('ar-SA',{year:'numeric',month:'long'})}`;
+    }
+    box.classList.add('vis'); btn.style.display='none';
+  } catch(e){
+    btn.classList.remove('loading');
+    btn.innerHTML='✨ إعادة المحاولة';
+  }
 }
 
 // ============================================================
 // SHARE
 // ============================================================
 function copyCode(){
-  const data=loadMyData()||encodedData;
-  navigator.clipboard.writeText(data).catch(()=>{});
-  const t=document.getElementById('copiedToast'); t.classList.add('visible');
-  setTimeout(()=>t.classList.remove('visible'),2500);
+  const d=loadData()||Enc;
+  navigator.clipboard.writeText(d).catch(()=>{});
+  const t=document.getElementById('copiedToast'); t.classList.add('vis');
+  setTimeout(()=>t.classList.remove('vis'),2500);
 }
-function sendWhatsapp(){
-  const data=loadMyData()||encodedData;
-  const isMale=currentGender==='male';
-  const msg=encodeURIComponent(`🌿 *بصمة التوافق*\n\n${isMale?'أكملت اختبار الزوج':'أكملت اختبار الزوجة'} وأريد نشوف تقرير التوافق بيننا 💞\n\nأكمل${isMale?'ي':''} اختبارك من هنا:\nhttps://engmhi126-ui.github.io/basmatawafuq\n\nثم أدخل${isMale?'ي':''} هذا الكود:\n${data}\n\n_الاختبار 12 موقف ويأخذ 15 دقيقة_`);
+function sendWA(){
+  const d=loadData()||Enc, isM=G==='male';
+  const msg=encodeURIComponent(`🌿 *بصمة التوافق*\n\n${isM?'أكملت اختبار رجل':'أكملت اختبار رجلة'} وأريد نشوف تقرير التوافق بيننا 💞\n\nأكمل${isM?'ي':''} اختبارك من هنا:\n${SITE_URL}\n\nثم أدخل${isM?'ي':''} هذا الكود:\n${d}\n\n_الاختبار 13 موقف — 15 دقيقة_`);
   window.open(`https://wa.me/?text=${msg}`,'_blank');
 }
 
 // ============================================================
-// COMPAT REPORT
+// COMPAT
 // ============================================================
-function loadCompatReport(){
-  const myInput=document.getElementById('myCodeInput').value.trim();
-  const ptInput=document.getElementById('partnerCodeInput').value.trim();
-  const errEl=document.getElementById('codeError');
-  const myD=decodeData(myInput)||decodeData(loadMyData());
-  const ptD=decodeData(ptInput);
+function loadCompat(){
+  const myI=document.getElementById('myInp').value.trim();
+  const ptI=document.getElementById('ptInp').value.trim();
+  const err=document.getElementById('cErr');
+  const myD=decData(myI)||decData(loadData());
+  const ptD=decData(ptI);
   if(!myD||!ptD||myD.g===ptD.g){
-    errEl.style.display='block';
-    errEl.textContent=(!myD||!ptD)?'⚠️ تأكد من الكودين وأعد المحاولة':'⚠️ يجب أن يكون أحد الكودين للزوج والآخر للزوجة';
-    setTimeout(()=>errEl.style.display='none',3500); return;
+    err.style.display='block';
+    err.textContent=(!myD||!ptD)?'⚠️ تأكد من الكودين وأعد المحاولة':'⚠️ يجب أن يكون أحد الكودين لرجل والآخر لامرأة';
+    setTimeout(()=>err.style.display='none',3500); return;
   }
-  errEl.style.display='none';
-  const maleD=myD.g==='male'?myD:ptD;
-  const femD=myD.g==='female'?myD:ptD;
-  buildCompatReport(maleD,femD);
+  err.style.display='none';
+  CompatMale=myD.g==='male'?myD:ptD;
+  CompatFemale=myD.g==='female'?myD:ptD;
+  buildCompatUI(CompatMale,CompatFemale);
 }
 
-function norm(v){ return Math.round(Math.max(0,Math.min(100,((v+8)/18)*100))); }
-
-function buildCompatReport(maleD,femD){
-  const mP=personalitiesMale.find(p=>p.key===maleD.pk)||personalitiesMale[1];
-  const fP=personalitiesFemale.find(p=>p.key===femD.pk)||personalitiesFemale[1];
-  document.getElementById('compatNameM').textContent=mP.name;
-  document.getElementById('compatNameF').textContent=fP.name;
+function buildCompatUI(mD,fD){
+  const mP=PERSONALITIES_M.find(p=>p.key===mD.pk)||PERSONALITIES_M[1];
+  const fP=PERSONALITIES_F.find(p=>p.key===fD.pk)||PERSONALITIES_F[1];
+  document.getElementById('cpNM').textContent=mP.name;
+  document.getElementById('cpNF').textContent=fP.name;
 
   const axes=[
-    {key:'c',name:'التواصل العاطفي',analysis:{close:'كلاكما يُقدّر الحوار المفتوح — هذا أقوى أساس للزواج.',far:'هناك فارق في أسلوب التعبير — أحدكما يحتاج كلاماً والآخر يُعبّر بالأفعال. هذا الفارق يُخلق شعوراً بعدم الفهم.',mid:'تتقاربان في التواصل لكن بأسلوبين مختلفين — التعرف على لغة كل طرف يُغير الكثير.'},exercise:{close:'كل أسبوع: سؤال واحد عميق — ما أصعب شيء مررت به هذا الأسبوع دون أن أعرف؟',far:'تمرين الكرسيين: كل طرف يتكلم 3 دقائق دون مقاطعة — الآخر يستمع فقط ثم يُعيد ما فهمه.',mid:'سؤال الأسبوع: ما الشيء الذي أتمنيت أن تخبرني به مؤخراً؟'}},
-    {key:'e',name:'الذكاء العاطفي',analysis:{close:'كلاكما يُدرك مشاعره ومشاعر الآخر — هذا يُقلل الجروح العميقة في الخلافات.',far:'هناك فارق في كيفية معالجة المشاعر — أحدكما يحتاج وقتاً للهضم والآخر يريد الحل الفوري. الاعتراف بهذا الفارق يُنهي كثيراً من سوء الفهم.',mid:'تتعاملان مع المشاعر بطرق مختلفة — تعلّم كيف يحتاج الآخر أن تُعالج مشاعره هدية عظيمة.'},exercise:{close:'شاركا يومياً: أفضل شيء وأصعب شيء في يومك.',far:'تمرين التسمية: حين تشعر بشيء صعب قل اسم الشعور بدلاً من التصرف بناءً عليه فوراً.',mid:'تمرين المرآة: أعد ما سمعته بكلماتك الخاصة قبل أن تُجيب.'}},
-    {key:'t',name:'الثقة والشفافية',analysis:{close:'الثقة المالية والشخصية بينكما مرتفعة — هذا يُسهل حل كل شيء آخر.',far:'هناك فارق في مستوى الانفتاح المالي أو الشخصي — أحدكما يحتاج شفافية أكثر والآخر يحتاج مساحة أكثر. اتفاق صريح على الحدود يحل هذا.',mid:'مستويات الثقة متقاربة لكن في جوانب مختلفة — الحديث عن التوقعات يُوضح الصورة.'},exercise:{close:'مراجعة مالية شهرية معاً — 30 دقيقة بشفافية كاملة.',far:'جلسة واحدة: كل طرف يضع أرقامه المالية على الطاولة ويشرح رؤيته لنموذج إدارة المال.',mid:'اتفقا على ميزانية مشتركة مع احتفاظ كل طرف بمبلغ شخصي مستقل.'}},
-    {key:'cf',name:'إدارة الخلاف',analysis:{close:'كلاكما يتعامل مع الخلاف بأسلوب صحي — هذا يمنع الجروح المتراكمة.',far:'أسلوبا الخلاف مختلفان بشكل واضح — أحدكما يُريد حلاً فورياً والآخر يحتاج وقتاً. بدون اتفاق، كل خلاف سيكون أصعب من الموضوع نفسه.',mid:'تتعاملان مع الخلاف بأساليب مختلفة — وضع قواعد مشتركة للخلاف يُحدث فرقاً كبيراً.'},exercise:{close:'بعد كل خلاف: كل طرف يقول شيئاً واحداً فعله الآخر صح.',far:'قاعدة التوقف: حين يرتفع الصوت كلاكما يأخذ 10 دقائق ثم يعودان بالترتيب نفسه.',mid:'ضعا قاعدة مشتركة للخلاف — مثلاً: لا نوم على خلاف، لا كلام جارح، وقت مهلة محدد.'}},
-    {key:'p',name:'الشراكة والقرارات',analysis:{close:'كلاكما يؤمن بالقرارات المشتركة — هذا يبني ثقة عميقة مع الوقت.',far:'هناك فارق في مفهوم الشراكة — أحدكما يريد مشاركة كل شيء والآخر يريد استقلالية في بعض القرارات. تحديد ما هو مشترك وما هو فردي يحل هذا.',mid:'تتفقان في معظم القرارات لكن هناك مناطق رمادية — تحديدها مبكراً يُجنب التوتر.'},exercise:{close:'قرار مشترك هذا الشهر: اختارا شيئاً وقررا معاً من البداية للنهاية.',far:'قائمة القرارات: كل طرف يكتب ما يعتبره قراراً شخصياً وما يعتبره مشتركاً — قارنا القائمتين.',mid:'قرارا بالتبادل: مرة هو مرة هي — تعلّم الثقة بقرار الآخر.'}},
-    {key:'i',name:'الاستقلالية والمساحة',analysis:{close:'كلاكما يتفق على حجم المساحة الشخصية المطلوبة — هذا يمنع الاختناق أو الوحدة.',far:'هناك فارق واضح في الاحتياج للمساحة — أحدكما يحتاج قرباً مستمراً والآخر يحتاج مساحة للتنفس. هذا الفارق ليس خطأ أحدكما، لكنه يحتاج اتفاقاً.',mid:'الاحتياج للمساحة متقارب نسبياً — اتفاق بسيط على "وقت الفرد" يُوازن الأمر.'},exercise:{close:'كل طرف له نشاط شخصي أسبوعي لا يُقاطع فيه — ثم يشاركان التجربة.',far:'اتفقا على تعريف واضح للمساحة الشخصية — ما هي وما حدودها وكيف يُعبّر كل طرف عن احتياجه.',mid:'حددا "وقت الفرد" ووقت الزوجية أسبوعياً بشكل صريح.'}},
-    {key:'f',name:'الأهل والحدود',analysis:{close:'كلاكما يتفق على دور الأسرة الممتدة في حياتكما — هذا يُوفر كثيراً من الخلافات الشائعة.',far:'هناك فارق كبير في كيفية رؤية دور الأهل — أحدكما يرى الأسرة الممتدة جزءاً طبيعياً من القرارات والآخر يُفضّل استقلالية الأسرة النووية. هذا الفارق سيظهر عند أول أزمة.',mid:'رؤيتكما للأهل متقاربة لكن هناك تفاصيل تحتاج حواراً صريحاً.'},exercise:{close:'زيارة عائلية مشتركة شهرياً تخططان لها معاً مسبقاً.',far:'اتفقا على حدود واضحة للأسرة الممتدة — ما يدخل حياتكما وما لا يدخل — قبل أن يحدث الموقف لا بعده.',mid:'حددا كيفية التعامل مع طلبات الأهل قبل أن تصل — من يرد؟ كيف نقرر؟'}},
-    {key:'st',name:'إدارة الضغط',analysis:{close:'كلاكما يتعامل مع الضغط بأسلوب مشابه — هذا يُسهل الدعم المتبادل في الأزمات.',far:'أسلوبا الاستجابة للضغط مختلفان — أحدكما ينسحب والآخر يبحث عن الحل الفوري. معرفة هذا الفارق تمنع كثيراً من سوء الفهم في لحظات الضعف.',mid:'تتعاملان مع الضغط بطرق مختلفة — سؤال ماذا تحتاج مني الآن؟ يُغير كل شيء.'},exercise:{close:'اتفقا على إشارة بسيطة تقول: أنا تعبان/تعبانة اليوم — لتعرف توقعاتك.',far:'كل طرف يكتب: ماذا أحتاج منك حين أكون في ضيق؟ تبادلا الإجابات.',mid:'جربا سؤال: ماذا تحتاج مني الآن؟ في كل موقف ضغط بدلاً من الافتراض.'}}
+    {key:'c',axKey:'communication',name:'التواصل العاطفي'},
+    {key:'e',axKey:'emotion',      name:'الذكاء العاطفي'},
+    {key:'t',axKey:'trust',        name:'الثقة والشفافية'},
+    {key:'cf',axKey:'conflict',    name:'إدارة الخلاف'},
+    {key:'p',axKey:'partnership',  name:'الشراكة والقرار'},
+    {key:'i',axKey:'independence', name:'الاستقلالية'},
+    {key:'f',axKey:'family',       name:'القيم الأسرية'},
+    {key:'st',axKey:'stress',      name:'إدارة الضغط'},
+    {key:'r',axKey:'religion',     name:'الدين والمرجعية'},
   ];
 
-  const content=document.getElementById('compatContent'); content.innerHTML='';
+  const content=document.getElementById('cpContent'); content.innerHTML='';
 
-  // Overall summary card
-  let strongCount=0, watchCount=0;
+  // ملخص
+  let str=0,wtch=0,ntrl=0;
   axes.forEach(ax=>{
-    const mv=maleD.s[ax.key]||0; const fv=femD.s[ax.key]||0;
-    const diff=Math.abs(mv-fv); const avg=(mv+fv)/2;
-    if(diff<=3&&avg>=0) strongCount++; else if(diff>=5) watchCount++;
+    const mv=mD.s[ax.key]||0,fv=fD.s[ax.key]||0;
+    const mn=norm(mv),fn=norm(fv),diff=Math.abs(mn-fn),avg=(mn+fn)/2;
+    if(diff<=15&&avg>=60)str++; else if(diff>=35||avg<30)wtch++; else ntrl++;
   });
-  const summaryCard=document.createElement('div'); summaryCard.className='compat-card';
-  summaryCard.innerHTML=`
-    <div class="compat-card-header"><div class="compat-card-icon">💞</div><div class="compat-card-title">ملخص البصمتين</div></div>
-    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
-      <div style="flex:1;min-width:100px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:10px;padding:10px;text-align:center;">
-        <div style="font-size:22px;font-weight:800;color:var(--success);">${strongCount}</div>
-        <div style="font-size:11px;color:var(--text-dim);">محاور توافق قوية</div>
-      </div>
-      <div style="flex:1;min-width:100px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:10px;text-align:center;">
-        <div style="font-size:22px;font-weight:800;color:var(--gold);">${axes.length-strongCount-watchCount}</div>
-        <div style="font-size:11px;color:var(--text-dim);">محاور تكاملية</div>
-      </div>
-      <div style="flex:1;min-width:100px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);border-radius:10px;padding:10px;text-align:center;">
-        <div style="font-size:22px;font-weight:800;color:var(--danger);">${watchCount}</div>
-        <div style="font-size:11px;color:var(--text-dim);">محاور تحتاج اتفاقاً</div>
-      </div>
+
+  const sc=document.createElement('div'); sc.className='cp-card';
+  sc.innerHTML=`<div class="cp-card-hdr"><div class="cp-card-ico">💞</div><div class="cp-card-tit">ملخص البصمتين</div></div>
+    <div style="display:flex;gap:8px;margin-bottom:11px;">
+      <div style="flex:1;background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.18);border-radius:9px;padding:9px;text-align:center;"><div style="font-size:20px;font-weight:800;color:var(--success);">${str}</div><div style="font-size:10px;color:var(--text-dim);">توافق قوي</div></div>
+      <div style="flex:1;background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.18);border-radius:9px;padding:9px;text-align:center;"><div style="font-size:20px;font-weight:800;color:var(--warn);">${ntrl}</div><div style="font-size:10px;color:var(--text-dim);">تكامل</div></div>
+      <div style="flex:1;background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.18);border-radius:9px;padding:9px;text-align:center;"><div style="font-size:20px;font-weight:800;color:var(--danger);">${wtch}</div><div style="font-size:10px;color:var(--text-dim);">يحتاج حواراً</div></div>
     </div>
-    <div style="font-size:12px;color:var(--text-dim);line-height:1.7;padding:10px;background:rgba(201,168,76,0.05);border-radius:10px;border-right:3px solid var(--gold);">
-      هذا التقرير ليس حكماً على زواجكما — بل خريطة للحوار. كل محور هو فرصة للفهم قبل أن يصبح مصدر توتر.
+    <div style="font-size:11px;color:var(--text-dim);line-height:1.7;padding:9px;background:rgba(201,168,76,0.04);border-radius:9px;border-right:2px solid var(--gold);">
+      هذا التقرير خريطة للحوار — لا حكم على زواجكما. كل محور فرصة للفهم قبل أن يصبح توتراً.
     </div>`;
-  content.appendChild(summaryCard);
+  content.appendChild(sc);
 
-  // Per-axis cards
-  axes.forEach(ax=>{
-    const mv=maleD.s[ax.key]||0; const fv=femD.s[ax.key]||0;
-    const mn=norm(mv); const fn=norm(fv);
-    const diff=Math.abs(mv-fv); const avg=(mv+fv)/2;
+  // محور الدين أولاً لأهميته
+  const sortedAxes=[axes[8],...axes.slice(0,8)];
+  sortedAxes.forEach(ax=>{
+    const mv=mD.s[ax.key]||0,fv=fD.s[ax.key]||0;
+    const mn=norm(mv),fn=norm(fv),diff=Math.abs(mn-fn),avg=(mn+fn)/2;
     let type,badge,badgeClass,icon;
-    if(diff<=3&&avg>=0){ type='close'; badge='توافق قوي'; badgeClass='cb-strong'; icon='✅'; }
-    else if(diff>=5){ type='far'; badge='يحتاج اتفاقاً'; badgeClass='cb-watch'; icon='⚠️'; }
-    else{ type='mid'; badge='مكمّلان'; badgeClass='cb-neutral'; icon='💡'; }
+    if(diff<=15&&avg>=60){type='strong';badge='توافق قوي';badgeClass='cb-s';icon='✅';}
+    else if(diff>=35||avg<30){type='far';badge='يحتاج حواراً';badgeClass='cb-w';icon='⚠️';}
+    else{type='mid';badge='مكمّلان';badgeClass='cb-n';icon='💡';}
 
-    const card=document.createElement('div'); card.className='compat-card';
+    const lvlM=`<span class="lvl-tag ${mn>=70?'lvl-hi':mn>=40?'lvl-md':'lvl-lo'}">${mn>=70?'مرتفع':mn>=40?'متوسط':'منخفض'}</span>`;
+    const lvlF=`<span class="lvl-tag ${fn>=70?'lvl-hi':fn>=40?'lvl-md':'lvl-lo'}">${fn>=70?'مرتفعة':fn>=40?'متوسطة':'منخفضة'}</span>`;
+    const diffTag=`<span class="diff-tag ${type==='strong'?'diff-close':type==='far'?'diff-far':'diff-mid'}">${type==='strong'?'● فارق صغير':type==='far'?'● فارق كبير':'● فارق متوسط'}</span>`;
+
+    const analysis=getCompatAnalysis(ax.axKey,mn,fn,type);
+    const card=document.createElement('div'); card.className='cp-card';
     card.innerHTML=`
-      <div class="compat-card-header">
-        <div class="compat-card-icon">${icon}</div>
-        <div class="compat-card-title">${ax.name}</div>
-        <div class="compat-badge ${badgeClass}">${badge}</div>
+      <div class="cp-card-hdr"><div class="cp-card-ico">${icon}</div><div class="cp-card-tit">${ax.name}</div><div class="cp-bdg ${badgeClass}">${badge}</div></div>
+      <div class="cmp-axis">
+        <div class="cmp-bars">
+          <div class="cmp-row"><div class="cmp-who m">هو</div><div class="cmp-trk"><div class="cmp-fil-m" data-w="${mn}"></div></div><div class="cmp-pct">${mn}%</div>${lvlM}</div>
+          <div class="cmp-row"><div class="cmp-who f">هي</div><div class="cmp-trk"><div class="cmp-fil-f" data-w="${fn}"></div></div><div class="cmp-pct">${fn}%</div>${lvlF}</div>
+        </div>${diffTag}
       </div>
-      <div class="compare-axis">
-        <div class="compare-bars">
-          <div class="compare-bar-row">
-            <div class="compare-bar-who his">هو</div>
-            <div class="compare-bar-track"><div class="compare-bar-fill-m" data-w="${mn}"></div></div>
-            <div class="compare-bar-pct">${mn}%</div>
-          </div>
-          <div class="compare-bar-row">
-            <div class="compare-bar-who hers">هي</div>
-            <div class="compare-bar-track"><div class="compare-bar-fill-f" data-w="${fn}"></div></div>
-            <div class="compare-bar-pct">${fn}%</div>
-          </div>
-        </div>
-        <div class="diff-indicator ${type==='close'?'diff-close':type==='far'?'diff-far':'diff-mid'}">
-          ${type==='close'?'● الفارق صغير — توافق طبيعي':type==='far'?'● فارق واضح — يستحق حواراً صريحاً':'● فارق متوسط — إثراء متبادل'}
-        </div>
-      </div>
-      <div class="analysis-text">${ax.analysis[type]}</div>
-      <div class="exercise-box">
-        <div class="exercise-label">✦ تمرين عملي</div>
-        <div class="exercise-text">${ax.exercise[type]}</div>
-      </div>`;
+      <div class="analysis">${analysis}</div>
+      <div class="exercise"><div class="ex-lbl">✦ تمرين عملي</div><div class="ex-txt">${getExercise(ax.axKey,type,mn,fn)}</div></div>`;
     content.appendChild(card);
   });
 
-  showScreen('screen-compat');
-  setTimeout(()=>{
-    document.querySelectorAll('.compare-bar-fill-m,.compare-bar-fill-f').forEach(b=>b.style.width=b.dataset.w+'%');
-  },300);
+  // إظهار زر AI التوافق
+  const cpBtn=document.getElementById('cpAIBtn');
+  if(cpBtn) cpBtn.style.display='flex';
+
+  show('screen-compat');
+  setTimeout(()=>{ document.querySelectorAll('.cmp-fil-m,.cmp-fil-f').forEach(b=>b.style.width=b.dataset.w+'%'); },280);
 }
 
-// INIT
-createParticles();
+function getCompatAnalysis(axKey,mn,fn,type){
+  const A={
+    religion:{
+      strong:"كلاكما يجعل الدين مرجعية فعلية في قراراتكما — هذا يُوحّد وجهة الأسرة ويُعطي الاطمئنان في الاختيارات الصعبة.",
+      far:mn>fn?"هو يُدرج الدين في قراراته أكثر منها. هذا الفارق يحتاج حواراً صريحاً — ليس عن الأفضل والأسوأ، بل عن كيف يمكن أن تتقاطع مرجعياتكما.":"هي تُدرج الدين في قراراتها أكثر منه. هذا الفارق يحتاج حواراً بينكما عن مكانة الدين في القرارات المشتركة.",
+      mid:"مستوى حضور الدين في القرارات متفاوت نسبياً — الحوار عن كيف يدخل الدين في قراراتكما المشتركة يُوضّح الصورة.",
+      both_low:"كلاكما يعتمد على العقل والتجربة أكثر من المرجعية الدينية في القرارات — تأمّلا معاً ما الذي تريدانه أساساً لبيتكما."
+    },
+    communication:{
+      strong:"كلاكما يُقدّر الحوار المفتوح ويُعبّر عن مشاعره بوضوح — هذا من أقوى أسس الزواج الصحي.",
+      far:mn>fn?"هو أكثر انفتاحاً في التواصل — قد تشعر هي أحياناً بضغط للوصول لمستوى انفتاحه.":"هي أكثر انفتاحاً في التواصل — قد يشعر هو أحياناً بضغط للتعبير عن مشاعره.",
+      mid:"أسلوبا تواصلكما متقاربان — التفاهم على توقعات التواصل يُعزز العلاقة.",
+      both_low:"كلاكما يميل لتأجيل الحوارات الصعبة — الخطر أن المشكلات تتراكم دون معالجة."
+    },
+    emotion:{
+      strong:"كلاكما يملك وعياً عاطفياً مرتفعاً — هذا يُقلل جروح الخلافات ويجعل كل طرف يشعر بأنه مفهوم.",
+      far:"فارق في الوعي العاطفي — أحدكما يحتاج مساحة أكبر لمعالجة مشاعره قبل الحوار.",
+      mid:"مستوى الوعي العاطفي متقارب — هذا يُسهل الفهم المتبادل في الأزمات.",
+      both_low:"كلاكما يجد صعوبة أحياناً في التعامل مع المشاعر — الوعي بهذا يمنع كثيراً من سوء الفهم."
+    },
+    trust:{
+      strong:"مستوى الثقة والشفافية مرتفع — هذا يُسهل بناء نموذج مالي واضح وعلاقة صريحة.",
+      far:"فارق في مستوى الانفتاح المالي والشخصي — أحدكما يحتاج شفافية أكثر والآخر يحتاج مساحة أكثر.",
+      mid:"مستوى الثقة متقارب — التوضيح المسبق لتوقعات الشفافية يُجنب سوء الفهم.",
+      both_low:"كلاكما يحتفظ بمساحة خاصة كبيرة — قد يُصعّب هذا الوصول للعمق في العلاقة."
+    },
+    conflict:{
+      strong:"كلاكما يتعامل مع الخلاف بأسلوب صحي — الخلافات عندكما فرص للفهم لا للجروح.",
+      far:"أسلوبا الخلاف مختلفان بشكل واضح — وضع قواعد مشتركة للخلاف ضروري جداً.",
+      mid:"أسلوبا الخلاف متقاربان — مع بعض القواعد المشتركة يصبح التعامل مع الخلاف أسهل.",
+      both_low:"كلاكما يميل للتصعيد أو الانسحاب في الخلافات — وضع قواعد مشتركة أمر ضروري."
+    },
+    partnership:{
+      strong:"كلاكما يؤمن بالقرارات المشتركة — هذا يبني ثقة عميقة ويمنع الشعور بالتهميش.",
+      far:"فارق في مفهوم الشراكة — أحدكما يريد مشاركة أكثر والآخر يريد استقلالية أكبر.",
+      mid:"مفهوم الشراكة متقارب — تحديد المناطق الرمادية بينكما يُجنب التوتر.",
+      both_low:"كلاكما يميل لاتخاذ قرارات مستقلة — قد يُقلل هذا من الشعور بالشراكة الحقيقية."
+    },
+    independence:{
+      strong:"كلاكما يحترم الاستقلالية الشخصية — هذا يمنع الشعور بالاختناق ويحفظ هوية كل طرف.",
+      far:mn>fn?"هو يحتاج مساحة أكثر مما هي مستعدة لإعطائه — توقف عند هذا الفارق يمنع كثيراً من التوتر.":"هي تحتاج مساحة أكثر مما هو مستعد لإعطائها — اتفاق صريح على وقت الفرد ضروري.",
+      mid:"احتياجكما للمساحة الشخصية متقارب — تحديد وقت الفرد أسبوعياً يُوازن الأمر.",
+      both_low:"كلاكما يحتاج قرباً مستمراً — جميل لكن راقبا أن لا يتحول لاعتماد متبادل."
+    },
+    family:{
+      strong:"كلاكما يتفق على دور الأسرة الممتدة — هذا يُوفر كثيراً من الخلافات الشائعة.",
+      far:"فارق كبير في رؤية دور الأهل — هذا الفارق سيظهر عند أول أزمة. اتفاق مبكر أفضل.",
+      mid:"رؤيتكما للأسرة متقاربة — حوار صريح عن الحدود يُجنب التوتر.",
+      both_low:"كلاكما يُفضّل استقلالية الأسرة النووية — وضع حدود واضحة مع الأسرة الممتدة أمر ضروري."
+    },
+    stress:{
+      strong:"كلاكما يتعامل مع الضغط بأسلوب متوازن — الدعم المتبادل في الأزمات سيكون أسهل وأكثر فاعلية.",
+      far:"أسلوبا الاستجابة للضغط مختلفان — أحدكما ينسحب والآخر يبحث عن الاتصال. معرفة هذا تمنع كثيراً من سوء الفهم.",
+      mid:"تتعاملان مع الضغط بأساليب مختلفة نسبياً — سؤال ماذا تحتاج مني الآن؟ يُغير كل شيء.",
+      both_low:"كلاكما يجد صعوبة أحياناً في إدارة الضغط — وضع خطة مسبقة للأزمات يُساعد."
+    }
+  };
+  const ax=A[axKey]||{};
+  return ax[type]||ax.mid||'تحدثا عن هذا المحور في وقت هادئ.';
+}
+
+function getExercise(axKey,type,mn,fn){
+  const E={
+    religion:{
+      strong:"حدّدا معاً: كيف يدخل الدين في قرار مهم قادم؟ — استخارة مشتركة، شورى، أم استشارة عالم؟",
+      far:"كل طرف يكتب: كيف يريد أن يكون حضور الدين في قراراتنا المشتركة؟ تبادلا الإجابات.",
+      mid:"جلسة واحدة: ما القرارات التي نستخير فيها معاً؟ — وضعها بوضوح يُوحّد الاتجاه.",
+      both_low:"تأمّلا معاً: ما القيم التي تريدان أن تكون أساس بيتكما؟ — لا يلزم أن تكون دينية لتكون قوية."
+    },
+    communication:{
+      strong:"كل أسبوع: سؤال واحد عميق — ما أصعب شيء مررت به هذا الأسبوع دون أن أعرف؟",
+      far:"اتفقا على وقت أسبوعي ثابت للحوار — 20 دقيقة بدون جوالات.",
+      mid:"سؤال الأسبوع: ما الشيء الذي أتمنيت أن تخبرني به مؤخراً؟",
+      both_low:"تمرين الكرسيين: كل طرف يتكلم 3 دقائق بدون مقاطعة — الآخر يستمع فقط."
+    },
+    emotion:{
+      strong:"شاركا يومياً: أفضل شيء وأصعب شيء في يومك.",
+      far:"كل طرف يكتب: ماذا أحتاج منك حين أكون في ضيق؟ تبادلا الإجابات.",
+      mid:"تمرين المرآة: أعد ما سمعته بكلماتك الخاصة قبل أن تُجيب.",
+      both_low:"تمرين التسمية: حين تشعر بشيء صعب قل اسم الشعور قبل أن تتصرف."
+    },
+    trust:{
+      strong:"مراجعة مالية شهرية معاً — 30 دقيقة بشفافية كاملة.",
+      far:"جلسة مالية واحدة: كل طرف يشرح رؤيته المثالية لإدارة المال.",
+      mid:"اتفقا على نموذج مالي واضح: ما المشترك وما المستقل.",
+      both_low:"ابدأا بخطوة صغيرة: شاركا ميزانية شهر واحد فقط — الثقة تُبنى بالتجارب الصغيرة."
+    },
+    conflict:{
+      strong:"بعد كل خلاف: كل طرف يقول شيئاً واحداً فعله الآخر صح.",
+      far:"اتفقا على قواعد الخلاف قبل الخلاف التالي: وقت المهلة، من يبدأ بالعودة؟",
+      mid:"ضعا قاعدة مشتركة للخلاف: مثلاً لا نوم على خلاف، ولا كلام جارح.",
+      both_low:"قاعدة التوقف: حين يرتفع الصوت كلاكما يأخذ 10 دقائق ثم يعودان."
+    },
+    partnership:{
+      strong:"قرار مشترك هذا الشهر: اختارا شيئاً وقررا معاً من البداية للنهاية.",
+      far:"قائمة القرارات: كل طرف يكتب ما يعتبره شخصياً وما يعتبره مشتركاً — قارنا القائمتين.",
+      mid:"وضّحا المناطق الرمادية: ما القرارات التي لا تتفقان على تصنيفها؟",
+      both_low:"حدّدا 3 فئات: قرارات فردية / تحتاج إشعاراً / تحتاج اتفاقاً."
+    },
+    independence:{
+      strong:"كل طرف له نشاط أسبوعي مستقل — ثم يتشاركان التجربة.",
+      far:"اتفقا على وقت الفرد ووقت الرجلية أسبوعياً بشكل صريح.",
+      mid:"حدّدا وقت الفرد ووقت الرجلية أسبوعياً — الوضوح يمنع الشعور بالإهمال أو الخنق.",
+      both_low:"لاحظا هذا معاً: هل قربكما يُعطي طاقة أم يستنزفها؟"
+    },
+    family:{
+      strong:"زيارة عائلية مشتركة شهرياً تخططانها معاً مسبقاً.",
+      far:"اتفقا على حدود واضحة للأسرة الممتدة — قبل أن تصطدما بها لا بعدها.",
+      mid:"حدّدا كيفية التعامل مع طلبات الأهل قبل أن تصل — من يرد؟ كيف نقرر؟",
+      both_low:"ضعا حدوداً واضحة مع الأسرة الممتدة — احترام الأهل والحدود ليسا متناقضَين."
+    },
+    stress:{
+      strong:"اتفقا على إشارة تقول: أنا تعبان اليوم — تُفعّل الدعم التلقائي.",
+      far:"كل طرف يكتب: ماذا أحتاج منك حين أكون في ضيق شديد؟",
+      mid:"سؤال أسبوعي: على سلم من 1 إلى 10 — كيف ضغطك هذا الأسبوع؟",
+      both_low:"ضعا خطة مسبقة للضغط الشديد: من يتحمل ماذا حين يكون الطرفان في أزمة معاً؟"
+    }
+  };
+  const ax=E[axKey]||{};
+  return ax[type]||ax.mid||'تحدثا عن هذا المحور في وقت هادئ.';
+}
+
+// URL params
 const urlP=new URLSearchParams(window.location.search);
-if(urlP.get('code')){ document.getElementById('partnerCodeInput').value=urlP.get('code'); showScreen('screen-partner-entry'); }
+if(urlP.get('code')){ document.getElementById('ptInp').value=urlP.get('code'); show('screen-entry'); }
 </script>
 </body>
 </html>
