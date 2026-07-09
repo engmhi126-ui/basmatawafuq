@@ -280,7 +280,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--deep);color:var(--white);
       <div class="age-card" onclick="selStatus('engaged',this)"><div class="age-icon">💍</div><div><div class="age-name">خاطب / خطيبة</div><div class="age-desc">بناء الأساس قبل الزواج</div></div></div>
       <div class="age-card" onclick="selStatus('married',this)"><div class="age-icon">🏠</div><div><div class="age-name">متزوج / متزوجة</div><div class="age-desc">تعميق التوافق وفهم الشريك</div></div></div>
     </div>
-    <button class="btn-p" id="statusBtn" onclick="show('screen-status')" style="opacity:.4;pointer-events:none;">متابعة ←</button>
+    <button class="btn-p" id="statusBtn" onclick="show('screen-age')" style="opacity:.4;pointer-events:none;">متابعة ←</button>
     <button class="btn-s" onclick="show('screen-gender')">العودة</button>
   </div>
 </div>
@@ -511,7 +511,7 @@ async function fetchStories(gender, status, ageGroup){
 // SETUP
 // ============================================================
 function selStatus(s,el){
-  document.querySelectorAll('.age-card').forEach(c=>c.classList.remove('sel'));
+  document.querySelectorAll('#screen-status .age-card').forEach(c=>c.classList.remove('sel'));
   el.classList.add('sel'); MaritalStatus=s;
   const b=document.getElementById('statusBtn'); b.style.opacity='1'; b.style.pointerEvents='auto';
 }
@@ -523,7 +523,7 @@ function selGender(g,el){
 }
 
 function selAge(a,el){
-  document.querySelectorAll('.age-card').forEach(c=>c.classList.remove('sel'));
+  document.querySelectorAll('#screen-age .age-card').forEach(c=>c.classList.remove('sel'));
   el.classList.add('sel'); AGE=a;
   const b=document.getElementById('ageBtn'); b.style.opacity='1'; b.style.pointerEvents='auto';
 }
